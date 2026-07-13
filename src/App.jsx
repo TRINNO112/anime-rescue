@@ -175,6 +175,11 @@ const companionSprites = {
     const img = new Image();
     img.src = `/chuuya/walking/frame_${String(i).padStart(3, '0')}.png`;
     return img;
+  }),
+  catnoir: Array.from({ length: 8 }, (_, i) => {
+    const img = new Image();
+    img.src = `/catnoir/walking/frame_${String(i).padStart(3, '0')}.png`;
+    return img;
   })
 };
 
@@ -954,7 +959,7 @@ function App() {
           
           let drawnSprite = false;
           
-          if (char.id === 'muichiro' || char.id === 'chuuya') {
+          if (char.id === 'muichiro' || char.id === 'chuuya' || char.id === 'catnoir') {
             const list = companionSprites[char.id];
             const frameIndex = Math.floor(frames / 6) % list.length;
             const img = list[frameIndex];
