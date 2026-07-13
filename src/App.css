@@ -1,0 +1,424 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;450;600;800&family=Press+Start+2P&display=swap');
+
+/* Main CSS styling for Akari's Anime Rescue */
+.app-container {
+  min-height: 100vh;
+  color: #f8fafc;
+  font-family: 'Outfit', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.font-retro {
+  font-family: 'Press Start 2P', monospace;
+  line-height: 1.5;
+}
+
+/* Ambient Background Animations */
+.ambient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.ambient-bg.magic {
+  background: radial-gradient(circle at 50% 50%, #1e1145 0%, #070311 100%);
+}
+
+/* Neon Grid Overlay */
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(168, 85, 247, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168, 85, 247, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+/* Start Screen */
+.start-screen-wrapper {
+  max-width: 650px;
+  width: 100%;
+  background: rgba(15, 10, 32, 0.85);
+  border: 2px solid rgba(168, 85, 247, 0.35);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.2), inset 0 0 15px rgba(168, 85, 247, 0.1);
+  border-radius: 16px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.title-banner {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.retro-tag {
+  font-size: 11px;
+  color: #ffd13b;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(255, 209, 59, 0.5);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.main-logo {
+  font-size: 28px;
+  margin: 0;
+  background: linear-gradient(135deg, #f3e8ff 0%, #c084fc 50%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(168, 85, 247, 0.5));
+}
+
+.story-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.story-card h2 {
+  color: #c084fc;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.story-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.setup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.input-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.name-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+  width: 250px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.name-input:focus {
+  border-color: #c084fc;
+  box-shadow: 0 0 10px rgba(192, 132, 252, 0.3);
+}
+
+.start-btn {
+  background: #7e22ce;
+  border: 2px solid #a855f7;
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(126, 34, 206, 0.5);
+  transition: all 0.2s;
+  margin-top: 10px;
+}
+
+.start-btn:hover {
+  background: #9333ea;
+  border-color: #c084fc;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.7);
+}
+
+.instructions {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 20px;
+  text-align: left;
+}
+
+.instructions h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.instructions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+/* Playing Screen */
+.game-screen-wrapper {
+  max-width: 1040px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.game-hud {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  background: rgba(15, 10, 32, 0.85);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.hud-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.hud-metric .label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.hud-metric .value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+}
+
+.text-gold {
+  color: #ffd13b;
+  text-shadow: 0 0 5px rgba(255, 209, 59, 0.3);
+}
+
+.text-purple {
+  color: #c084fc;
+}
+
+.canvas-wrapper {
+  background: #090514;
+  border: 3px solid rgba(168, 85, 247, 0.4);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  display: flex;
+}
+
+.game-canvas {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  display: block;
+}
+
+.companions-status {
+  width: 100%;
+  background: rgba(15, 10, 32, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.companions-status h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #c084fc;
+  letter-spacing: 1px;
+}
+
+.companions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.no-power-msg {
+  color: #64748b;
+  font-size: 13px;
+  grid-column: 1 / -1;
+}
+
+.power-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.power-card .char-name {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.power-card .power-desc {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+/* Victory Screen */
+.victory-screen-wrapper {
+  max-width: 700px;
+  width: 100%;
+  animation: zoomIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.congrats-card {
+  background: rgba(15, 10, 32, 0.9);
+  border: 3px solid #ffd13b;
+  box-shadow: 0 0 35px rgba(255, 209, 59, 0.25), inset 0 0 20px rgba(255, 209, 59, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.flashing-logo {
+  font-size: 24px;
+  color: #ffffff;
+  animation: flash 1s infinite alternate;
+  margin: 0 0 10px;
+}
+
+.recipient {
+  font-size: 32px;
+  margin: 0 0 30px;
+}
+
+.interactive-cake {
+  font-size: 70px;
+  margin-bottom: 25px;
+  position: relative;
+  display: inline-block;
+}
+
+.cake-candle {
+  font-size: 35px;
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: flicker 0.15s infinite alternate;
+}
+
+.victory-msg {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #cbd5e1;
+  margin-bottom: 30px;
+}
+
+.characters-wishes {
+  text-align: left;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 35px;
+}
+
+.characters-wishes h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #ffd13b;
+  text-transform: uppercase;
+}
+
+.wish-bubbles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wish-bubble {
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 3px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.wish-author {
+  font-weight: bold;
+  margin-right: 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.text-mint { color: #80ed99; }
+.text-blue { color: #219ebc; }
+.text-cyan { color: #00f5d4; }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes flash {
+  0% { color: #ffd13b; text-shadow: 0 0 15px #ffd13b; }
+  100% { color: #ff006e; text-shadow: 0 0 15px #ff006e; }
+}
+
+@keyframes flicker {
+  0% { transform: translateX(-50%) scale(1); }
+  100% { transform: translateX(-52%) scale(1.1) rotate(-2deg); }
+}
