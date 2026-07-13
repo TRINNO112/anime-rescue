@@ -164,6 +164,20 @@ const akariSprites = {
   })
 };
 
+// Preload companion walking cycles
+const companionSprites = {
+  muichiro: Array.from({ length: 25 }, (_, i) => {
+    const img = new Image();
+    img.src = `/muichiro/walking/frame_${String(i).padStart(3, '0')}.png`;
+    return img;
+  }),
+  chuuya: Array.from({ length: 36 }, (_, i) => {
+    const img = new Image();
+    img.src = `/chuuya/walking/frame_${String(i).padStart(3, '0')}.png`;
+    return img;
+  })
+};
+
 function App() {
   const [gameState, setGameState] = useState('START'); // START, PLAYING, VICTORY
   const [playerName, setPlayerName] = useState('Akari');
@@ -227,10 +241,9 @@ function App() {
     // Define characters list
     const CHARACTERS = [
       { id: 'muichiro', name: 'Muichiro', color: '#8ecae6', power: 'Double Jump', hairColor: '#202020', hairTip: '#80ed99' },
-      { id: 'chuuya', name: 'Chuuya', color: '#ffb703', power: 'Gravity Float', hairColor: '#fb8500', hairTip: '#fb8500' },
-      { id: 'giyu', name: 'Giyu', color: '#219ebc', power: 'Water Shield', hairColor: '#121212', hairTip: '#121212' },
-      { id: 'luka', name: 'Luka', color: '#023047', power: 'Speed Boost', hairColor: '#00f5d4', hairTip: '#00bbf9' },
-      { id: 'yuta', name: 'Yuta', color: '#e0b1cb', power: 'Long Range', hairColor: '#4f5d75', hairTip: '#4f5d75' },
+      { id: 'chuuya', name: 'Chuuya', color: '#fb8500', power: 'Gravity Float', hairColor: '#d66800', hairTip: '#d66800' },
+      { id: 'catnoir', name: 'Cat Noir', color: '#10b981', power: 'Cataclysm Shield', hairColor: '#ffe5b4', hairTip: '#ffe5b4' },
+      { id: 'yuta', name: 'Yuta', color: '#e0b1cb', power: 'Cursed Slash', hairColor: '#4f5d75', hairTip: '#4f5d75' },
       { id: 'vanitas', name: 'Vanitas', color: '#7209b7', power: 'Homing Sparks', hairColor: '#1a1a2e', hairTip: '#1a1a2e' }
     ];
 
@@ -289,10 +302,9 @@ function App() {
     const cages = [
       { x: 400, y: 300, w: 50, h: 60, charId: 'muichiro', rescued: false },
       { x: 800, y: 210, w: 50, h: 60, charId: 'chuuya', rescued: false },
-      { x: 1300, y: 280, w: 50, h: 60, charId: 'giyu', rescued: false },
-      { x: 1850, y: 270, w: 50, h: 60, charId: 'luka', rescued: false },
-      { x: 2450, y: 410, w: 50, h: 60, charId: 'yuta', rescued: false },
-      { x: 2950, y: 410, w: 50, h: 60, charId: 'vanitas', rescued: false }
+      { x: 1400, y: 280, w: 50, h: 60, charId: 'catnoir', rescued: false },
+      { x: 2200, y: 410, w: 50, h: 60, charId: 'yuta', rescued: false },
+      { x: 2900, y: 410, w: 50, h: 60, charId: 'vanitas', rescued: false }
     ];
 
     // Monsters
@@ -360,15 +372,14 @@ function App() {
       // Check active powers
       const hasDoubleJump = activeRescues.some(c => c.id === 'muichiro');
       const hasGravityFloat = activeRescues.some(c => c.id === 'chuuya');
-      const hasWaterShield = activeRescues.some(c => c.id === 'giyu');
-      const hasSpeedBoost = activeRescues.some(c => c.id === 'luka');
-      const hasLongRange = activeRescues.some(c => c.id === 'yuta');
+      const hasCataclysmShield = activeRescues.some(c => c.id === 'catnoir');
+      const hasCursedSlash = activeRescues.some(c => c.id === 'yuta');
       const hasHomingSparks = activeRescues.some(c => c.id === 'vanitas');
 
       // 1. Physics Constants
       const GRAVITY = hasGravityFloat ? 0.35 : 0.6;
-      const SPEED_ACCEL = hasSpeedBoost ? 1.0 : 0.7;
-      const MAX_SPEED = hasSpeedBoost ? 6.5 : 4.8;
+      const SPEED_ACCEL = 0.7;
+      const MAX_SPEED = 4.8;
       const JUMP_FORCE = hasGravityFloat ? -11.5 : -10.5;
 
       // 2. Control logic
@@ -412,13 +423,13 @@ function App() {
       // Invulnerable frame ticker
       if (player.invulnFrames > 0) player.invulnFrames--;
 
-      // Shield Recharge
-      if (hasWaterShield) {
+      // Shield Recharge (Cat Noir's Cataclysm Shield)
+      if (hasCataclysmShield) {
         if (player.shieldCooldown > 0) {
           player.shieldCooldown--;
           if (player.shieldCooldown === 0) {
             player.shieldActive = true;
-            addExplosion(player.x + player.width / 2, player.y + player.height / 2, '#00bbf9', 12);
+            addExplosion(player.x + player.width / 2, player.y + player.height / 2, '#10b981', 12);
           }
         } else if (!player.shieldActive && player.shieldCooldown === 0) {
           player.shieldActive = true;
@@ -466,7 +477,7 @@ function App() {
       // 3. Attack / Shooting magic
       if (player.attackCooldown > 0) player.attackCooldown--;
       if (keysRef.current.attack && player.attackCooldown === 0) {
-        const attackRange = hasLongRange ? 350 : 200;
+        const attackRange = hasCursedSlash ? 350 : 200;
         const speed = player.facingLeft ? -8 : 8;
         
         magicBolts.push({
@@ -940,36 +951,80 @@ function App() {
         const offsetHistory = player.history[player.history.length - 1 - (idx + 1) * 16];
         if (offsetHistory) {
           const cx = offsetHistory.x - cameraX;
-          const cy = offsetHistory.y + Math.sin((frames + idx * 25) / 10) * 8 - 10;
           
-          ctx.fillStyle = '#ffd166';
-          ctx.fillRect(cx, cy, 18, 18);
+          let drawnSprite = false;
           
-          ctx.fillStyle = char.hairColor;
-          ctx.fillRect(cx - 2, cy - 2, 22, 6);
-          ctx.fillRect(cx - 2, cy + 4, 4, 10);
-          ctx.fillRect(cx + 16, cy + 4, 4, 10);
-          
-          if (char.hairTip !== char.hairColor) {
-            ctx.fillStyle = char.hairTip;
-            ctx.fillRect(cx - 2, cy + 12, 4, 4);
-            ctx.fillRect(cx + 16, cy + 12, 4, 4);
+          if (char.id === 'muichiro' || char.id === 'chuuya') {
+            const list = companionSprites[char.id];
+            const frameIndex = Math.floor(frames / 6) % list.length;
+            const img = list[frameIndex];
+            
+            if (img && img.complete && img.naturalWidth !== 0) {
+              ctx.save();
+              if (player.facingLeft) {
+                ctx.translate(cx + 9, offsetHistory.y + 9);
+                ctx.scale(-1, 1);
+                ctx.translate(-(cx + 9), -(offsetHistory.y + 9));
+              }
+              
+              const compHeight = 90;
+              const ratio = img.naturalWidth / img.naturalHeight;
+              const compWidth = compHeight * ratio;
+              
+              ctx.imageSmoothingEnabled = true;
+              ctx.drawImage(
+                img, 
+                cx - compWidth / 2 + 9, 
+                offsetHistory.y + player.height - compHeight + 12, 
+                compWidth, 
+                compHeight
+              );
+              ctx.restore();
+              drawnSprite = true;
+            }
           }
+          
+          if (!drawnSprite) {
+            // Draw procedural chibi fallback for companions who don't have walk sprites yet (Cat Noir, Yuta, Vanitas)
+            // Float them slightly for a magical/chibi feel
+            const cy = offsetHistory.y + Math.sin((frames + idx * 25) / 10) * 8 - 10;
+            
+            ctx.fillStyle = '#ffd166'; // Skin
+            ctx.fillRect(cx, cy, 18, 18);
+            
+            ctx.fillStyle = char.hairColor;
+            ctx.fillRect(cx - 2, cy - 2, 22, 6);
+            ctx.fillRect(cx - 2, cy + 4, 4, 10);
+            ctx.fillRect(cx + 16, cy + 4, 4, 10);
+            
+            if (char.id === 'catnoir') {
+              // Draw tiny black cat ears for Chat Noir!
+              ctx.fillStyle = '#121212';
+              ctx.beginPath();
+              ctx.moveTo(cx - 2, cy - 2);
+              ctx.lineTo(cx + 2, cy - 6);
+              ctx.lineTo(cx + 4, cy - 2);
+              ctx.moveTo(cx + 14, cy - 2);
+              ctx.lineTo(cx + 16, cy - 6);
+              ctx.lineTo(cx + 20, cy - 2);
+              ctx.fill();
+            }
 
-          ctx.fillStyle = char.color;
-          ctx.fillRect(cx + 3, cy + 6, 3, 3);
-          ctx.fillRect(cx + 11, cy + 6, 3, 3);
+            ctx.fillStyle = char.color;
+            ctx.fillRect(cx + 3, cy + 6, 3, 3);
+            ctx.fillRect(cx + 11, cy + 6, 3, 3);
 
-          if (frames % 12 === 0) {
-            particles.push({
-              x: offsetHistory.x + 9,
-              y: offsetHistory.y + 9,
-              vx: (Math.random() - 0.5) * 2,
-              vy: Math.random() * 1.5,
-              color: char.color,
-              size: Math.random() * 3 + 1,
-              life: 25
-            });
+            if (frames % 12 === 0) {
+              particles.push({
+                x: offsetHistory.x + 9,
+                y: offsetHistory.y + 9,
+                vx: (Math.random() - 0.5) * 2,
+                vy: Math.random() * 1.5,
+                color: char.color,
+                size: Math.random() * 3 + 1,
+                life: 25
+              });
+            }
           }
         }
       });
