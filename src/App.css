@@ -870,6 +870,40 @@ body {
   50%      { opacity: 1; }
 }
 
+/* Falling sakura petals drifting down the curtain */
+.ld-petals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ld-petal {
+  position: absolute;
+  top: -6%;
+  left: var(--x);
+  font-size: var(--size);
+  line-height: 1;
+  color: rgba(255, 154, 186, 0.72);
+  text-shadow: 0 0 10px rgba(255, 59, 107, 0.45);
+  will-change: transform, opacity;
+  animation:
+    ldPetalFall var(--fall) linear var(--delay) infinite,
+    ldPetalSway var(--sway) ease-in-out var(--delay) infinite alternate;
+}
+
+@keyframes ldPetalFall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  8%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateY(112vh) rotate(420deg); opacity: 0; }
+}
+
+@keyframes ldPetalSway {
+  from { margin-left: -22px; }
+  to   { margin-left: 22px; }
+}
+
 .ld-core {
   position: relative;
   width: min(560px, 82vw);
@@ -910,14 +944,50 @@ body {
 }
 
 .ld-title-lg {
+  position: relative;
   font-family: 'Bebas Neue', 'Outfit', sans-serif;
   font-size: clamp(34px, 7.4vw, 66px);
   letter-spacing: 0.04em;
-  background: linear-gradient(180deg, #ffffff 10%, #ffd9e3 52%, #ff3b6b 100%);
+  background:
+    linear-gradient(100deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.92) 42%,
+      transparent 64%),
+    linear-gradient(180deg, #ffffff 10%, #ffd9e3 52%, #ff3b6b 100%);
+  background-size: 220% 100%, 100% 100%;
+  background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 6px 30px rgba(255, 59, 107, 0.42));
+  animation: ldShimmer 3.4s ease-in-out 0.6s infinite;
+}
+
+@keyframes ldShimmer {
+  0%       { background-position: 190% 0, 0 0; }
+  55%,100% { background-position: -90% 0, 0 0; }
+}
+
+/* 誕生日 types in one glyph at a time, then breathes */
+.ld-kanji-ch {
+  display: inline-block;
+  opacity: 0;
+  animation:
+    ldKanjiIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    ldKanjiGlow 3s ease-in-out infinite;
+  animation-delay:
+    calc(var(--ki, 0) * 0.22s + 0.15s),
+    calc(var(--ki, 0) * 0.22s + 0.75s);
+}
+
+@keyframes ldKanjiIn {
+  0%   { opacity: 0; transform: translateY(8px) scale(1.6); filter: blur(5px); }
+  100% { opacity: 1; transform: translateY(0)   scale(1);   filter: blur(0); }
+}
+
+@keyframes ldKanjiGlow {
+  0%, 100% { opacity: 0.55; text-shadow: none; }
+  50%      { opacity: 1;    text-shadow: 0 0 12px rgba(255, 59, 107, 0.75); }
 }
 
 /* Hairline progress rail */

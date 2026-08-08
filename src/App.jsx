@@ -724,8 +724,23 @@ function App() {
       {!isLoaded && (
         <div className="screen loading-screen">
           <div className="ld-veil" aria-hidden="true" />
+          <div className="ld-petals" aria-hidden="true">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <span key={i} className="ld-petal" style={{
+                '--x': `${Math.random() * 100}%`,
+                '--fall': `${4 + Math.random() * 6}s`,
+                '--sway': `${2 + Math.random() * 3}s`,
+                '--delay': `${Math.random() * 5}s`,
+                '--size': `${6 + Math.random() * 10}px`
+              }}>❀</span>
+            ))}
+          </div>
           <div className="ld-core">
-            <span className="ld-kanji">誕生日</span>
+            <span className="ld-kanji">
+              {'誕生日'.split('').map((ch, i) => (
+                <span key={i} className="ld-kanji-ch" style={{ '--ki': i }}>{ch}</span>
+              ))}
+            </span>
             <h1 className="ld-title">
               <span className="ld-title-sm">AKARI&rsquo;S</span>
               <span className="ld-title-lg">BIRTHDAY RESCUE</span>
@@ -762,7 +777,11 @@ function App() {
               }} />
             ))}
           </div>
-          <span className="ts-vert" aria-hidden="true">アカリの誕生日レスキュー</span>
+          <span className="ts-vert" aria-hidden="true">
+            {'アカリの誕生日レスキュー'.split('').map((ch, i) => (
+              <span key={i} className="ts-vert-ch" style={{ '--vi': i }}>{ch}</span>
+            ))}
+          </span>
 
           <button
             className="ts-sound-btn"
