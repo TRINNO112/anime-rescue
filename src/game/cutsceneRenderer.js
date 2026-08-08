@@ -51,16 +51,46 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
     }
   }
 
-  // 3. Classic 2D RPG Bottom Dialogue Box (Anchored at very bottom of screen)
-  const cardW = Math.min(840, viewW - 32);
-  const cardH = 100;
+  // 3. Dynamic RPG Dialogue Box (Moves up and sizes to fit content on small screens)
+  const isSmallScreen = viewW < 600 || viewH < 400;
+  const cardW = Math.min(840, viewW - 24);
+  
+  const fontSize = isSmallScreen ? 11 : 13;
+  const lineSpacing = isSmallScreen ? 15 : 18;
+  const avatarSize = isSmallScreen ? 24 : 30;
+  const portRadius = isSmallScreen ? 22 : 30;
+  const portPadding = isSmallScreen ? 10 : 16;
+  
+  ctx.save();
+  ctx.font = `600 ${fontSize}px system-ui, sans-serif`;
+  
+  const maxWidth = cardW - (isSmallScreen ? 90 : 120);
+  const words = dialogData.speech.split(' ');
+  const lines = [];
+  let currentLine = '';
+  
+  for (let i = 0; i < words.length; i++) {
+    const testLine = currentLine + words[i] + ' ';
+    const metrics = ctx.measureText(testLine);
+    if (metrics.width > maxWidth && i > 0) {
+      lines.push(currentLine);
+      currentLine = words[i] + ' ';
+    } else {
+      currentLine = testLine;
+    }
+  }
+  lines.push(currentLine);
+  
+  // Calculate dynamic card height to fit text lines
+  const textTopOffset = isSmallScreen ? 34 : 48;
+  const cardH = Math.max(isSmallScreen ? 85 : 110, textTopOffset + lines.length * lineSpacing + (isSmallScreen ? 18 : 22));
   const cardX = viewW / 2 - cardW / 2;
-  const cardY = viewH - 112;
+  const cardY = viewH - cardH - (isSmallScreen ? 6 : 14);
 
   // Glass Box Container
   ctx.fillStyle = 'rgba(10, 15, 30, 0.96)';
   ctx.strokeStyle = char.color || '#a855f7';
-  ctx.lineWidth = 3;
+  ctx.lineWidth = isSmallScreen ? 2 : 3;
 
   ctx.beginPath();
   ctx.roundRect(cardX, cardY, cardW, cardH, 12);
@@ -68,57 +98,45 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   ctx.stroke();
 
   // Character Face Portrait Avatar Box
-  const portX = cardX + 16;
-  const portY = cardY + 16;
+  const portX = cardX + portPadding;
+  const portY = cardY + portPadding;
   ctx.fillStyle = char.color ? `${char.color}33` : 'rgba(168, 85, 247, 0.2)';
   ctx.strokeStyle = char.color || '#c084fc';
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 1.5;
   ctx.beginPath();
-  ctx.arc(portX + 32, portY + 32, 30, 0, Math.PI * 2);
+  ctx.arc(portX + portRadius, portY + portRadius, portRadius, 0, Math.PI * 2);
   ctx.fill();
   ctx.stroke();
 
-  ctx.font = '30px system-ui, sans-serif';
+  ctx.font = `${isSmallScreen ? 20 : 30}px system-ui, sans-serif`;
   ctx.textAlign = 'center';
-  ctx.fillText(dialogData.avatar, portX + 32, portY + 42);
+  ctx.fillText(dialogData.avatar, portX + portRadius, portY + portRadius + (isSmallScreen ? 7 : 10));
 
   // Dialogue Title & Speech Text
-  const textX = cardX + 96;
+  const textX = cardX + (isSmallScreen ? 72 : 96);
   ctx.textAlign = 'left';
 
   // Title / Power Nameplate
   ctx.fillStyle = char.color || '#c084fc';
-  ctx.font = '800 12px system-ui, sans-serif';
-  ctx.fillText(dialogData.title, textX, cardY + 26);
+  ctx.font = `800 ${isSmallScreen ? 10 : 12}px system-ui, sans-serif`;
+  ctx.fillText(dialogData.title, textX, cardY + (isSmallScreen ? 20 : 26));
 
   // Dialogue Speech Text
   ctx.fillStyle = '#f8fafc';
-  ctx.font = '600 13px system-ui, sans-serif';
+  ctx.font = `600 ${fontSize}px system-ui, sans-serif`;
   
-  const maxWidth = cardW - 120;
-  const words = dialogData.speech.split(' ');
-  let line = '';
-  let lineY = cardY + 48;
-
-  for (let i = 0; i < words.length; i++) {
-    const testLine = line + words[i] + ' ';
-    const metrics = ctx.measureText(testLine);
-    if (metrics.width > maxWidth && i > 0) {
-      ctx.fillText(line, textX, lineY);
-      line = words[i] + ' ';
-      lineY += 18;
-    } else {
-      line = testLine;
-    }
+  let lineY = cardY + textTopOffset;
+  for (let j = 0; j < lines.length; j++) {
+    ctx.fillText(lines[j], textX, lineY);
+    lineY += lineSpacing;
   }
-  ctx.fillText(line, textX, lineY);
 
   // Press Prompt Badge (Bottom Right)
   const bounceX = Math.sin(frames / 6) * 3;
   ctx.fillStyle = char.color || '#ffd13b';
-  ctx.font = '700 11px system-ui, sans-serif';
+  ctx.font = `700 ${isSmallScreen ? 9 : 11}px system-ui, sans-serif`;
   ctx.textAlign = 'right';
-  ctx.fillText(`PRESS [X] OR TAP TO CONTINUE ▶`, cardX + cardW - 18 + bounceX, cardY + cardH - 14);
+  ctx.fillText(`PRESS [X] OR TAP TO CONTINUE ▶`, cardX + cardW - 14 + bounceX, cardY + cardH - (isSmallScreen ? 8 : 12));
 
   ctx.restore();
 }
