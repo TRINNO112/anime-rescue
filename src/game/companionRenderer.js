@@ -13,8 +13,15 @@ export function drawCompanions(ctx, activeRescues, player, cameraX, frames, near
     const compObj = companionSprites[char.id];
     if (compObj) {
       const isMoving = Math.abs(player.vx) > 0.1;
-      // Companions ONLY attack when an active enemy or boss is nearby!
       const shouldUseAttack = Boolean(nearEnemies);
+
+      if (shouldUseAttack) {
+        if (char._attackStart === undefined) {
+          char._attackStart = frames;
+        }
+      } else {
+        delete char._attackStart;
+      }
       
       const animList = (shouldUseAttack && compObj.attack && compObj.attack.length > 0)
         ? compObj.attack
@@ -22,42 +29,52 @@ export function drawCompanions(ctx, activeRescues, player, cameraX, frames, near
 
       if (animList && animList.length > 0) {
         const animSpeed = shouldUseAttack ? 4 : 5;
-        const frameIndex = (isMoving || shouldUseAttack) ? (Math.floor(frames / animSpeed) % animList.length) : 0;
+        let frameIndex = 0;
+        let attackProgress = 0;
+
+        if (shouldUseAttack && char._attackStart !== undefined) {
+          attackProgress = Math.floor((frames - char._attackStart) / animSpeed);
+          frameIndex = attackProgress % animList.length;
+        } else if (isMoving) {
+          frameIndex = Math.floor(frames / animSpeed) % animList.length;
+        }
+
         const img = animList[frameIndex];
 
         if (img) {
           const COMPANION_HEIGHT = shouldUseAttack ? 68 : 60;
           drawnSprite = drawCroppedSprite(ctx, img, cx, groundY, COMPANION_HEIGHT, player.facingLeft, compObj.flipDefault);
 
-          // Render Soft, Light Pastel Lore Ability Aura Effects (Subtle & Non-Distracting!)
+          // Render Soft Lore Ability Aura FX - Synchronized starting at Frame 0 with combat strike!
           if (shouldUseAttack) {
             ctx.save();
             ctx.globalCompositeOperation = 'lighter';
+            const f = attackProgress; // Synchronized local attack frame tick
             
             if (char.id === 'muichiro') {
               // Mist Breathing 7th Form: Soft Ethereal White/Sky Mist Glow
-              ctx.fillStyle = 'rgba(224, 242, 254, 0.22)';
+              ctx.fillStyle = 'rgba(224, 242, 254, 0.25)';
               for (let i = 0; i < 3; i++) {
-                const mistX = cx + Math.sin((frames + i * 15) / 6) * 18;
+                const mistX = cx + Math.sin((f + i * 4) / 3) * 18;
                 const mistY = groundY - 18 - i * 10;
                 ctx.beginPath();
-                ctx.arc(mistX, mistY, 10 + i * 3, 0, Math.PI * 2);
+                ctx.arc(mistX, mistY, 8 + (f % 12) + i * 2, 0, Math.PI * 2);
                 ctx.fill();
               }
             } else if (char.id === 'chuuya') {
               // Gravity Distortion Ring (Light Soft Amber Pulse)
-              ctx.strokeStyle = 'rgba(254, 215, 170, 0.28)';
+              ctx.strokeStyle = 'rgba(254, 215, 170, 0.3)';
               ctx.lineWidth = 1.5;
               ctx.beginPath();
-              const r = 18 + (frames % 18);
+              const r = 12 + ((f * 3) % 24);
               ctx.arc(cx, groundY - 22, r, 0, Math.PI * 2);
               ctx.stroke();
             } else if (char.id === 'yuta') {
               // Cursed Energy Surge (Soft Pastel Violet Motes)
               ctx.fillStyle = 'rgba(245, 208, 254, 0.35)';
               for (let i = 0; i < 3; i++) {
-                const px = cx + (Math.sin(frames / 5 + i) * 20);
-                const py = groundY - 24 + (Math.cos(frames / 5 + i) * 16);
+                const px = cx + (Math.sin((f + i * 3) / 3) * 22);
+                const py = groundY - 24 + (Math.cos((f + i * 3) / 3) * 16);
                 ctx.fillRect(px, py, 3, 3);
               }
             } else if (char.id === 'giyu') {
@@ -65,7 +82,7 @@ export function drawCompanions(ctx, activeRescues, player, cameraX, frames, near
               ctx.strokeStyle = 'rgba(219, 234, 254, 0.35)';
               ctx.lineWidth = 1.5;
               ctx.beginPath();
-              const r1 = 16 + Math.sin(frames / 6) * 4;
+              const r1 = 14 + Math.sin(f / 4) * 6;
               ctx.arc(cx, groundY - 24, r1, 0, Math.PI * 2);
               ctx.stroke();
             }
