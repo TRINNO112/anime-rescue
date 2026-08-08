@@ -279,50 +279,42 @@ function App() {
           player.history.shift();
         }
 
-        // Attack & Projectiles
+        // Melee Katana Sword Strike System (No yellow circles or purple balls!)
         if (player.attackCooldown > 0) player.attackCooldown--;
         if (keysRef.current.attack && player.attackCooldown === 0) {
-          const attackRange = hasCursedSlash ? 380 : 220;
-          const speed = player.facingLeft ? -8.5 : 8.5;
-          
-          magicBolts.push({
-            x: player.facingLeft ? player.x - 10 : player.x + player.width + 10,
-            y: player.y + player.height / 2 - 4,
-            vx: speed,
-            vy: 0,
-            range: attackRange,
-            distTraveled: 0
-          });
+          player.attackCooldown = 18;
+          synth.playSfx('sword');
 
-          synth.playSfx('shoot');
-          player.attackCooldown = 20;
-        }
+          // Melee Katana Slash Hit Area (75px in facing direction)
+          const slashReach = 75;
+          const slashMinX = player.facingLeft ? player.x - slashReach : player.x;
+          const slashMaxX = player.facingLeft ? player.x + player.width : player.x + player.width + slashReach;
 
-        // Homing Sparks
-        if (sparkCooldown > 0) sparkCooldown--;
-        if (sparkCooldown === 0 && activeRescues.length > 0) {
-          let nearestEnemy = null;
-          let minDist = 320;
-          enemies.concat(boss.active ? [boss] : []).forEach(e => {
-            if (e.health > 0) {
-              const d = Math.abs(e.x - player.x);
-              if (d < minDist) {
-                minDist = d;
-                nearestEnemy = e;
+          // Melee strike enemies
+          enemies.forEach(enemy => {
+            if (enemy.health > 0 && enemy.x + enemy.width > slashMinX && enemy.x < slashMaxX &&
+                Math.abs(enemy.y - player.y) < 60) {
+              enemy.health--;
+              synth.playSfx('hit');
+              particleEngine.addExplosion(enemy.x + enemy.width / 2, enemy.y + enemy.height / 2, '#ff4d6d', 10);
+              if (enemy.health <= 0) {
+                setCurrentScore(s => s + 100);
               }
             }
           });
 
-          if (nearestEnemy) {
-            homingSparks.push({
-              x: player.x + player.width / 2,
-              y: player.y + 10,
-              target: nearestEnemy,
-              vx: 0,
-              vy: -2,
-              life: 90
-            });
-            sparkCooldown = 65;
+          // Melee strike boss
+          if (boss.active && boss.health > 0 && boss.x + boss.width > slashMinX && boss.x < slashMaxX &&
+              Math.abs(boss.y - player.y) < 100) {
+            boss.health -= 2;
+            synth.playSfx('hit');
+            particleEngine.addExplosion(boss.x + boss.width / 2, boss.y + boss.height / 2, '#ff4d6d', 14);
+            if (boss.health <= 0) {
+              particleEngine.addExplosion(boss.x + boss.width / 2, boss.y + boss.height / 2, '#ffd13b', 50);
+              setCurrentScore(s => s + 5000);
+              synth.playBirthdayTheme();
+              setTimeout(() => setGameState('VICTORY'), 2000);
+            }
           }
         }
 
