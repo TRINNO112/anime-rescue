@@ -696,72 +696,115 @@ function App() {
 
       {gameState === 'START' && (
         <div className="screen start-screen">
-          <div className="title-banner">
-            <span className="retro-tag">✨ 2D ANIME ACTION RPG • 2026 EDITION ✨</span>
-            <h1 className="title">AKARI'S BIRTHDAY RESCUE</h1>
-            <span className="kanji-subtitle">「アカリの誕生日レスキュー」</span>
-            <p className="title-sub">Battle through gothic shadow realms, shatter prison sanctuaries, and rescue your 4 anime companions!</p>
-          </div>
+          <div className="ts-aura" aria-hidden="true" />
 
-          <div className="hero-showcase-card">
-            <div className="hero-avatar">👑</div>
-            <div className="hero-details">
-              <h2>HEROINE AKARI</h2>
-              <p>Weapon: Birthday Katana • HP: ❤️❤️❤️❤️❤️ • Special: Sword Slash</p>
-            </div>
-            <button className="start-audio-btn" onClick={() => setIsMuted(synth.toggleMute())}>
-              {isMuted ? '🔇 SOUND OFF' : '🔊 SOUND ON'}
-            </button>
-          </div>
+          <header className="ts-header">
+            <span className="ts-eyebrow">2D Anime Action RPG</span>
+            <h1 className="ts-title">
+              <span className="ts-title-top">AKARI&rsquo;S</span>
+              <span className="ts-title-main">BIRTHDAY RESCUE</span>
+            </h1>
+            <div className="ts-rule" aria-hidden="true"><i /><span>◆</span><i /></div>
+            <span className="ts-kanji">アカリの誕生日レスキュー</span>
+            <p className="ts-tagline">
+              Cut through the gothic shadow realm, shatter four prison cells,
+              and bring every companion home before the night ends.
+            </p>
+          </header>
 
-          <div className="companion-grid-section">
-            <h2 className="section-heading">🛡️ RECRUITABLE ANIME ALLIES</h2>
-            <div className="roster-grid">
-              <div className="roster-card" style={{ borderColor: '#38bdf8' }}>
-                <div className="roster-icon">🗡️</div>
-                <div className="roster-info">
-                  <h3>Muichiro Tokito</h3>
-                  <span className="power-tag" style={{ background: '#38bdf8', color: '#0f172a' }}>Air Double Jump</span>
+          <div className="ts-body">
+            <section className="ts-hero">
+              <div className="ts-hero-crest"><span>刀</span></div>
+              <div className="ts-hero-meta">
+                <span className="ts-label">Playable Heroine</span>
+                <h2 className="ts-hero-name">AKARI</h2>
+                <div className="ts-hero-stats">
+                  <div className="ts-stat">
+                    <span className="ts-stat-key">Weapon</span>
+                    <span className="ts-stat-val">Birthday Katana</span>
+                  </div>
+                  <div className="ts-stat">
+                    <span className="ts-stat-key">Vitality</span>
+                    <span className="ts-stat-val ts-pips">
+                      <i /><i /><i /><i /><i />
+                    </span>
+                  </div>
+                  <div className="ts-stat">
+                    <span className="ts-stat-key">Art</span>
+                    <span className="ts-stat-val">Crescent Slash</span>
+                  </div>
                 </div>
               </div>
+              <button
+                className="ts-sound-btn"
+                onClick={() => setIsMuted(synth.toggleMute())}
+                aria-pressed={!isMuted}
+              >
+                {isMuted ? '🔇' : '🔊'}
+                <span>{isMuted ? 'Muted' : 'Sound'}</span>
+              </button>
+            </section>
 
-              <div className="roster-card" style={{ borderColor: '#fb8500' }}>
-                <div className="roster-icon">🍷</div>
-                <div className="roster-info">
-                  <h3>Chuuya Nakahara</h3>
-                  <span className="power-tag" style={{ background: '#fb8500', color: '#0f172a' }}>Gravity Float</span>
-                </div>
+            <section className="ts-roster">
+              <div className="ts-roster-head">
+                <span className="ts-label">Allies to Free</span>
+                <span className="ts-roster-count">04</span>
               </div>
 
-              <div className="roster-card" style={{ borderColor: '#e0b1cb' }}>
-                <div className="roster-icon">💍</div>
-                <div className="roster-info">
-                  <h3>Yuta Okkotsu</h3>
-                  <span className="power-tag" style={{ background: '#e0b1cb', color: '#0f172a' }}>Cursed Slash</span>
-                </div>
-              </div>
-
-              <div className="roster-card" style={{ borderColor: '#0ea5e9' }}>
-                <div className="roster-icon">🌊</div>
-                <div className="roster-info">
-                  <h3>Giyu Tomioka</h3>
-                  <span className="power-tag" style={{ background: '#0ea5e9', color: '#ffffff' }}>Water Shield</span>
-                </div>
-              </div>
-            </div>
+              <ul className="ts-roster-list">
+                <li className="ts-ally" style={{ '--ally': '#8ecae6' }}>
+                  <span className="ts-ally-no">01</span>
+                  <span className="ts-ally-body">
+                    <span className="ts-ally-name">Muichiro Tokito</span>
+                    <span className="ts-ally-power">Air Double Jump</span>
+                  </span>
+                </li>
+                <li className="ts-ally" style={{ '--ally': '#fb8500' }}>
+                  <span className="ts-ally-no">02</span>
+                  <span className="ts-ally-body">
+                    <span className="ts-ally-name">Chuuya Nakahara</span>
+                    <span className="ts-ally-power">Gravity Float</span>
+                  </span>
+                </li>
+                <li className="ts-ally" style={{ '--ally': '#e0b1cb' }}>
+                  <span className="ts-ally-no">03</span>
+                  <span className="ts-ally-body">
+                    <span className="ts-ally-name">Yuta Okkotsu</span>
+                    <span className="ts-ally-power">Cursed Slash</span>
+                  </span>
+                </li>
+                <li className="ts-ally" style={{ '--ally': '#219ebc' }}>
+                  <span className="ts-ally-no">04</span>
+                  <span className="ts-ally-body">
+                    <span className="ts-ally-name">Giyu Tomioka</span>
+                    <span className="ts-ally-power">Water Shield</span>
+                  </span>
+                </li>
+              </ul>
+            </section>
           </div>
 
-          <div className="controls-glass-card">
-            <h3>⚡ CONTROLS & GAMEPLAY</h3>
-            <div className="controls-list">
-              <span><strong>[A] [D] / Left & Right Arrows</strong> : Walk Akari</span>
-              <span><strong>[SPACE] / [W]</strong> : Jump (Unlocks Air Double-Jump with Muichiro!)</span>
-              <span><strong>[X] / [ENTER]</strong> : Sword Attack & Shatter Prison Cages</span>
-            </div>
-          </div>
+          <section className="ts-controls">
+            <span className="ts-label">Controls</span>
+            <ul className="ts-control-list">
+              <li>
+                <span className="ts-keys"><kbd>A</kbd><kbd>D</kbd></span>
+                <span className="ts-control-text">Walk</span>
+              </li>
+              <li>
+                <span className="ts-keys"><kbd>Space</kbd><kbd>W</kbd></span>
+                <span className="ts-control-text">Jump</span>
+              </li>
+              <li>
+                <span className="ts-keys"><kbd>X</kbd><kbd>Enter</kbd></span>
+                <span className="ts-control-text">Attack &amp; Shatter Prison Cells</span>
+              </li>
+            </ul>
+          </section>
 
-          <button className="start-btn" onClick={resetGame}>
-            PLAY MISSION ▶
+          <button className="ts-play" onClick={resetGame}>
+            <span className="ts-play-label">Play Mission</span>
+            <span className="ts-play-icon">▶</span>
           </button>
         </div>
       )}

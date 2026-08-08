@@ -4,22 +4,22 @@ const RESCUE_DIALOGUES = {
   muichiro: {
     avatar: "🗡️",
     title: "MIST HASHIRA • MUICHIRO TOKITO",
-    speech: "Happy Birthday, Akari! What shape was that cloud again...? Oh right, protecting you! Mist Breathing 7th Form — Obscuring Clouds! Let's slice that Shadow Overlord together!"
+    speech: "Happy Birthday, Akari-san! What shape was that cloud again...? Oh right, protecting you! Mist Breathing 7th Form — Obscuring Clouds! I will clear a path through the mist for you!"
   },
   chuuya: {
     avatar: "🍷",
     title: "GRAVITY USER • CHUUYA NAKAHARA",
-    speech: "Happy Birthday, Akari! Nobody locks my allies in a void cage and gets away with it! Upon the Tainted Sorrow — Gravity Control ready! Let me crush the next shadow beast for you!"
+    speech: "Happy Birthday, Akari! Nobody locks my allies in a void cage and gets away with it! Upon the Tainted Sorrow — Gravity Control ready! Stand behind me, I'll crush these void demons into dust!"
   },
   yuta: {
     avatar: "💍",
     title: "SPECIAL GRADE • YUTA OKKOTSU",
-    speech: "Akari! Happy Birthday! I won't let anyone hurt you today. Pure Cursed Energy and Rika's blessing are with us — let me handle the next shadow monster!"
+    speech: "Akari-san! Happy Birthday! I won't let anyone hurt you today. Pure Cursed Energy and Rika are with us — I'll shield you with everything I've got!"
   },
   giyu: {
     avatar: "🌊",
     title: "WATER HASHIRA • GIYU TOMIOKA",
-    speech: "Happy Birthday, Akari. Water Breathing 11th Form — Dead Calm activated. Stand behind my Water Shield, I will ensure your safety all the way to the final boss!"
+    speech: "Happy Birthday, Akari. Water Breathing 11th Form — Dead Calm. Stand behind my Water Shield, no shadow beast will touch you while I'm breathing."
   }
 };
 
@@ -39,12 +39,12 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   ctx.fillStyle = 'rgba(7, 10, 20, 0.72)';
   ctx.fillRect(0, 0, viewW, viewH);
 
-  // 2. Companion Special Attack Rescue Strike Action Animation (Center Stage)
+  // 2. Companion Special Attack Rescue Showcase Animation (Cinematic Slowed Frame Rate: 9 ticks per frame!)
   const compObj = companionSprites[char.id];
   const attackList = (compObj && compObj.attack) ? compObj.attack : (compObj ? compObj.walking : null);
 
   if (attackList && attackList.length > 0) {
-    const animFrame = Math.floor(frames / 4) % attackList.length;
+    const animFrame = Math.floor(frames / 9) % attackList.length;
     const attackImg = attackList[animFrame];
     if (attackImg) {
       drawCroppedSprite(ctx, attackImg, viewW / 2, viewH / 2 + 10, 120, false, compObj ? compObj.flipDefault : false);
