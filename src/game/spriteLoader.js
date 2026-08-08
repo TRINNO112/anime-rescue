@@ -183,7 +183,7 @@ export const enemySprites = {
     frames: Array.from({ length: 6 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/WereWolf/Sprites/run/werewolf-run${i + 1}.png`))
   },
   fireskull: {
-    flipDefault: false,
+    flipDefault: true, // Fireskull raw source PNG faces LEFT -> set flipDefault: true so it floats FORWARD!
     frames: Array.from({ length: 8 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/Fire-Skull-Files/Sprites/Fire/frame${i + 1}.png`))
   },
   demonboss: {
