@@ -29,44 +29,44 @@ export function drawCompanions(ctx, activeRescues, player, cameraX, frames, near
           const COMPANION_HEIGHT = shouldUseAttack ? 68 : 60;
           drawnSprite = drawCroppedSprite(ctx, img, cx, groundY, COMPANION_HEIGHT, player.facingLeft, compObj.flipDefault);
 
-          // Render Authentic Lore Elemental Ability Effects during combat!
+          // Render Soft, Light Pastel Lore Ability Aura Effects (Subtle & Non-Distracting!)
           if (shouldUseAttack) {
             ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            
             if (char.id === 'muichiro') {
-              // Mist Breathing 7th Form: Obscuring Clouds (Cyan Mist Cloud Swirls)
-              ctx.fillStyle = 'rgba(56, 189, 248, 0.35)';
+              // Mist Breathing 7th Form: Soft Ethereal White/Sky Mist Glow
+              ctx.fillStyle = 'rgba(224, 242, 254, 0.22)';
               for (let i = 0; i < 3; i++) {
-                const mistX = cx + Math.sin((frames + i * 15) / 5) * 22;
-                const mistY = groundY - 20 - i * 12;
+                const mistX = cx + Math.sin((frames + i * 15) / 6) * 18;
+                const mistY = groundY - 18 - i * 10;
                 ctx.beginPath();
-                ctx.arc(mistX, mistY, 14 + i * 4, 0, Math.PI * 2);
+                ctx.arc(mistX, mistY, 10 + i * 3, 0, Math.PI * 2);
                 ctx.fill();
               }
             } else if (char.id === 'chuuya') {
-              // Ability: Upon the Tainted Sorrow (Red/Orange Gravity Distortion Waves)
-              ctx.strokeStyle = '#fb8500';
-              ctx.lineWidth = 2.5;
+              // Gravity Distortion Ring (Light Soft Amber Pulse)
+              ctx.strokeStyle = 'rgba(254, 215, 170, 0.28)';
+              ctx.lineWidth = 1.5;
               ctx.beginPath();
-              const r = 22 + (frames % 20);
-              ctx.arc(cx, groundY - 25, r, 0, Math.PI * 2);
+              const r = 18 + (frames % 18);
+              ctx.arc(cx, groundY - 22, r, 0, Math.PI * 2);
               ctx.stroke();
             } else if (char.id === 'yuta') {
-              // Special Grade Cursed Energy Surge (Purple Cursed Energy Sparkles)
-              ctx.fillStyle = '#e0b1cb';
-              for (let i = 0; i < 4; i++) {
-                const px = cx + (Math.sin(frames / 4 + i) * 25);
-                const py = groundY - 30 + (Math.cos(frames / 4 + i) * 20);
-                ctx.fillRect(px, py, 4, 4);
+              // Cursed Energy Surge (Soft Pastel Violet Motes)
+              ctx.fillStyle = 'rgba(245, 208, 254, 0.35)';
+              for (let i = 0; i < 3; i++) {
+                const px = cx + (Math.sin(frames / 5 + i) * 20);
+                const py = groundY - 24 + (Math.cos(frames / 5 + i) * 16);
+                ctx.fillRect(px, py, 3, 3);
               }
             } else if (char.id === 'giyu') {
-              // Water Breathing 11th Form: Dead Calm (Blue Water Aura Ripples)
-              ctx.strokeStyle = 'rgba(14, 165, 233, 0.7)';
-              ctx.lineWidth = 2;
+              // Water Breathing 11th Form: Lull (Light Pastel Water Ripples)
+              ctx.strokeStyle = 'rgba(219, 234, 254, 0.35)';
+              ctx.lineWidth = 1.5;
               ctx.beginPath();
-              const r1 = 18 + Math.sin(frames / 6) * 5;
-              const r2 = 30 + Math.cos(frames / 6) * 5;
-              ctx.arc(cx, groundY - 30, r1, 0, Math.PI * 2);
-              ctx.arc(cx, groundY - 30, r2, 0, Math.PI * 2);
+              const r1 = 16 + Math.sin(frames / 6) * 4;
+              ctx.arc(cx, groundY - 24, r1, 0, Math.PI * 2);
               ctx.stroke();
             }
             ctx.restore();
