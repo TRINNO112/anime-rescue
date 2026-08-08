@@ -11,7 +11,7 @@ import { HUD } from './components/HUD';
 import { MobileControls } from './components/MobileControls';
 
 function App() {
-  const [gameState, setGameState] = useState('START'); // START, PLAYING, GAME_OVER, VICTORY
+  const [gameState, setGameState] = useState('VICTORY'); // START, PLAYING, GAME_OVER, VICTORY
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [playerName, setPlayerName] = useState('Akari');
@@ -896,6 +896,31 @@ function App() {
             <strong> today belongs to you.</strong> 🎂
           </p>
 
+          <div className="vc-personal-msg">
+            <span className="vc-msg-from">A message from TRINNO ✉️</span>
+            <p className="vc-msg-text">
+              Hey Akari — you really crushed it out there. Every shadow, 
+              every boss, every locked cage — you faced them all head-on, 
+              and honestly, I wouldn&rsquo;t expect anything less from you.
+            </p>
+            <p className="vc-msg-text">
+              I built this entire game from scratch, just for you — every sprite, 
+              every level, every line of code. It took a lot of sleepless nights 
+              and a lot of hard work, but it was <strong>absolutely worth it</strong> if 
+              it made you smile even once while playing.
+            </p>
+            <p className="vc-msg-text">
+              <strong>Happy Birthday, Akari.</strong> I genuinely wish you the brightest, 
+              most beautiful future ahead — full of everything that makes you happy. 
+              You deserve all of it and more. Have the most amazing day today. 🎂✨
+            </p>
+            <p className="vc-msg-text">
+              Below are some birthday wishes from your favorite characters — 
+              I thought they&rsquo;d want to celebrate with you too. 💛
+            </p>
+            <span className="vc-msg-sign">— TRINNO</span>
+          </div>
+
           <ul className="vc-wishes">
             <li className="vc-wish" style={{ '--ally': '#8ecae6' }}>
               <span className="vc-wish-face">🗡️</span>
@@ -926,31 +951,6 @@ function App() {
               </span>
             </li>
           </ul>
-
-          <div className="vc-personal-msg">
-            <span className="vc-msg-from">A message from Trinno ✉️</span>
-            <p className="vc-msg-text">
-              Hey Akari — you really did amazing out there, and honestly, 
-              I wouldn&rsquo;t expect anything less from you.
-            </p>
-            <p className="vc-msg-text">
-              Today is your birthday, and I just want to say — <strong>very happy birthday</strong>, 
-              from the bottom of my heart. I&rsquo;m not going to ask how you are or how 
-              everything&rsquo;s going, because today isn&rsquo;t about all that. 
-              Today is just about you having a great day. That&rsquo;s it.
-            </p>
-            <p className="vc-msg-text">
-              I don&rsquo;t know when we&rsquo;ll get to talk again, or for how long, 
-              or even if we will — but I wanted you to know that <strong>I really miss you</strong>. 
-              I miss you a lot. And I hope this little game I made for you 
-              puts a smile on your face, even if just for a moment.
-            </p>
-            <p className="vc-msg-text">
-              Above are some messages from your favorite characters — 
-              I thought they&rsquo;d want to say happy birthday too. 💛
-            </p>
-            <span className="vc-msg-sign">— Trinno</span>
-          </div>
 
           <div className="vc-stats">
             <span><b>04</b> Allies Freed</span>
