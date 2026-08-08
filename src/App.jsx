@@ -654,7 +654,7 @@ function App() {
         const currentBossFrame = Math.floor(frames / 6) % bossAnim.length;
         const bossImg = bossAnim[currentBossFrame];
 
-        // Demon Boss source sprite faces RIGHT by default -> flip=false faces LEFT towards Heroine Akari!
+        // Demon Boss source sprite faces RIGHT by default -> flip=false faces LEFT towards Akari!
         if (!drawCroppedSprite(ctx, bossImg, bossCenterX, bossGroundY, BOSS_RENDER_HEIGHT, false)) {
           ctx.fillStyle = '#6b21a8';
           ctx.fillRect(boss.x - cameraX, boss.y, boss.width, boss.height);
@@ -705,7 +705,7 @@ function App() {
           <div className="hero-showcase-card">
             <div className="hero-avatar">👑</div>
             <div className="hero-details">
-              <h2>HEROINE AKARI</h2>
+              <h2>AKARI</h2>
               <p>Weapon: Birthday Katana • HP: ❤️❤️❤️❤️❤️</p>
             </div>
             <button className="start-audio-btn" onClick={() => setIsMuted(synth.toggleMute())}>
@@ -753,7 +753,7 @@ function App() {
           <div className="controls-glass-card">
             <h3>⚡ CONTROLS & HOW TO PLAY</h3>
             <div className="controls-list">
-              <span><strong>[A] [D] / Left & Right Arrows</strong> : Walk Heroine Akari</span>
+              <span><strong>[A] [D] / Left & Right Arrows</strong> : Walk Akari</span>
               <span><strong>[SPACE] / [W]</strong> : Jump (Unlocks Air Double-Jump with Muichiro!)</span>
               <span><strong>[X] / [ENTER]</strong> : Sword Attack & Shatter Prison Cages</span>
             </div>
