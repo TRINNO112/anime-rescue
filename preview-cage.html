@@ -29,12 +29,12 @@ function draw() {
   env.drawPlatforms(ctx, platforms, 0);
   env.drawCages(ctx, cages, 0, frames, player);
 
-  // Magnified inspection strip of the first cage
+  // Magnified inspection of the first cage (3x)
   ctx.imageSmoothingEnabled = false;
-  ctx.drawImage(canvas, 70, 225, 100, 100, 780, 40, 200, 200);
+  ctx.drawImage(canvas, 75, 205, 130, 105, 610, 60, 390, 315);
   ctx.imageSmoothingEnabled = true;
   ctx.strokeStyle = '#ffffff55';
-  ctx.strokeRect(780, 40, 200, 200);
+  ctx.strokeRect(610, 60, 390, 315);
   window.__ready = true;
 }
 setInterval(draw, 60);

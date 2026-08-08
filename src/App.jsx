@@ -63,6 +63,13 @@ function App() {
   // Handle game input listeners
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // Hidden Developer Cheat: Press 'V' to instantly trigger the custom Victory Birthday screen!
+      if (e.key === 'v' || e.key === 'V') {
+        setGameState('VICTORY');
+        synth.playBirthdayTheme();
+        return;
+      }
+
       if (gameState !== 'PLAYING') return;
       if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' ', 'x', 'X', 'Enter', 'w', 'W', 'a', 'A', 's', 'S', 'd', 'D', 'f', 'F'].includes(e.key)) {
         e.preventDefault();
