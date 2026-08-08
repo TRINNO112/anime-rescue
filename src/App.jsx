@@ -723,15 +723,13 @@ function App() {
     <div className="app-container">
       {!isLoaded && (
         <div className="screen loading-screen">
-          <div className="loading-card">
-            <div className="loading-icon">🗡️✨</div>
-            <h1 className="loading-title">AKARI'S BIRTHDAY RESCUE</h1>
-            <p className="loading-subtitle">「 PRELOADING ANIME COMPANION SPRITES & REALM BIOMES 」</p>
-
-            <div className="loading-bar-container">
-              <div className="loading-bar-fill" style={{ width: `${loadingProgress}%` }} />
-            </div>
-            <span className="loading-percent">{loadingProgress}% COMPLETE</span>
+          <div className="loader-circle-wrap">
+            <div className="loader-ring" />
+            <span className="loader-progress-text">{loadingProgress}%</span>
+          </div>
+          <div className="loader-meta">
+            <h1 className="loader-title">AKARI'S BIRTHDAY RESCUE</h1>
+            <p className="loader-subtitle">Loading Gothic Biomes & Sprite Sheets...</p>
           </div>
         </div>
       )}
