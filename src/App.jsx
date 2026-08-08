@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import { synth } from './game/soundSynth';
-import { akariSprites, enemySprites, drawCroppedSprite } from './game/spriteLoader';
+import { akariSprites, enemySprites, drawCroppedSprite, companionSprites, preloadAllImages } from './game/spriteLoader';
 import { CHARACTERS, platforms, initialCages, initialEnemies } from './game/gameConfig';
 import { drawCompanions } from './game/companionRenderer';
 import { EnvironmentRenderer } from './game/environmentRenderer';
@@ -12,9 +12,19 @@ import { MobileControls } from './components/MobileControls';
 
 function App() {
   const [gameState, setGameState] = useState('START'); // START, PLAYING, GAME_OVER, VICTORY
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const [playerName, setPlayerName] = useState('Akari');
   const [rescuedList, setRescuedList] = useState([]);
   const canvasRef = useRef(null);
+
+  useEffect(() => {
+    preloadAllImages((pct) => {
+      setLoadingProgress(pct);
+    }).then(() => {
+      setTimeout(() => setIsLoaded(true), 250);
+    });
+  }, []);
 
   // Active status variables
   const [currentScore, setCurrentScore] = useState(0);
@@ -704,6 +714,21 @@ function App() {
 
   return (
     <div className="app-container">
+      {!isLoaded && (
+        <div className="screen loading-screen">
+          <div className="loading-card">
+            <div className="loading-icon">🗡️✨</div>
+            <h1 className="loading-title">AKARI'S BIRTHDAY RESCUE</h1>
+            <p className="loading-subtitle">「 PRELOADING ANIME COMPANION SPRITES & REALM BIOMES 」</p>
+
+            <div className="loading-bar-container">
+              <div className="loading-bar-fill" style={{ width: `${loadingProgress}%` }} />
+            </div>
+            <span className="loading-percent">{loadingProgress}% COMPLETE</span>
+          </div>
+        </div>
+      )}
+
       <div className="portrait-orientation-warning">
         <span>🔄 PLEASE ROTATE YOUR PHONE TO LANDSCAPE MODE 🎮</span>
         <p>This RPG is designed for horizontal landscape gameplay!</p>

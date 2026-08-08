@@ -88,13 +88,45 @@ export function drawCroppedSprite(ctx, img, centerX, bottomY, targetHeight, faci
   return true;
 }
 
+const allLoadedImages = [];
+
 function createImage(src) {
   const img = new Image();
   img.src = src;
   img.onload = () => {
     processImageCanvas(img);
   };
+  allLoadedImages.push(img);
   return img;
+}
+
+export function preloadAllImages(onProgress) {
+  return new Promise((resolve) => {
+    if (allLoadedImages.length === 0) {
+      resolve();
+      return;
+    }
+    let loadedCount = 0;
+    const total = allLoadedImages.length;
+
+    const checkImage = () => {
+      loadedCount++;
+      const percent = Math.min(100, Math.floor((loadedCount / total) * 100));
+      if (onProgress) onProgress(percent);
+      if (loadedCount >= total) {
+        resolve();
+      }
+    };
+
+    allLoadedImages.forEach(img => {
+      if (img.complete) {
+        checkImage();
+      } else {
+        img.addEventListener('load', checkImage);
+        img.addEventListener('error', checkImage);
+      }
+    });
+  });
 }
 
 // Preload Akari's sprite sheets

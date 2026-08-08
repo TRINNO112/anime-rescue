@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><style>body{margin:0;background:#0b0716}canvas{display:block;image-rendering:auto}</style></head>
+<body>
+<canvas id="c" width="1000" height="500"></canvas>
+<script type="module">
+import { EnvironmentRenderer } from '/src/game/environmentRenderer.js';
+
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const env = new EnvironmentRenderer(1000, 500);
+
+// Four cages, one per companion, sitting on a platform
+const platforms = [{ x: 0, y: 300, w: 1000, h: 50 }];
+const cages = [
+  { x: 90,  y: 250, w: 50, h: 50, charId: 'muichiro', rescued: false },
+  { x: 290, y: 250, w: 50, h: 50, charId: 'chuuya',   rescued: false },
+  { x: 490, y: 250, w: 50, h: 50, charId: 'yuta',     rescued: false },
+  { x: 690, y: 250, w: 50, h: 50, charId: 'giyu',     rescued: false },
+];
+// Player far away so the "[X] BREAK CAGE" prompt stays hidden
+const player = { x: -9999, y: -9999, width: 28, height: 48 };
+
+let frames = 0;
+function draw() {
+  frames++;
+  ctx.clearRect(0, 0, 1000, 500);
+  env.drawBackground(ctx, 0, frames);
+  env.drawPlatforms(ctx, platforms, 0);
+  env.drawCages(ctx, cages, 0, frames, player);
+
+  // Magnified inspection strip of the first cage
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(canvas, 70, 225, 100, 100, 780, 40, 200, 200);
+  ctx.imageSmoothingEnabled = true;
+  ctx.strokeStyle = '#ffffff55';
+  ctx.strokeRect(780, 40, 200, 200);
+  window.__ready = true;
+}
+setInterval(draw, 60);
+draw();
+</script>
+</body>
+</html>
