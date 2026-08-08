@@ -260,30 +260,25 @@ export class EnvironmentRenderer {
           }
         }
 
-        // Heavy Gothic Dark Steel Cage Beams & Border
+        // Clean, Sleek Gothic Iron Cell Frame
         ctx.fillStyle = '#0f172a';
-        ctx.fillRect(cx - 2, cy - 4, cage.w + 4, 8); // Top header beam
-        ctx.fillRect(cx - 2, cy + cage.h - 4, cage.w + 4, 8); // Bottom base beam
-        ctx.fillRect(cx - 4, cy - 4, 8, cage.h + 8); // Left pillar post
-        ctx.fillRect(cx + cage.w - 4, cy - 4, 8, cage.h + 8); // Right pillar post
+        ctx.fillRect(cx - 2, cy - 4, cage.w + 4, 6); // Top bar
+        ctx.fillRect(cx - 2, cy + cage.h - 2, cage.w + 4, 6); // Bottom bar
+        ctx.fillRect(cx - 4, cy - 4, 6, cage.h + 8); // Left bar
+        ctx.fillRect(cx + cage.w - 2, cy - 4, 6, cage.h + 8); // Right bar
 
-        // Metallic Steel Vertical Bars with Highlights
+        // Vertical Iron Bars with Subtle Metallic Highlight
         for (let bx = cx + 8; bx < cx + cage.w - 6; bx += 10) {
           ctx.fillStyle = '#334155';
-          ctx.fillRect(bx, cy + 4, 4, cage.h - 8);
-          ctx.fillStyle = '#94a3b8';
-          ctx.fillRect(bx + 1, cy + 4, 1, cage.h - 8);
+          ctx.fillRect(bx, cy + 2, 3, cage.h - 4);
+          ctx.fillStyle = '#64748b';
+          ctx.fillRect(bx + 1, cy + 2, 1, cage.h - 4);
         }
 
-        // Golden Padlock Emblem in Center
-        ctx.fillStyle = 'rgba(251, 191, 36, 0.2)';
-        ctx.beginPath();
-        ctx.arc(cx + cage.w / 2, cy + cage.h / 2 + 2, 14, 0, Math.PI * 2);
-        ctx.fill();
-
+        // Golden Padlock Icon in Center
         ctx.font = '16px system-ui';
         ctx.textAlign = 'center';
-        ctx.fillText('🔒', cx + cage.w / 2, cy + cage.h / 2 + 7);
+        ctx.fillText('🔒', cx + cage.w / 2, cy + cage.h / 2 + 6);
 
         // Keypress Proximity Prompt Overlay when Akari is near!
         const dist = Math.abs((player.x + player.width / 2) - (cage.x + cage.w / 2));

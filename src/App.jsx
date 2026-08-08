@@ -40,12 +40,27 @@ function App() {
 
   const cutsceneRef = useRef({ active: false, char: null });
 
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+  };
+
   // Handle game input listeners
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (gameState !== 'PLAYING') return;
-      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' ', 'x', 'X', 'Enter', 'w', 'W', 'a', 'A', 's', 'S', 'd', 'D'].includes(e.key)) {
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' ', 'x', 'X', 'Enter', 'w', 'W', 'a', 'A', 's', 'S', 'd', 'D', 'f', 'F'].includes(e.key)) {
         e.preventDefault();
+      }
+
+      if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+        return;
       }
 
       // If Dialogue Box is open, pressing ANY key dismisses it!
@@ -818,6 +833,7 @@ function App() {
             rescuedList={rescuedList} 
             isMuted={isMuted}
             onToggleAudio={() => setIsMuted(synth.toggleMute())}
+            onToggleFullscreen={toggleFullscreen}
           />
 
           <div className="canvas-wrapper">
@@ -842,6 +858,7 @@ function App() {
             <span>[A] [D] / Arrows / Touch D-Pad : Walk</span>
             <span>[SPACE] / [W] / [🦘] : Jump (Double Jump with Muichiro!)</span>
             <span>[X] / [ENTER] / [⚔️] : Attack & Break Prison Cages</span>
+            <span>[F] / [🖥️] : Toggle Fullscreen Mode</span>
           </div>
         </div>
       )}
