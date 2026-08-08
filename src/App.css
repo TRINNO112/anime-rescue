@@ -169,7 +169,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   line-height: 1;
 }
 
@@ -955,7 +955,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  line-height: 0.88;
+  gap: 12px;
+  line-height: 1;
 }
 
 .ld-title-sm {
@@ -1165,7 +1166,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
   line-height: 1;
 }
 
