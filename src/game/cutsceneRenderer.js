@@ -47,7 +47,7 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
     const animFrame = Math.floor(frames / 9) % attackList.length;
     const attackImg = attackList[animFrame];
     if (attackImg) {
-      drawCroppedSprite(ctx, attackImg, viewW / 2, viewH / 2 + 10, 120, false, compObj ? compObj.flipDefault : false);
+      drawCroppedSprite(ctx, attackImg, viewW / 2, isSmallScreen ? viewH * 0.28 : viewH / 2 + 10, isSmallScreen ? 90 : 120, false, compObj ? compObj.flipDefault : false);
     }
   }
 
@@ -85,7 +85,7 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   const textTopOffset = isSmallScreen ? 34 : 48;
   const cardH = Math.max(isSmallScreen ? 85 : 110, textTopOffset + lines.length * lineSpacing + (isSmallScreen ? 18 : 22));
   const cardX = viewW / 2 - cardW / 2;
-  const cardY = viewH - cardH - (isSmallScreen ? 6 : 14);
+  const cardY = isSmallScreen ? viewH - cardH - 56 : viewH - cardH - 14;
 
   // Glass Box Container
   ctx.fillStyle = 'rgba(10, 15, 30, 0.96)';
