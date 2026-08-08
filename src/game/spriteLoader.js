@@ -91,8 +91,11 @@ export function drawCroppedSprite(ctx, img, centerX, bottomY, targetHeight, faci
 const allLoadedImages = [];
 
 function createImage(src) {
+  const baseUrl = import.meta.env.BASE_URL || './';
+  const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
+  const fullPath = baseUrl.endsWith('/') ? baseUrl + cleanSrc : baseUrl + '/' + cleanSrc;
   const img = new Image();
-  img.src = src;
+  img.src = fullPath;
   img.onload = () => {
     processImageCanvas(img);
   };
