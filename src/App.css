@@ -38,12 +38,11 @@ body {
 }
 
 /* ==========================================================================
-   TITLE SCREEN — "Akari's Birthday Rescue"
-   Ink-and-neon: near-black lacquer panel, a single crimson accent, thin rules.
+   TITLE SCREEN — anime character-select. Poster-scale type, one crimson
+   accent, and a row of glyph cards instead of a wall of names.
    ========================================================================== */
 .start-screen {
   --ink: #08060f;
-  --edge: rgba(255, 255, 255, 0.09);
   --crimson: #ff3b6b;
   --ember: #ffb347;
   --muted: #9a93b0;
@@ -54,59 +53,84 @@ body {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 44px 46px 40px;
-  border-radius: 24px;
+  padding: 52px 46px 42px;
+  border-radius: 26px;
   overflow: hidden;
-  text-align: left;
   background:
-    linear-gradient(180deg, rgba(28, 16, 44, 0.65) 0%, rgba(8, 6, 15, 0.94) 45%),
+    linear-gradient(180deg, rgba(30, 16, 48, 0.6) 0%, rgba(8, 6, 15, 0.96) 52%),
     var(--ink);
   box-shadow:
     0 40px 90px -30px rgba(0, 0, 0, 0.95),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   animation: animeEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   gap: 30px;
 }
 
 @keyframes animeEntrance {
-  0% {
-    opacity: 0;
-    transform: translateY(24px) scale(0.97);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  0%   { opacity: 0; transform: translateY(24px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Crimson glow bleeding in from the top edge */
+/* Crimson dusk bleeding down from the top edge */
 .ts-aura {
   position: absolute;
-  inset: -40% -20% auto -20%;
-  height: 70%;
+  inset: -45% -20% auto -20%;
+  height: 85%;
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 50% 100%, rgba(255, 59, 107, 0.28) 0%, transparent 62%),
-    radial-gradient(ellipse at 18% 90%, rgba(140, 82, 255, 0.22) 0%, transparent 58%);
-  filter: blur(6px);
+    radial-gradient(ellipse at 50% 100%, rgba(255, 59, 107, 0.3) 0%, transparent 62%),
+    radial-gradient(ellipse at 15% 92%, rgba(140, 82, 255, 0.24) 0%, transparent 58%);
+  filter: blur(8px);
 }
 
-/* Hairline top accent */
 .start-screen::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 12%;
-  right: 12%;
+  left: 14%;
+  right: 14%;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--crimson), transparent);
-  opacity: 0.85;
+}
+
+/* Vertical japanese spine down the left gutter */
+.ts-vert {
+  position: absolute;
+  top: 44px;
+  left: 18px;
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  color: rgba(255, 255, 255, 0.18);
+  user-select: none;
+  pointer-events: none;
+}
+
+.ts-sound-btn {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.ts-sound-btn:hover {
+  border-color: var(--crimson);
+  background: rgba(255, 59, 107, 0.16);
+  transform: scale(1.06);
 }
 
 /* --- Header ------------------------------------------------------------- */
@@ -117,368 +141,174 @@ body {
   text-align: center;
 }
 
-.ts-eyebrow,
-.ts-label {
-  font-size: 10px;
+.ts-eyebrow {
+  font-size: 9.5px;
   font-weight: 800;
-  letter-spacing: 0.34em;
+  letter-spacing: 0.38em;
+  text-indent: 0.38em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--crimson);
+  opacity: 0.9;
 }
 
 .ts-title {
-  margin: 14px 0 0;
+  margin: 16px 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  line-height: 0.92;
+  line-height: 0.86;
 }
 
 .ts-title-top {
   font-family: 'Bebas Neue', 'Outfit', sans-serif;
-  font-size: clamp(20px, 3.2vw, 30px);
-  letter-spacing: 0.44em;
-  text-indent: 0.44em;
+  font-size: clamp(18px, 2.8vw, 26px);
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
   color: #efe9ff;
-  opacity: 0.85;
+  opacity: 0.7;
 }
 
 .ts-title-main {
+  position: relative;
   font-family: 'Bebas Neue', 'Outfit', sans-serif;
-  font-size: clamp(42px, 8vw, 82px);
-  letter-spacing: 0.05em;
-  background: linear-gradient(180deg, #ffffff 8%, #ffd9e3 46%, var(--crimson) 100%);
+  font-size: clamp(46px, 9.5vw, 104px);
+  letter-spacing: 0.02em;
+  background: linear-gradient(180deg, #ffffff 6%, #ffd9e3 44%, var(--crimson) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 6px 26px rgba(255, 59, 107, 0.45));
+  filter: drop-shadow(0 8px 34px rgba(255, 59, 107, 0.5));
 }
 
-.ts-rule {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: min(320px, 70%);
-  margin: 16px 0 12px;
-  color: var(--crimson);
-  font-size: 9px;
-}
-
-.ts-rule i {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
-}
-
-.ts-kanji {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.42em;
-  text-indent: 0.42em;
-  color: #d9b8ff;
+/* Ghost echo behind the title for a printed-poster feel */
+.ts-title-main::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  -webkit-text-fill-color: rgba(255, 59, 107, 0.16);
+  transform: translate(3px, 3px);
 }
 
 .ts-tagline {
-  max-width: 52ch;
-  margin: 14px 0 0;
-  font-size: 13.5px;
+  margin: 18px 0 0;
+  font-size: 13px;
   font-weight: 300;
-  line-height: 1.7;
-  color: #c8c2da;
+  letter-spacing: 0.13em;
+  color: #b9b2cc;
 }
 
-/* --- Two-column body ---------------------------------------------------- */
-.ts-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  align-items: stretch;
+/* --- Character select cards -------------------------------------------- */
+.ts-cards {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
-/* --- Heroine panel ------------------------------------------------------ */
-.ts-hero {
+.ts-card {
   position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-areas: 'crest meta';
-  gap: 18px;
-  padding: 22px;
+  flex: 1 1 120px;
+  max-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 12px 16px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 59, 107, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    linear-gradient(145deg, rgba(255, 59, 107, 0.12) 0%, rgba(255, 59, 107, 0) 55%),
-    rgba(255, 255, 255, 0.025);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  cursor: default;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.ts-hero-crest {
-  grid-area: crest;
-  width: 54px;
-  height: 54px;
+/* Colour wash that only wakes up on hover */
+.ts-card::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: var(--ally);
+  opacity: 0.55;
+  transition: opacity 0.25s ease, height 0.25s ease;
+}
+
+.ts-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--ally) 55%, transparent);
+  box-shadow: 0 18px 40px -18px var(--ally);
+}
+
+.ts-card:hover::after {
+  opacity: 1;
+  height: 4px;
+}
+
+.ts-card-glyph {
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
   border-radius: 12px;
-  border: 1px solid rgba(255, 179, 71, 0.5);
-  background: linear-gradient(160deg, rgba(255, 179, 71, 0.22), rgba(255, 59, 107, 0.18));
-  color: var(--ember);
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 600;
-  text-shadow: 0 0 18px rgba(255, 179, 71, 0.6);
+  color: var(--ally);
+  background: color-mix(in srgb, var(--ally) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ally) 35%, transparent);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--ally) 70%, transparent);
 }
 
-.ts-hero-meta {
-  grid-area: meta;
-  min-width: 0;
-}
-
-.ts-hero-name {
+.ts-card-name {
+  margin-top: 4px;
   font-family: 'Bebas Neue', 'Outfit', sans-serif;
-  font-size: 34px;
-  letter-spacing: 0.12em;
+  font-size: 17px;
+  letter-spacing: 0.14em;
   color: #ffffff;
-  margin: 4px 0 14px;
-  line-height: 1;
 }
 
-.ts-hero-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.ts-stat {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  font-size: 12.5px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding-top: 7px;
-}
-
-.ts-stat:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.ts-stat-key {
-  flex: 0 0 62px;
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.ts-stat-val {
-  color: #f0ecfa;
-  font-weight: 600;
-}
-
-.ts-pips {
-  display: inline-flex;
-  gap: 5px;
-  align-items: center;
-}
-
-.ts-pips i {
-  width: 9px;
-  height: 9px;
-  border-radius: 2px;
-  transform: rotate(45deg);
-  background: var(--crimson);
-  box-shadow: 0 0 8px rgba(255, 59, 107, 0.7);
-}
-
-.ts-sound-btn {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 11px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.04);
-  color: #e7e2f5;
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 800;
+.ts-card-power {
+  font-size: 9.5px;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  color: var(--ally);
+  opacity: 0.85;
 }
 
-.ts-sound-btn:hover {
-  border-color: var(--crimson);
-  background: rgba(255, 59, 107, 0.14);
-  color: #ffffff;
+.ts-card--hero {
+  border-color: rgba(255, 59, 107, 0.4);
+  background:
+    linear-gradient(180deg, rgba(255, 59, 107, 0.16), rgba(255, 59, 107, 0.02));
 }
 
-/* --- Ally roster -------------------------------------------------------- */
-.ts-roster {
-  padding: 22px;
-  border-radius: 14px;
-  border: 1px solid var(--edge);
-  background: rgba(255, 255, 255, 0.025);
-}
-
-.ts-roster-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.ts-roster-count {
-  font-family: 'Bebas Neue', 'Outfit', sans-serif;
-  font-size: 20px;
-  letter-spacing: 0.08em;
-  color: var(--crimson);
-}
-
-.ts-roster-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.ts-ally {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 11px 8px 11px 12px;
-  margin: 0 -8px 0 -12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  position: relative;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.ts-ally::before {
-  content: '';
+.ts-card-tag {
   position: absolute;
-  left: 0;
-  top: 22%;
-  bottom: 22%;
-  width: 2px;
-  border-radius: 2px;
-  background: var(--ally);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.ts-ally:last-child {
-  border-bottom: 0;
-}
-
-.ts-ally:hover {
-  background: rgba(255, 255, 255, 0.04);
-  transform: translateX(3px);
-}
-
-.ts-ally:hover::before {
-  opacity: 1;
-}
-
-.ts-ally-no {
-  font-family: 'Bebas Neue', 'Outfit', sans-serif;
-  font-size: 15px;
-  letter-spacing: 0.08em;
-  color: var(--ally);
-  opacity: 0.75;
-  min-width: 20px;
-}
-
-.ts-ally-body {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.ts-ally-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #f3f0fb;
-  letter-spacing: 0.01em;
-}
-
-.ts-ally-power {
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ally);
-  opacity: 0.9;
-}
-
-/* --- Controls ----------------------------------------------------------- */
-.ts-controls {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 14px 26px;
-  padding: 16px 22px;
-  border-radius: 14px;
-  border: 1px solid var(--edge);
-  background: rgba(0, 0, 0, 0.32);
-}
-
-.ts-control-list {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 26px;
-  margin: 0;
-  padding: 0;
-  flex: 1;
-}
-
-.ts-control-list li {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.ts-keys {
-  display: inline-flex;
-  gap: 4px;
-}
-
-.ts-controls kbd {
-  font-family: 'Outfit', sans-serif;
-  font-size: 10px;
+  top: 8px;
+  right: 8px;
+  font-size: 8px;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-bottom-width: 2px;
-  border-radius: 5px;
-  padding: 4px 8px;
-  min-width: 14px;
-  text-align: center;
+  letter-spacing: 0.16em;
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: #0b0510;
+  background: var(--ember);
 }
 
-.ts-control-text {
-  font-size: 12.5px;
-  font-weight: 300;
-  color: #c8c2da;
-}
-
-/* --- Play button -------------------------------------------------------- */
+/* --- Start button ------------------------------------------------------- */
 .ts-play {
-  align-self: center;
   position: relative;
   overflow: hidden;
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  padding: 17px 46px;
+  padding: 16px 58px;
   border: 0;
   border-radius: 999px;
   cursor: pointer;
@@ -486,15 +316,15 @@ body {
   color: #ffffff;
   background: linear-gradient(100deg, #e01e4f 0%, var(--crimson) 45%, #ff7a4d 100%);
   box-shadow:
-    0 18px 40px -14px rgba(255, 59, 107, 0.8),
-    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+    0 18px 44px -14px rgba(255, 59, 107, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34);
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
 }
 
 .ts-play-label {
-  font-size: 21px;
-  letter-spacing: 0.22em;
-  text-indent: 0.22em;
+  font-size: 23px;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
 }
 
 .ts-play-icon {
@@ -502,7 +332,6 @@ body {
   transition: transform 0.22s ease;
 }
 
-/* Sheen sweep */
 .ts-play::after {
   content: '';
   position: absolute;
@@ -518,21 +347,13 @@ body {
 .ts-play:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 24px 52px -14px rgba(255, 59, 107, 0.95),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    0 26px 56px -14px rgba(255, 59, 107, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
 }
 
-.ts-play:hover::after {
-  left: 120%;
-}
-
-.ts-play:hover .ts-play-icon {
-  transform: translateX(4px);
-}
-
-.ts-play:active {
-  transform: translateY(0) scale(0.985);
-}
+.ts-play:hover::after { left: 120%; }
+.ts-play:hover .ts-play-icon { transform: translateX(5px); }
+.ts-play:active { transform: translateY(0) scale(0.985); }
 
 .ts-play:focus-visible,
 .ts-sound-btn:focus-visible {
@@ -540,36 +361,142 @@ body {
   outline-offset: 3px;
 }
 
-@keyframes tsRise {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* --- Key legend --------------------------------------------------------- */
+.ts-keys {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.ts-keys span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ts-keys i {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.ts-keys kbd {
+  font-family: 'Outfit', sans-serif;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 3px 7px;
 }
 
 /* --- Title screen responsive ------------------------------------------- */
 @media (max-width: 720px) {
-  .start-screen {
-    padding: 30px 22px 28px;
-    gap: 22px;
-  }
-  .ts-body {
-    grid-template-columns: 1fr;
-  }
-  .ts-controls {
-    padding: 14px 18px;
-  }
-  .ts-play {
-    width: 100%;
-    justify-content: center;
-    padding: 15px 24px;
-  }
+  .start-screen { padding: 40px 18px 30px; gap: 24px; }
+  .ts-vert { display: none; }
+  .ts-card { flex: 1 1 44%; max-width: none; padding: 16px 10px 13px; }
+  .ts-play { width: 100%; justify-content: center; padding: 15px 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .start-screen { animation: none; }
-  .ts-play,
-  .ts-play::after,
-  .ts-play-icon,
-  .ts-ally { transition: none; }
+  .ts-play, .ts-play::after, .ts-play-icon, .ts-card { transition: none; }
+  .ts-fade-in, .ts-card-enter, .ts-typewriter { animation: none !important; opacity: 1 !important; }
+}
+
+/* ==========================================================================
+   START SCREEN SEQUENTIAL REVEAL ANIMATIONS
+   ========================================================================== */
+
+/* Staggered fade-in from below for header, button, keys */
+.ts-fade-in {
+  opacity: 0;
+  animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 0.15s + 0.3s);
+}
+
+@keyframes fadeSlideUp {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Character cards slide in from bottom with stagger */
+.ts-card-enter {
+  opacity: 0;
+  animation: cardSlideIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--ci, 0) * 0.12s + 0.9s);
+}
+
+@keyframes cardSlideIn {
+  0%   { opacity: 0; transform: translateY(40px) scale(0.92); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Typewriter cursor blinking effect on tagline */
+.ts-typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--crimson);
+  width: 0;
+  animation:
+    typeExpand 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards,
+    cursorBlink 0.6s step-end infinite;
+}
+
+@keyframes typeExpand {
+  0%   { width: 0; }
+  100% { width: 100%; }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { border-color: var(--crimson); }
+  50%      { border-color: transparent; }
+}
+
+/* Floating embers / sakura particles */
+.ts-particles {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ts-particle {
+  position: absolute;
+  left: var(--px);
+  top: var(--py);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 59, 107, 0.9), rgba(192, 132, 252, 0.6));
+  box-shadow: 0 0 8px rgba(255, 59, 107, 0.5);
+  animation: floatParticle var(--d) ease-in-out var(--delay) infinite alternate;
+}
+
+@keyframes floatParticle {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  50%  { opacity: 0.9; }
+  100% { transform: translate(15px, -30px) scale(0.6); opacity: 0.15; }
+}
+
+/* Glyph pulse inside character cards */
+.ts-card-glyph {
+  animation: glyphPulse 3s ease-in-out infinite;
+}
+
+@keyframes glyphPulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
 }
 
 /* HUD audio toggle (in-game) */
@@ -769,58 +696,11 @@ body {
   text-shadow: 0 0 14px rgba(239, 68, 68, 0.6);
 }
 
-/* Victory Screen */
-.victory-screen {
-  background: var(--bg-glass);
-  border: 2px solid var(--gold-accent);
-  box-shadow: 0 0 50px rgba(255, 209, 59, 0.3);
-  border-radius: 20px;
-  padding: 36px;
-  box-sizing: border-box;
-  max-width: 680px;
-  animation: zoomIn 0.4s ease-out;
-  backdrop-filter: blur(16px);
-}
-
-.victory-title {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 18px;
-  color: var(--gold-accent);
-  margin-bottom: 12px;
-  text-shadow: 0 0 12px rgba(255, 209, 59, 0.5);
-}
 
 .victory-subtitle {
   font-size: 14px;
   color: #cbd5e1;
   margin-bottom: 25px;
-}
-
-.victory-party {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 12px;
-  width: 100%;
-  margin-bottom: 25px;
-}
-
-.victory-char-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1.5px solid rgba(168, 85, 247, 0.4);
-  border-radius: 10px;
-  padding: 12px;
-}
-
-.victory-char-card h3 {
-  margin: 0 0 4px;
-  font-size: 13px;
-  color: #f8fafc;
-}
-
-.victory-char-card p {
-  margin: 0;
-  font-size: 11px;
-  color: #94a3b8;
 }
 
 @keyframes fadeIn {
@@ -948,78 +828,6 @@ body {
     border: none;
   }
 
-/* ==========================================================================
-   NEON ANIME PRELOADER & LOADING SCREEN UI
-   ========================================================================== */
-.loading-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  background: radial-gradient(circle at 50% 50%, #0c081f 0%, #03010a 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 36px;
-}
-
-.loader-circle-wrap {
-  position: relative;
-  width: 140px;
-  height: 140px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loader-ring {
-  position: absolute;
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  border: 4px dashed rgba(244, 63, 94, 0.15);
-  border-top: 4px solid #f43f5e;
-  border-right: 4px solid #c084fc;
-  animation: spinLoader 2.2s linear infinite;
-}
-
-@keyframes spinLoader {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loader-progress-text {
-  font-family: 'Outfit', sans-serif;
-  font-size: 32px;
-  font-weight: 850;
-  color: #ffffff;
-  text-shadow: 0 0 20px rgba(244, 63, 94, 0.85);
-  letter-spacing: -0.5px;
-}
-
-.loader-meta {
-  text-align: center;
-}
-
-.loader-title {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  margin: 0 0 8px 0;
-  background: linear-gradient(135deg, #f472b6 0%, #c084fc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(244, 114, 182, 0.4));
-}
-
-.loader-subtitle {
-  font-size: 11px;
-  font-weight: 700;
-  color: #94a3b8;
-  letter-spacing: 1.5px;
-  margin: 0;
-  text-transform: uppercase;
-}
 
   .mobile-touch-gamepad {
     padding: 12px 24px;
@@ -1033,129 +841,494 @@ body {
 }
 
 /* ==========================================================================
-   VICTORY BIRTHDAY SCREEN STYLING
+   PRELOADER — a quiet, premium curtain. No spinner, just type and a hairline.
    ========================================================================== */
-.victory-screen {
-  background: radial-gradient(circle at center, rgba(30, 15, 60, 0.9) 0%, #03010a 100%);
-  border-radius: 32px;
-  padding: 50px 40px;
-  border: 2px solid rgba(254, 240, 138, 0.25);
-  box-shadow: 0 0 80px rgba(168, 85, 247, 0.3);
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  max-width: none;
+  display: grid;
+  place-items: center;
+  background: #05030d;
+  overflow: hidden;
+}
+
+.ld-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 118%, rgba(255, 59, 107, 0.3) 0%, transparent 58%),
+    radial-gradient(ellipse at 50% -18%, rgba(140, 82, 255, 0.22) 0%, transparent 55%);
+  animation: ldBreathe 4.5s ease-in-out infinite;
+}
+
+@keyframes ldBreathe {
+  0%, 100% { opacity: 0.65; }
+  50%      { opacity: 1; }
+}
+
+.ld-core {
+  position: relative;
+  width: min(560px, 82vw);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 960px;
-  width: 95%;
-  animation: animeEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: ldEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.victory-crown {
-  font-size: 64px;
-  margin-bottom: 12px;
-  animation: pulseGlow 1.8s infinite ease-in-out;
+@keyframes ldEnter {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.victory-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 40px;
-  font-weight: 900;
-  letter-spacing: -1.5px;
-  margin: 0;
-  background: linear-gradient(135deg, #f43f5e 0%, #c084fc 50%, #fef08a 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 25px rgba(244, 63, 94, 0.6));
-  line-height: 1.2;
+.ld-kanji {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.62em;
+  text-indent: 0.62em;
+  color: rgba(255, 255, 255, 0.32);
 }
 
-.victory-kanji {
-  font-size: 14px;
-  font-weight: 800;
-  color: #f43f5e;
-  letter-spacing: 3px;
-  margin-top: 6px;
-  display: block;
-}
-
-.victory-card {
-  background: rgba(10, 5, 25, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 28px;
-  max-width: 720px;
-  margin: 28px 0;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-  transform: skewX(-3deg);
-}
-
-.victory-main-message {
-  font-size: 15px;
-  line-height: 1.65;
-  color: #cbd5e1;
-  margin: 0;
-}
-
-.victory-companions-container {
-  width: 100%;
-  margin-bottom: 30px;
-}
-
-.victory-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.victory-card-item {
-  background: rgba(10, 5, 25, 0.7);
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 24px 20px;
-  text-align: center;
-  transform: skewX(-3deg);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.victory-card-item:hover {
-  transform: translateY(-6px) skewX(-3deg) scale(1.02);
-  box-shadow: 0 15px 35px rgba(168, 85, 247, 0.25);
-  border-color: rgba(254, 240, 138, 0.5);
-}
-
-.avatar-bubble {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+.ld-title {
+  margin: 18px 0 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  font-size: 22px;
-  margin: 0 auto 14px;
-  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  line-height: 0.88;
 }
 
-.victory-card-item h3 {
-  font-size: 15px;
-  font-weight: 850;
+.ld-title-sm {
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+  font-size: clamp(14px, 2.4vw, 19px);
+  letter-spacing: 0.52em;
+  text-indent: 0.52em;
+  color: rgba(239, 233, 255, 0.62);
+}
+
+.ld-title-lg {
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+  font-size: clamp(34px, 7.4vw, 66px);
+  letter-spacing: 0.04em;
+  background: linear-gradient(180deg, #ffffff 10%, #ffd9e3 52%, #ff3b6b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 6px 30px rgba(255, 59, 107, 0.42));
+}
+
+/* Hairline progress rail */
+.ld-bar {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  margin-top: 38px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+}
+
+.ld-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #8c52ff, #ff3b6b 60%, #ffb347);
+  box-shadow: 0 0 14px rgba(255, 59, 107, 0.85);
+  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ld-foot {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.ld-status {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.ld-status::after {
+  content: '...';
+  animation: ldDots 1.4s steps(4, end) infinite;
+}
+
+@keyframes ldDots {
+  0%   { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+.ld-pct {
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.06em;
   color: #ffffff;
-  margin: 0 0 10px 0;
-  letter-spacing: -0.5px;
+  line-height: 1;
 }
 
-.blessing-quote {
-  font-size: 12px;
-  font-style: italic;
-  color: #94a3b8;
+.ld-pct em {
+  font-style: normal;
+  font-size: 13px;
+  color: #ff3b6b;
+  margin-left: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ld-veil, .ld-core, .ld-status::after { animation: none; }
+}
+
+/* ==========================================================================
+   VICTORY — the birthday letter. Warm gold-on-ink, sparkles, ally wishes.
+   ========================================================================== */
+.victory-screen {
+  --gold: #ffd66b;
+  --rose: #ff6f9c;
+
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 54px 44px 44px;
+  border-radius: 28px;
+  overflow: hidden;
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(48, 22, 40, 0.7) 0%, rgba(8, 5, 16, 0.97) 55%),
+    #07040f;
+  border: 1px solid rgba(255, 214, 107, 0.22);
+  box-shadow:
+    0 40px 100px -34px rgba(0, 0, 0, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  animation: animeEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.vc-glow {
+  position: absolute;
+  inset: -50% -20% auto -20%;
+  height: 95%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(255, 214, 107, 0.26) 0%, transparent 60%),
+    radial-gradient(ellipse at 22% 92%, rgba(255, 111, 156, 0.24) 0%, transparent 56%);
+  filter: blur(10px);
+}
+
+/* Drifting sparkles, each offset so they never pulse in unison */
+.vc-sparks {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.vc-sparks span {
+  position: absolute;
+  font-size: 13px;
+  color: var(--gold);
+  opacity: 0;
+  animation: vcTwinkle 4s ease-in-out infinite;
+}
+
+.vc-sparks span:nth-child(1) { top: 12%; left: 8%;  animation-delay: 0s;   }
+.vc-sparks span:nth-child(2) { top: 24%; left: 91%; animation-delay: 0.5s; }
+.vc-sparks span:nth-child(3) { top: 62%; left: 5%;  animation-delay: 1s;   color: var(--rose); }
+.vc-sparks span:nth-child(4) { top: 78%; left: 94%; animation-delay: 1.5s; }
+.vc-sparks span:nth-child(5) { top: 42%; left: 14%; animation-delay: 2s;   }
+.vc-sparks span:nth-child(6) { top: 8%;  left: 76%; animation-delay: 2.5s; color: var(--rose); }
+.vc-sparks span:nth-child(7) { top: 88%; left: 22%; animation-delay: 3s;   }
+.vc-sparks span:nth-child(8) { top: 55%; left: 88%; animation-delay: 3.5s; }
+
+@keyframes vcTwinkle {
+  0%, 100% { opacity: 0;    transform: scale(0.6) rotate(0deg); }
+  50%      { opacity: 0.95; transform: scale(1.15) rotate(180deg); }
+}
+
+.vc-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  color: var(--gold);
+  opacity: 0.9;
+}
+
+.vc-title {
   margin: 0;
-  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.84;
 }
 
-.victory-restart-btn {
+.vc-title-line {
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+}
+
+.vc-title .vc-title-line:first-child {
+  font-size: clamp(20px, 3.4vw, 30px);
+  letter-spacing: 0.52em;
+  text-indent: 0.52em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.vc-title-big {
+  font-size: clamp(44px, 9vw, 92px);
+  letter-spacing: 0.02em;
+  background: linear-gradient(180deg, #ffffff 6%, var(--gold) 52%, #ff9f5b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 8px 34px rgba(255, 214, 107, 0.45));
+}
+
+.vc-title-name {
   margin-top: 10px;
-  transform: skewX(-3deg);
+  font-size: clamp(24px, 4.6vw, 40px);
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  color: var(--rose);
+  text-shadow: 0 0 26px rgba(255, 111, 156, 0.55);
+}
+
+.vc-note {
+  max-width: 46ch;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #d6cfe4;
+}
+
+.vc-note strong {
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* --- Ally wishes -------------------------------------------------------- */
+.vc-wishes {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 4px 0 0;
+  padding: 0;
+  width: 100%;
+}
+
+.vc-wish {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 15px 16px;
+  border-radius: 14px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-left: 2px solid var(--ally);
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--ally) 9%, transparent),
+    rgba(255, 255, 255, 0.015) 60%
+  );
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.vc-wish:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px -18px var(--ally);
+}
+
+.vc-wish-face {
+  flex: 0 0 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  font-size: 16px;
+  background: color-mix(in srgb, var(--ally) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ally) 34%, transparent);
+}
+
+.vc-wish-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.vc-wish-name {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ally);
+}
+
+.vc-wish-text {
+  font-size: 12.5px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.55;
+  color: #c6bfd6;
+}
+
+/* --- Run stats ---------------------------------------------------------- */
+.vc-stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8d86a3;
+}
+
+.vc-stats b {
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+  font-size: 19px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-right: 6px;
+}
+
+.vc-stats span {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.vc-stats i {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* --- Play again --------------------------------------------------------- */
+.vc-again {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 48px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.26em;
+  text-indent: 0.26em;
+  color: #180a06;
+  background: linear-gradient(100deg, var(--gold) 0%, #ffb347 55%, var(--rose) 130%);
+  box-shadow:
+    0 18px 44px -14px rgba(255, 214, 107, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+}
+
+.vc-again-icon {
+  font-size: 16px;
+  text-indent: 0;
+  transition: transform 0.35s ease;
+}
+
+.vc-again:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 26px 56px -14px rgba(255, 214, 107, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.vc-again:hover .vc-again-icon {
+  transform: rotate(-180deg);
+}
+
+.vc-again:active { transform: translateY(0) scale(0.985); }
+
+.vc-again:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .victory-screen { padding: 38px 18px 32px; gap: 20px; }
+  .vc-wishes { grid-template-columns: 1fr; }
+  .vc-again { width: 100%; justify-content: center; padding: 15px 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .victory-screen, .vc-sparks span { animation: none; }
+  .vc-wish, .vc-again, .vc-again-icon { transition: none; }
+}
+
+/* ==========================================================================
+   TRINNO'S PERSONAL MESSAGE — handwritten letter aesthetic
+   ========================================================================== */
+.vc-personal-msg {
+  width: 100%;
+  max-width: 560px;
+  margin: 8px 0;
+  padding: 28px 26px 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 214, 107, 0.18);
+  border-left: 3px solid var(--gold, #ffd66b);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 214, 107, 0.06) 0%,
+    rgba(255, 255, 255, 0.015) 100%
+  );
+  text-align: left;
+}
+
+.vc-msg-from {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold, #ffd66b);
+  margin-bottom: 14px;
+}
+
+.vc-msg-text {
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #d6cfe4;
+  margin: 0 0 12px 0;
+}
+
+.vc-msg-text:last-of-type {
+  margin-bottom: 16px;
+}
+
+.vc-msg-text strong {
+  font-weight: 700;
+  color: var(--gold, #ffd66b);
+}
+
+.vc-msg-sign {
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--rose, #ff6f9c);
+  text-align: right;
+  letter-spacing: 0.05em;
 }

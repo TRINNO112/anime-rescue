@@ -751,6 +751,17 @@ function App() {
       {gameState === 'START' && (
         <div className="screen start-screen">
           <div className="ts-aura" aria-hidden="true" />
+          <div className="ts-particles" aria-hidden="true">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <span key={i} className="ts-particle" style={{
+                '--px': `${10 + Math.random() * 80}%`,
+                '--py': `${10 + Math.random() * 80}%`,
+                '--d': `${3 + Math.random() * 6}s`,
+                '--delay': `${Math.random() * 4}s`,
+                '--size': `${2 + Math.random() * 3}px`
+              }} />
+            ))}
+          </div>
           <span className="ts-vert" aria-hidden="true">アカリの誕生日レスキュー</span>
 
           <button
@@ -762,49 +773,49 @@ function App() {
           </button>
 
           <header className="ts-header">
-            <span className="ts-eyebrow">◆ Chapter One ◆</span>
+            <span className="ts-eyebrow ts-fade-in" style={{ '--i': 0 }}>◆ Chapter One ◆</span>
             <h1 className="ts-title">
-              <span className="ts-title-top">AKARI&rsquo;S</span>
-              <span className="ts-title-main" data-text="BIRTHDAY RESCUE">BIRTHDAY RESCUE</span>
+              <span className="ts-title-top ts-fade-in" style={{ '--i': 1 }}>AKARI&rsquo;S</span>
+              <span className="ts-title-main ts-fade-in" data-text="BIRTHDAY RESCUE" style={{ '--i': 2 }}>BIRTHDAY RESCUE</span>
             </h1>
-            <p className="ts-tagline">Four allies. One night. Bring them all home.</p>
+            <p className="ts-tagline ts-typewriter">Four allies. One night. Bring them all home.</p>
           </header>
 
           <ul className="ts-cards">
-            <li className="ts-card ts-card--hero" style={{ '--ally': '#ff3b6b' }}>
+            <li className="ts-card ts-card--hero ts-card-enter" style={{ '--ally': '#ff3b6b', '--ci': 0 }}>
               <span className="ts-card-glyph">刀</span>
               <span className="ts-card-name">AKARI</span>
               <span className="ts-card-power">Crescent Slash</span>
               <span className="ts-card-tag">YOU</span>
             </li>
-            <li className="ts-card" style={{ '--ally': '#8ecae6' }}>
+            <li className="ts-card ts-card-enter" style={{ '--ally': '#8ecae6', '--ci': 1 }}>
               <span className="ts-card-glyph">霞</span>
               <span className="ts-card-name">MUICHIRO</span>
               <span className="ts-card-power">Double Jump</span>
             </li>
-            <li className="ts-card" style={{ '--ally': '#fb8500' }}>
+            <li className="ts-card ts-card-enter" style={{ '--ally': '#fb8500', '--ci': 2 }}>
               <span className="ts-card-glyph">重</span>
               <span className="ts-card-name">CHUUYA</span>
               <span className="ts-card-power">Gravity Float</span>
             </li>
-            <li className="ts-card" style={{ '--ally': '#e0b1cb' }}>
+            <li className="ts-card ts-card-enter" style={{ '--ally': '#e0b1cb', '--ci': 3 }}>
               <span className="ts-card-glyph">呪</span>
               <span className="ts-card-name">YUTA</span>
               <span className="ts-card-power">Cursed Slash</span>
             </li>
-            <li className="ts-card" style={{ '--ally': '#219ebc' }}>
+            <li className="ts-card ts-card-enter" style={{ '--ally': '#219ebc', '--ci': 4 }}>
               <span className="ts-card-glyph">水</span>
               <span className="ts-card-name">GIYU</span>
               <span className="ts-card-power">Water Shield</span>
             </li>
           </ul>
 
-          <button className="ts-play" onClick={resetGame}>
+          <button className="ts-play ts-fade-in" style={{ '--i': 5 }} onClick={resetGame}>
             <span className="ts-play-label">Start</span>
             <span className="ts-play-icon">▶</span>
           </button>
 
-          <div className="ts-keys">
+          <div className="ts-keys ts-fade-in" style={{ '--i': 6 }}>
             <span><kbd>A</kbd><kbd>D</kbd> Move</span>
             <i aria-hidden="true" />
             <span><kbd>Space</kbd> Jump</span>
@@ -915,6 +926,31 @@ function App() {
               </span>
             </li>
           </ul>
+
+          <div className="vc-personal-msg">
+            <span className="vc-msg-from">A message from Trinno ✉️</span>
+            <p className="vc-msg-text">
+              Hey Akari — you really did amazing out there, and honestly, 
+              I wouldn&rsquo;t expect anything less from you.
+            </p>
+            <p className="vc-msg-text">
+              Today is your birthday, and I just want to say — <strong>very happy birthday</strong>, 
+              from the bottom of my heart. I&rsquo;m not going to ask how you are or how 
+              everything&rsquo;s going, because today isn&rsquo;t about all that. 
+              Today is just about you having a great day. That&rsquo;s it.
+            </p>
+            <p className="vc-msg-text">
+              I don&rsquo;t know when we&rsquo;ll get to talk again, or for how long, 
+              or even if we will — but I wanted you to know that <strong>I really miss you</strong>. 
+              I miss you a lot. And I hope this little game I made for you 
+              puts a smile on your face, even if just for a moment.
+            </p>
+            <p className="vc-msg-text">
+              Above are some messages from your favorite characters — 
+              I thought they&rsquo;d want to say happy birthday too. 💛
+            </p>
+            <span className="vc-msg-sign">— Trinno</span>
+          </div>
 
           <div className="vc-stats">
             <span><b>04</b> Allies Freed</span>
