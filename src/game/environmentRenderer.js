@@ -240,45 +240,160 @@ export class EnvironmentRenderer {
       const animeChar = CHARACTERS.find(ch => ch.id === cage.charId);
 
       if (!cage.rescued) {
-        // Translucent Dark Runic Cell Interior
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
-        ctx.fillRect(cx, cy, cage.w, cage.h);
+        // --- Gothic Iron Cell Geometry ---------------------------------
+        const accent = (animeChar && animeChar.color) || '#c084fc';
+        const midX = cx + cage.w / 2;
+        const left = cx - 3;
+        const right = cx + cage.w + 3;
+        const span = right - left;
+        const top = cy - 2;
+        const bottom = cy + cage.h;
+        const archPeak = top - 14; // control point of the arched crown
+        const pulse = 0.55 + Math.sin(frames / 32) * 0.45;
 
-        // Draw companion preview sprite inside cage!
+        // Arch curve: control-x sits at the midpoint, so x moves linearly
+        // with t and a bar's top edge is a plain quadratic lookup.
+        const archY = (x) => {
+          const t = (x - left) / span;
+          const inv = 1 - t;
+          return inv * inv * top + 2 * inv * t * archPeak + t * t * top;
+        };
+
+        ctx.save();
+
+        // 1. Contact shadow so the cell reads as resting on the stone
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.42)';
+        ctx.beginPath();
+        ctx.ellipse(midX, bottom + 3, cage.w * 0.56, 4.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 2. Cell cavity (arched silhouette)
+        ctx.beginPath();
+        ctx.moveTo(left, bottom);
+        ctx.lineTo(left, top);
+        ctx.quadraticCurveTo(midX, archPeak, right, top);
+        ctx.lineTo(right, bottom);
+        ctx.closePath();
+
+        const cavity = ctx.createLinearGradient(0, archPeak, 0, bottom);
+        cavity.addColorStop(0, 'rgba(9, 7, 22, 0.94)');
+        cavity.addColorStop(1, 'rgba(4, 3, 12, 0.97)');
+        ctx.fillStyle = cavity;
+        ctx.fill();
+
+        // 3. The captive's aura, clipped to the cavity so it never bleeds out
+        ctx.save();
+        ctx.clip();
+        const aura = ctx.createRadialGradient(midX, bottom - 14, 2, midX, bottom - 14, cage.w * 0.85);
+        aura.addColorStop(0, accent);
+        aura.addColorStop(1, 'transparent');
+        ctx.globalAlpha = 0.16 + pulse * 0.14;
+        ctx.fillStyle = aura;
+        ctx.fillRect(left, archPeak, span, bottom - archPeak);
+        ctx.globalAlpha = 1;
+
+        // 4. Companion preview sprite, framed inside the cell
         if (animeChar) {
           const compObj = companionSprites[animeChar.id];
           const list = (compObj && compObj.walking) ? compObj.walking : null;
           const img = (list && list.length > 0) ? list[0] : null;
 
           if (img) {
-            drawCroppedSprite(ctx, img, cx + cage.w / 2, cy + cage.h - 4, 38, false, compObj ? compObj.flipDefault : false);
+            drawCroppedSprite(ctx, img, midX, bottom - 4, 38, false, compObj ? compObj.flipDefault : false);
           } else {
             ctx.fillStyle = '#ffd166';
-            ctx.fillRect(cx + cage.w / 2 - 10, cy + cage.h - 28, 20, 20);
+            ctx.fillRect(midX - 10, bottom - 28, 20, 20);
             ctx.fillStyle = animeChar.hairColor || '#333';
-            ctx.fillRect(cx + cage.w / 2 - 12, cy + cage.h - 32, 24, 8);
+            ctx.fillRect(midX - 12, bottom - 32, 24, 8);
           }
         }
+        ctx.restore();
 
-        // Clean, Sleek Gothic Iron Cell Frame
-        ctx.fillStyle = '#0f172a';
-        ctx.fillRect(cx - 2, cy - 4, cage.w + 4, 6); // Top bar
-        ctx.fillRect(cx - 2, cy + cage.h - 2, cage.w + 4, 6); // Bottom bar
-        ctx.fillRect(cx - 4, cy - 4, 6, cage.h + 8); // Left bar
-        ctx.fillRect(cx + cage.w - 2, cy - 4, 6, cage.h + 8); // Right bar
+        // 5. Vertical iron bars, tops following the arch
+        const barGrad = ctx.createLinearGradient(left, 0, right, 0);
+        barGrad.addColorStop(0, '#1c2436');
+        barGrad.addColorStop(0.45, '#5b6880');
+        barGrad.addColorStop(0.6, '#8996ac');
+        barGrad.addColorStop(1, '#1c2436');
 
-        // Vertical Iron Bars with Subtle Metallic Highlight
-        for (let bx = cx + 8; bx < cx + cage.w - 6; bx += 10) {
-          ctx.fillStyle = '#334155';
-          ctx.fillRect(bx, cy + 2, 3, cage.h - 4);
-          ctx.fillStyle = '#64748b';
-          ctx.fillRect(bx + 1, cy + 2, 1, cage.h - 4);
+        const BAR_W = 2.4;
+        const GAP = 9;
+        const inset = 6;
+        for (let bx = left + inset; bx <= right - inset; bx += GAP) {
+          ctx.fillStyle = barGrad;
+          ctx.fillRect(bx - BAR_W / 2, archY(bx) + 2, BAR_W, bottom - archY(bx) - 2);
+          // thin specular edge
+          ctx.fillStyle = 'rgba(203, 213, 225, 0.35)';
+          ctx.fillRect(bx - BAR_W / 2, archY(bx) + 2, 0.8, bottom - archY(bx) - 2);
         }
 
-        // Golden Padlock Icon in Center
-        ctx.font = '16px system-ui';
+        // 6. Horizontal cross rails
+        [top + (bottom - top) * 0.34, top + (bottom - top) * 0.7].forEach(ry => {
+          ctx.fillStyle = '#232b3c';
+          ctx.fillRect(left + 1, ry, span - 2, 3);
+          ctx.fillStyle = 'rgba(148, 163, 184, 0.4)';
+          ctx.fillRect(left + 1, ry, span - 2, 1);
+        });
+
+        // 7. Outer frame: side posts, base plinth and the arched crown
+        ctx.fillStyle = '#161d2c';
+        ctx.fillRect(left - 2, top - 2, 4, bottom - top + 2); // left post
+        ctx.fillRect(right - 2, top - 2, 4, bottom - top + 2); // right post
+        ctx.fillRect(left - 4, bottom - 4, span + 8, 6); // base plinth
+        ctx.fillStyle = '#0a0f1a';
+        ctx.fillRect(left - 4, bottom + 1, span + 8, 2); // plinth shadow trim
+
+        ctx.beginPath();
+        ctx.moveTo(left - 1, top);
+        ctx.quadraticCurveTo(midX, archPeak, right + 1, top);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = '#161d2c';
+        ctx.stroke();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+        ctx.stroke();
+
+        // 8. Rivets on the posts
+        ctx.fillStyle = '#64748b';
+        [top + 4, bottom - 9].forEach(ry => {
+          ctx.beginPath();
+          ctx.arc(left, ry, 1.4, 0, Math.PI * 2);
+          ctx.arc(right, ry, 1.4, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // 9. Keystone gem crowning the arch
+        ctx.fillStyle = accent;
+        ctx.globalAlpha = 0.45 + pulse * 0.55;
+        ctx.beginPath();
+        ctx.moveTo(midX, archPeak + 3);
+        ctx.lineTo(midX + 3.5, archPeak + 7);
+        ctx.lineTo(midX, archPeak + 11);
+        ctx.lineTo(midX - 3.5, archPeak + 7);
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // 10. Golden padlock emblem on the cell door
+        const lockY = top + (bottom - top) * 0.7 + 1.5;
+        ctx.fillStyle = 'rgba(255, 209, 59, 0.18)';
+        ctx.beginPath();
+        ctx.arc(midX, lockY, 9, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#12182a';
+        ctx.beginPath();
+        ctx.arc(midX, lockY, 7, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ffd13b';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        ctx.font = '11px system-ui';
         ctx.textAlign = 'center';
-        ctx.fillText('🔒', cx + cage.w / 2, cy + cage.h / 2 + 6);
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🔒', midX, lockY + 0.5);
+
+        ctx.restore();
 
         // Keypress Proximity Prompt Overlay when Akari is near!
         const dist = Math.abs((player.x + player.width / 2) - (cage.x + cage.w / 2));
