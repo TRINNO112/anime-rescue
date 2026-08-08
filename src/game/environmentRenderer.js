@@ -240,11 +240,11 @@ export class EnvironmentRenderer {
       const animeChar = CHARACTERS.find(ch => ch.id === cage.charId);
 
       if (!cage.rescued) {
-        // Translucent Dark Runic Sanctuary Shield Trapping Companion
-        ctx.fillStyle = 'rgba(30, 27, 75, 0.65)';
+        // Translucent Dark Runic Cell Interior
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
         ctx.fillRect(cx, cy, cage.w, cage.h);
 
-        // Draw character mini preview sprite trapped inside pillar sanctuary!
+        // Draw companion preview sprite inside cage!
         if (animeChar) {
           const compObj = companionSprites[animeChar.id];
           const list = (compObj && compObj.walking) ? compObj.walking : null;
@@ -260,32 +260,30 @@ export class EnvironmentRenderer {
           }
         }
 
-        // Inverted Gothic Stone Pillars Gate Prison Structure!
-        if (this.propPillars.complete && this.propPillars.naturalWidth !== 0) {
-          // Left Upright Gothic Pillar
-          ctx.drawImage(this.propPillars, cx - 10, cy - 8, 22, cage.h + 14);
+        // Heavy Gothic Dark Steel Cage Beams & Border
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(cx - 2, cy - 4, cage.w + 4, 8); // Top header beam
+        ctx.fillRect(cx - 2, cy + cage.h - 4, cage.w + 4, 8); // Bottom base beam
+        ctx.fillRect(cx - 4, cy - 4, 8, cage.h + 8); // Left pillar post
+        ctx.fillRect(cx + cage.w - 4, cy - 4, 8, cage.h + 8); // Right pillar post
 
-          // Right Upright Gothic Pillar
-          ctx.drawImage(this.propPillars, cx + cage.w - 12, cy - 8, 22, cage.h + 14);
-
-          // Inverted Gothic Pillar Top Roof Cap Arch
-          ctx.save();
-          ctx.translate(cx + cage.w / 2, cy);
-          ctx.scale(1, -1); // Vertically Inverted Pillar on top of cage roof!
-          ctx.drawImage(this.propPillars, -cage.w / 2 - 10, -18, cage.w + 20, 26);
-          ctx.restore();
-        } else {
-          // Fallback gothic frame
-          ctx.fillStyle = '#1e293b';
-          ctx.fillRect(cx - 6, cy - 6, cage.w + 12, 10);
-          ctx.fillRect(cx - 6, cy, 10, cage.h);
-          ctx.fillRect(cx + cage.w - 4, cy, 10, cage.h);
+        // Metallic Steel Vertical Bars with Highlights
+        for (let bx = cx + 8; bx < cx + cage.w - 6; bx += 10) {
+          ctx.fillStyle = '#334155';
+          ctx.fillRect(bx, cy + 4, 4, cage.h - 8);
+          ctx.fillStyle = '#94a3b8';
+          ctx.fillRect(bx + 1, cy + 4, 1, cage.h - 8);
         }
 
-        // Golden Padlock Icon in Center
+        // Golden Padlock Emblem in Center
+        ctx.fillStyle = 'rgba(251, 191, 36, 0.2)';
+        ctx.beginPath();
+        ctx.arc(cx + cage.w / 2, cy + cage.h / 2 + 2, 14, 0, Math.PI * 2);
+        ctx.fill();
+
         ctx.font = '16px system-ui';
         ctx.textAlign = 'center';
-        ctx.fillText('🔒', cx + cage.w / 2, cy + cage.h / 2 + 5);
+        ctx.fillText('🔒', cx + cage.w / 2, cy + cage.h / 2 + 7);
 
         // Keypress Proximity Prompt Overlay when Akari is near!
         const dist = Math.abs((player.x + player.width / 2) - (cage.x + cage.w / 2));

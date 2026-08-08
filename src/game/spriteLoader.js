@@ -68,11 +68,8 @@ export function drawCroppedSprite(ctx, img, centerX, bottomY, targetHeight, faci
   const drawX = centerX - targetWidth / 2;
   const drawY = bottomY - targetHeight;
 
-  // Determine effective flip state:
-  // Raw PNG source files for characters/monsters face LEFT by default.
-  // When facingLeft = true (moving left), shouldFlip = false (keep facing left).
-  // When facingLeft = false (moving right), shouldFlip = true (flip to face right).
-  const shouldFlip = flipDefault ? facingLeft : !facingLeft;
+  // Determine effective flip state
+  const shouldFlip = flipDefault ? !facingLeft : facingLeft;
 
   ctx.save();
   if (shouldFlip) {

@@ -635,8 +635,9 @@ function App() {
         const bossGroundY = boss.y + boss.height + 2;
         const BOSS_RENDER_HEIGHT = 140;
 
-        const bossAnim = enemySprites.demonboss;
-        const currentBossFrame = Math.floor(frames / 6) % bossAnim.length;
+        const bossConfig = enemySprites.demonboss;
+        const bossAnim = Array.isArray(bossConfig) ? bossConfig : (bossConfig.frames || []);
+        const currentBossFrame = Math.floor(frames / 6) % (bossAnim.length || 1);
         const bossImg = bossAnim[currentBossFrame];
 
         // Demon Boss source sprite faces RIGHT by default -> flip=false faces LEFT towards Akari!
