@@ -135,10 +135,22 @@ export const companionSprites = {
 
 // Preload Gothicvania enemy & boss animated sprites (High Frame-Count Cycles)
 export const enemySprites = {
-  hellhound: Array.from({ length: 12 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/Hell-Hound-Files/Sprites/Walk/frame${i + 1}.png`)),
-  werewolf: Array.from({ length: 6 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/WereWolf/Sprites/run/werewolf-run${i + 1}.png`)),
-  fireskull: Array.from({ length: 8 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/Fire-Skull-Files/Sprites/Fire/frame${i + 1}.png`)),
-  demonboss: Array.from({ length: 18 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/demon-Files/Sprites/DemonAttackBreath/frame${i + 1}.png`))
+  hellhound: {
+    flipDefault: true,
+    frames: Array.from({ length: 12 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/Hell-Hound-Files/Sprites/Walk/frame${i + 1}.png`))
+  },
+  werewolf: {
+    flipDefault: true,
+    frames: Array.from({ length: 6 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/WereWolf/Sprites/run/werewolf-run${i + 1}.png`))
+  },
+  fireskull: {
+    flipDefault: false,
+    frames: Array.from({ length: 8 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/Fire-Skull-Files/Sprites/Fire/frame${i + 1}.png`))
+  },
+  demonboss: {
+    flipDefault: false,
+    frames: Array.from({ length: 18 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/demon-Files/Sprites/DemonAttackBreath/frame${i + 1}.png`))
+  }
 };
 
 

@@ -563,16 +563,19 @@ function App() {
         const enemyCenterX = ex + enemy.width / 2;
         // Snap enemy feet solidly onto stone platform caps (+2px offset)
         const enemyGroundY = enemy.y + enemy.height + 2;
-        // HellHound & Werewolf source sprites face LEFT by default -> facingLeft = true when moving left (speed < 0)
+        
+        const enemyConfig = enemySprites[enemy.type] || enemySprites.hellhound;
+        const animList = Array.isArray(enemyConfig) ? enemyConfig : (enemyConfig.frames || []);
+        const flipDefault = enemyConfig.flipDefault || false;
+        
+        // facingLeft = true when moving left (speed < 0)
         const facingLeft = (enemy.vx ? enemy.vx < 0 : enemy.speed < 0);
-
-        const animList = enemySprites[enemy.type] || enemySprites.hellhound;
-        const currentFrameIdx = Math.floor(frames / 5) % animList.length;
+        const currentFrameIdx = Math.floor(frames / 5) % (animList.length || 1);
         const enemyImg = animList[currentFrameIdx];
 
         const renderHeight = enemy.type === 'werewolf' ? 68 : enemy.type === 'fireskull' ? 44 : 54;
 
-        if (!drawCroppedSprite(ctx, enemyImg, enemyCenterX, enemyGroundY, renderHeight, facingLeft)) {
+        if (!drawCroppedSprite(ctx, enemyImg, enemyCenterX, enemyGroundY, renderHeight, facingLeft, flipDefault)) {
           ctx.fillStyle = '#ef4444';
           ctx.fillRect(ex, enemy.y, enemy.width, enemy.height);
         }
@@ -589,13 +592,10 @@ function App() {
           ctx.arc(bx, bolt.y, 7, 0, Math.PI * 2);
           ctx.fill();
         } else {
-          ctx.strokeStyle = '#ffd13b';
-          ctx.lineWidth = 4;
+          ctx.fillStyle = '#ffd13b';
           ctx.beginPath();
-          const startAngle = bolt.vx > 0 ? -Math.PI / 3 : Math.PI - Math.PI / 3;
-          const endAngle = bolt.vx > 0 ? Math.PI / 3 : Math.PI + Math.PI / 3;
-          ctx.arc(bx, bolt.y, 22, startAngle, endAngle);
-          ctx.stroke();
+          ctx.arc(bx, bolt.y, 5, 0, Math.PI * 2);
+          ctx.fill();
         }
       });
 
@@ -605,7 +605,7 @@ function App() {
       // 7. Companions Trail
       drawCompanions(ctx, activeRescues, player, cameraX, frames);
 
-      // 8. Player (Akari) - Cropped Normalized Rendering with Feet Ground Snapping & Slash FX
+      // 8. Player (Akari) - Authentic 8-Frame Katana Slash Animation (No procedural semi-circles!)
       if (player.invulnFrames % 4 < 2) {
         let state = 'idle';
         if (!player.isGrounded) state = 'jump';
@@ -624,23 +624,6 @@ function App() {
         if (!drawCroppedSprite(ctx, akariImg, akariCenterX, akariGroundY, AKARI_RENDER_HEIGHT, player.facingLeft)) {
           ctx.fillStyle = player.color;
           ctx.fillRect(player.x - cameraX, player.y, player.width, player.height);
-        }
-
-        // Render Sword Slash Energy Arc when Attack Key is Active!
-        if (state === 'attack') {
-          ctx.save();
-          ctx.strokeStyle = '#ff758f';
-          ctx.shadowColor = '#ff4d6d';
-          ctx.shadowBlur = 12;
-          ctx.lineWidth = 3.5;
-          ctx.beginPath();
-          const slashX = akariCenterX + (player.facingLeft ? -25 : 25);
-          const slashY = akariGroundY - 34;
-          const startA = player.facingLeft ? Math.PI * 0.75 : -Math.PI * 0.25;
-          const endA = player.facingLeft ? Math.PI * 1.25 : Math.PI * 0.25;
-          ctx.arc(slashX, slashY, 32, startA, endA);
-          ctx.stroke();
-          ctx.restore();
         }
       }
 
