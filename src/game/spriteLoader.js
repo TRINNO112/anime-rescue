@@ -68,8 +68,11 @@ export function drawCroppedSprite(ctx, img, centerX, bottomY, targetHeight, faci
   const drawX = centerX - targetWidth / 2;
   const drawY = bottomY - targetHeight;
 
-  // Determine effective flip state
-  const shouldFlip = flipDefault ? !facingLeft : facingLeft;
+  // Determine effective flip state:
+  // Raw PNG source files for characters/monsters face LEFT by default.
+  // When facingLeft = true (moving left), shouldFlip = false (keep facing left).
+  // When facingLeft = false (moving right), shouldFlip = true (flip to face right).
+  const shouldFlip = flipDefault ? facingLeft : !facingLeft;
 
   ctx.save();
   if (shouldFlip) {
@@ -136,11 +139,11 @@ export const companionSprites = {
 // Preload Gothicvania enemy & boss animated sprites (High Frame-Count Cycles)
 export const enemySprites = {
   hellhound: {
-    flipDefault: true,
+    flipDefault: false,
     frames: Array.from({ length: 12 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/Hell-Hound-Files/Sprites/Walk/frame${i + 1}.png`))
   },
   werewolf: {
-    flipDefault: true,
+    flipDefault: false,
     frames: Array.from({ length: 6 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/WereWolf/Sprites/run/werewolf-run${i + 1}.png`))
   },
   fireskull: {
