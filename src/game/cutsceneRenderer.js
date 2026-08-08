@@ -4,22 +4,22 @@ const RESCUE_DIALOGUES = {
   muichiro: {
     avatar: "🗡️",
     title: "MIST HASHIRA • MUICHIRO TOKITO",
-    speech: "Thanks Akari! Mist Breathing 7th Form ready! I'll meet you at the Boss Arena to slice the Shadow Overlord!"
+    speech: "Happy Birthday, Akari! What shape was that cloud again...? Oh right, protecting you! Mist Breathing 7th Form — Obscuring Clouds! Let's slice that Shadow Overlord together!"
   },
   chuuya: {
     avatar: "🍷",
     title: "GRAVITY USER • CHUUYA NAKAHARA",
-    speech: "Thanks Akari! Upon the Tainted Sorrow! Let's crush that mighty void demon together at the end!"
+    speech: "Happy Birthday, Akari! Nobody locks my allies in a void cage and gets away with it! Upon the Tainted Sorrow — Gravity Control ready! Let me crush the next shadow beast for you!"
   },
   yuta: {
     avatar: "💍",
     title: "SPECIAL GRADE • YUTA OKKOTSU",
-    speech: "Thanks Akari! Pure Love & Cursed Energy ready! I'll bring Rika's power to help you slay the final boss!"
+    speech: "Akari! Happy Birthday! I won't let anyone hurt you today. Pure Cursed Energy and Rika's blessing are with us — let me handle the next shadow monster!"
   },
   giyu: {
     avatar: "🌊",
     title: "WATER HASHIRA • GIYU TOMIOKA",
-    speech: "Thanks Akari! Water Breathing 11th Form Lull activated! Water Shield ready for the final battle!"
+    speech: "Happy Birthday, Akari. Water Breathing 11th Form — Dead Calm activated. Stand behind my Water Shield, I will ensure your safety all the way to the final boss!"
   }
 };
 
@@ -30,41 +30,16 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   const dialogData = RESCUE_DIALOGUES[char.id] || {
     avatar: "👑",
     title: `${char.name.toUpperCase()} RESCUED!`,
-    speech: `Thanks Akari! We will meet you at the boss arena to defeat the Shadow Overlord!`
+    speech: `Happy Birthday, Akari! We will stand by your side and defeat the Shadow Overlord!`
   };
 
   ctx.save();
 
-  // 1. Dark Cinematic Background Overlay
-  ctx.fillStyle = 'rgba(7, 10, 20, 0.82)';
+  // 1. Cinematic Dim Backdrop
+  ctx.fillStyle = 'rgba(7, 10, 20, 0.72)';
   ctx.fillRect(0, 0, viewW, viewH);
 
-  // 2. Top and Bottom Letterbox Bars
-  ctx.fillStyle = '#090d16';
-  ctx.fillRect(0, 0, viewW, 50);
-  ctx.fillRect(0, viewH - 50, viewW, 50);
-
-  ctx.fillStyle = char.color || '#a855f7';
-  ctx.fillRect(0, 48, viewW, 2);
-  ctx.fillRect(0, viewH - 50, viewW, 2);
-
-  // 3. Central Glowing Spotlight & Magic Slash Particles
-  const beamGrad = ctx.createLinearGradient(viewW / 2 - 180, 0, viewW / 2 + 180, 0);
-  beamGrad.addColorStop(0, 'rgba(0,0,0,0)');
-  beamGrad.addColorStop(0.5, char.color ? `${char.color}44` : 'rgba(168, 85, 247, 0.25)');
-  beamGrad.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = beamGrad;
-  ctx.fillRect(viewW / 2 - 200, 50, 400, viewH - 100);
-
-  // Magic Slash Wave Visual Behind Companion
-  ctx.strokeStyle = char.color || '#38bdf8';
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  const slashRadius = 60 + Math.sin(frames / 4) * 10;
-  ctx.arc(viewW / 2, viewH / 2 + 20, slashRadius, -Math.PI / 4, Math.PI / 4);
-  ctx.stroke();
-
-  // 4. Companion Special Attack / Rescue Showcase Animation
+  // 2. Companion Special Attack Rescue Strike Action Animation (Center Stage)
   const compObj = companionSprites[char.id];
   const attackList = (compObj && compObj.attack) ? compObj.attack : (compObj ? compObj.walking : null);
 
@@ -72,43 +47,43 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
     const animFrame = Math.floor(frames / 4) % attackList.length;
     const attackImg = attackList[animFrame];
     if (attackImg) {
-      drawCroppedSprite(ctx, attackImg, viewW / 2, viewH / 2 + 35, 115, false, compObj ? compObj.flipDefault : false);
+      drawCroppedSprite(ctx, attackImg, viewW / 2, viewH / 2 + 10, 120, false, compObj ? compObj.flipDefault : false);
     }
   }
 
-  // 5. 2D RPG Dialogue Box Overlay with Character Face Portrait
-  const cardW = Math.min(680, viewW - 40);
-  const cardH = 90;
+  // 3. Classic 2D RPG Bottom Dialogue Box (Anchored at very bottom of screen)
+  const cardW = Math.min(840, viewW - 32);
+  const cardH = 100;
   const cardX = viewW / 2 - cardW / 2;
-  const cardY = viewH - 150;
+  const cardY = viewH - 112;
 
-  // Glass Box Background
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
+  // Glass Box Container
+  ctx.fillStyle = 'rgba(10, 15, 30, 0.96)';
   ctx.strokeStyle = char.color || '#a855f7';
-  ctx.lineWidth = 2.5;
+  ctx.lineWidth = 3;
 
   ctx.beginPath();
   ctx.roundRect(cardX, cardY, cardW, cardH, 12);
   ctx.fill();
   ctx.stroke();
 
-  // Character Face Portrait Avatar Badge
+  // Character Face Portrait Avatar Box
   const portX = cardX + 16;
-  const portY = cardY + 15;
+  const portY = cardY + 16;
   ctx.fillStyle = char.color ? `${char.color}33` : 'rgba(168, 85, 247, 0.2)';
   ctx.strokeStyle = char.color || '#c084fc';
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.arc(portX + 30, portY + 30, 28, 0, Math.PI * 2);
+  ctx.arc(portX + 32, portY + 32, 30, 0, Math.PI * 2);
   ctx.fill();
   ctx.stroke();
 
-  ctx.font = '28px system-ui, sans-serif';
+  ctx.font = '30px system-ui, sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText(dialogData.avatar, portX + 30, portY + 39);
+  ctx.fillText(dialogData.avatar, portX + 32, portY + 42);
 
-  // Dialogue Title & Subtitle Speech Text
-  const textX = cardX + 90;
+  // Dialogue Title & Speech Text
+  const textX = cardX + 96;
   ctx.textAlign = 'left';
 
   // Title / Power Nameplate
@@ -120,8 +95,7 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   ctx.fillStyle = '#f8fafc';
   ctx.font = '600 13px system-ui, sans-serif';
   
-  // Word wrap speech text if long
-  const maxWidth = cardW - 110;
+  const maxWidth = cardW - 120;
   const words = dialogData.speech.split(' ');
   let line = '';
   let lineY = cardY + 48;
@@ -138,6 +112,13 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
     }
   }
   ctx.fillText(line, textX, lineY);
+
+  // Press Prompt Badge (Bottom Right)
+  const bounceX = Math.sin(frames / 6) * 3;
+  ctx.fillStyle = char.color || '#ffd13b';
+  ctx.font = '700 11px system-ui, sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText(`PRESS [X] OR TAP TO CONTINUE ▶`, cardX + cardW - 18 + bounceX, cardY + cardH - 14);
 
   ctx.restore();
 }
