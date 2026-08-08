@@ -136,7 +136,7 @@ export const companionSprites = {
 // Preload Gothicvania enemy & boss animated sprites (High Frame-Count Cycles)
 export const enemySprites = {
   hellhound: {
-    flipDefault: false,
+    flipDefault: true, // Hellhound raw source PNG has head on LEFT -> set flipDefault: true so it walks FORWARD!
     frames: Array.from({ length: 12 }, (_, i) => createImage(`/assets/legacy/Legacy Collection/Assets/Gothicvania/Characters/Hell-Hound-Files/Sprites/Walk/frame${i + 1}.png`))
   },
   werewolf: {

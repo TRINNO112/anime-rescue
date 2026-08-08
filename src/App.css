@@ -37,53 +37,55 @@ body {
   text-align: center;
 }
 
-/* Start Screen Styling */
+/* Start Screen Styling - Vibrant Anime Hero Theme */
 .start-screen {
-  background: var(--bg-glass);
-  border: 1px solid rgba(168, 85, 247, 0.4);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.25);
-  border-radius: 20px;
-  padding: 36px 40px;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(24, 16, 50, 0.92);
+  border: 2px solid #ec4899;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7), 0 0 40px rgba(236, 72, 153, 0.4);
+  border-radius: 24px;
+  padding: 36px 42px;
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
   box-sizing: border-box;
-  max-width: 680px;
-  animation: fadeIn 0.4s ease-out;
+  max-width: 720px;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
 .retro-tag {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 2px;
-  color: var(--gold-accent);
-  background: rgba(255, 209, 59, 0.12);
-  border: 1px solid rgba(255, 209, 59, 0.3);
-  padding: 4px 12px;
+  color: #fef08a;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(168, 85, 247, 0.3));
+  border: 1px solid #f472b6;
+  padding: 5px 14px;
   border-radius: 20px;
   text-transform: uppercase;
   display: inline-block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  box-shadow: 0 0 15px rgba(244, 114, 182, 0.3);
 }
 
 .title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 20px;
+  font-size: 22px;
   margin: 0;
-  background: linear-gradient(135deg, #f3e8ff 0%, #c084fc 50%, #a855f7 100%);
+  background: linear-gradient(135deg, #f472b6 0%, #c084fc 40%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 10px rgba(168, 85, 247, 0.6));
-  line-height: 1.4;
+  filter: drop-shadow(0 4px 14px rgba(236, 72, 153, 0.6));
+  line-height: 1.45;
 }
 
 .title-sub {
-  font-size: 13px;
-  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e2e8f0;
   margin: 8px 0 0 0;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 /* Roster Grid Section */
@@ -92,114 +94,119 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .section-heading {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
-  letter-spacing: 1px;
-  color: #c084fc;
+  letter-spacing: 1.2px;
+  color: #f472b6;
   margin: 0;
+  text-shadow: 0 0 10px rgba(244, 114, 182, 0.4);
 }
 
 .roster-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 14px;
   width: 100%;
 }
 
 .roster-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  padding: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-align: left;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .roster-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.25);
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(236, 72, 153, 0.35);
 }
 
 .roster-icon {
-  font-size: 26px;
+  font-size: 28px;
   line-height: 1;
 }
 
 .roster-info h3 {
-  font-size: 14px;
-  font-weight: 700;
-  color: #f8fafc;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
   margin: 0 0 4px 0;
 }
 
 .power-tag {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
-  padding: 2px 8px;
-  border-radius: 10px;
+  padding: 3px 10px;
+  border-radius: 12px;
   display: inline-block;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Controls Glass Card */
 .controls-glass-card {
-  background: rgba(168, 85, 247, 0.06);
-  border: 1px solid rgba(168, 85, 247, 0.25);
-  border-radius: 12px;
-  padding: 14px 18px;
+  background: rgba(236, 72, 153, 0.1);
+  border: 1.5px solid rgba(236, 72, 153, 0.35);
+  border-radius: 14px;
+  padding: 16px 20px;
   width: 100%;
   box-sizing: border-box;
   text-align: left;
 }
 
 .controls-glass-card h3 {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
-  color: var(--gold-accent);
-  margin: 0 0 8px 0;
+  color: #fef08a;
+  margin: 0 0 10px 0;
   letter-spacing: 1px;
 }
 
 .controls-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 12px;
-  color: #cbd5e1;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f1f5f9;
 }
 
 /* Hero Showcase Card */
 .hero-showcase-card {
-  background: rgba(168, 85, 247, 0.08);
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  border-radius: 12px;
-  padding: 12px 18px;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+  border: 2px solid #f472b6;
+  border-radius: 16px;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(236, 72, 153, 0.25);
 }
 
 .hero-avatar {
-  font-size: 32px;
-  background: rgba(255, 209, 59, 0.15);
-  border: 1px solid rgba(255, 209, 59, 0.4);
+  font-size: 34px;
+  background: linear-gradient(135deg, #fef08a, #f59e0b);
+  border: 2px solid #ffffff;
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 20px rgba(254, 240, 138, 0.5);
 }
 
 .hero-details {
@@ -208,46 +215,57 @@ body {
 }
 
 .hero-details h2 {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 800;
-  color: var(--gold-accent);
+  color: #ffffff;
   margin: 0 0 2px 0;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 .hero-details p {
-  font-size: 11px;
-  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f1f5f9;
   margin: 0;
 }
 
 .start-audio-btn, .audio-toggle-btn {
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid #c084fc;
-  color: #f8fafc;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 700;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1.5px solid #f472b6;
+  color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .start-audio-btn:hover, .audio-toggle-btn:hover {
-  background: #a855f7;
-  transform: translateY(-1px);
+  background: #ec4899;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
 }
 
 .start-btn {
-  background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%);
-  border: 1.5px solid #c084fc;
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%);
+  border: 2px solid #ffffff;
   color: #ffffff;
-  padding: 14px 32px;
-  border-radius: 10px;
-  font-size: 13px;
+  padding: 16px 38px;
+  border-radius: 14px;
+  font-size: 15px;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 30px rgba(236, 72, 153, 0.55);
+}
+
+.start-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 38px rgba(236, 72, 153, 0.75);
+}
   box-shadow: 0 0 20px rgba(126, 34, 206, 0.6);
   transition: all 0.2s ease-in-out;
 }
