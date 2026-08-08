@@ -13,7 +13,8 @@ export function drawCompanions(ctx, activeRescues, player, cameraX, frames, isAt
     const compObj = companionSprites[char.id];
     if (compObj) {
       const isMoving = Math.abs(player.vx) > 0.1;
-      const shouldUseAttack = isAttacking || nearEnemies || (frames + idx * 15) % 120 < 40;
+      // Companions ONLY attack when Akari is attacking OR enemies are nearby!
+      const shouldUseAttack = Boolean(isAttacking || nearEnemies);
       
       const animList = (shouldUseAttack && compObj.attack && compObj.attack.length > 0)
         ? compObj.attack

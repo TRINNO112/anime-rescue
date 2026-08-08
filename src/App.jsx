@@ -38,6 +38,8 @@ function App() {
     setGameState('PLAYING');
   };
 
+  const cutsceneRef = useRef({ active: false, char: null });
+
   // Handle game input listeners
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -45,6 +47,16 @@ function App() {
       if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' ', 'x', 'X', 'Enter', 'w', 'W', 'a', 'A', 's', 'S', 'd', 'D'].includes(e.key)) {
         e.preventDefault();
       }
+
+      // If Dialogue Box is open, pressing ANY key dismisses it!
+      if (cutsceneRef.current.active) {
+        if (['x', 'X', 'Enter', ' ', 'w', 'W', 'a', 'A', 's', 'S', 'd', 'D'].includes(e.key)) {
+          cutsceneRef.current.active = false;
+          synth.playSfx('unlock');
+          return;
+        }
+      }
+
       if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keysRef.current.left = true;
       if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keysRef.current.right = true;
       if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
@@ -65,11 +77,20 @@ function App() {
       if (e.key === 'x' || e.key === 'X' || e.key === 'Enter') keysRef.current.attack = false;
     };
 
+    const handlePointerDown = () => {
+      if (cutsceneRef.current.active) {
+        cutsceneRef.current.active = false;
+        synth.playSfx('unlock');
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener('pointerdown', handlePointerDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('pointerdown', handlePointerDown);
     };
   }, [gameState]);
 
@@ -468,10 +489,11 @@ function App() {
               setCurrentScore(s => s + 300);
             }
 
-            // Trigger RPG Dialogue & Rescue Cutscene Overlay
+            // Trigger RPG Dialogue & Rescue Cutscene Overlay (Indefinite Hold Until Dismissed!)
             cutsceneState.active = true;
             cutsceneState.char = animeChar;
-            cutsceneState.timer = 110;
+            cutsceneRef.current.active = true;
+            cutsceneRef.current.char = animeChar;
           }
         });
 
@@ -661,8 +683,8 @@ function App() {
         ctx.fillText('🔥 SHADOW DEMON OVERLORD 🔥', VIEW_W / 2, 16);
       }
 
-      // 10. Companion Rescue Cutscene Overlay
-      drawRescueCutscene(ctx, cutsceneState, VIEW_W, VIEW_H, frames);
+      // 10. Companion Rescue Cutscene Overlay (Stays Open Until Dismissed!)
+      drawRescueCutscene(ctx, cutsceneRef.current, VIEW_W, VIEW_H, frames);
 
       ctx.restore();
 
