@@ -103,6 +103,10 @@ function createImage(src) {
   return img;
 }
 
+export function registerExtraImage(src) {
+  return createImage(src);
+}
+
 export function preloadAllImages(onProgress) {
   return new Promise((resolve) => {
     if (allLoadedImages.length === 0) {

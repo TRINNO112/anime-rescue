@@ -1,10 +1,8 @@
-import { companionSprites, drawCroppedSprite } from './spriteLoader';
+import { companionSprites, drawCroppedSprite, registerExtraImage } from './spriteLoader';
 import { CHARACTERS } from './gameConfig';
 
 function loadImg(src) {
-  const img = new Image();
-  img.src = src;
-  return img;
+  return registerExtraImage(src);
 }
 
 export class EnvironmentRenderer {
