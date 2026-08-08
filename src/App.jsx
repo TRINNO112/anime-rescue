@@ -11,7 +11,7 @@ import { HUD } from './components/HUD';
 import { MobileControls } from './components/MobileControls';
 
 function App() {
-  const [gameState, setGameState] = useState('VICTORY'); // START, PLAYING, GAME_OVER, VICTORY
+  const [gameState, setGameState] = useState('START'); // START, PLAYING, GAME_OVER, VICTORY
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [playerName, setPlayerName] = useState('Akari');
