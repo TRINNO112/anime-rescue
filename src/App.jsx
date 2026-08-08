@@ -723,13 +723,22 @@ function App() {
     <div className="app-container">
       {!isLoaded && (
         <div className="screen loading-screen">
-          <div className="loader-circle-wrap">
-            <div className="loader-ring" />
-            <span className="loader-progress-text">{loadingProgress}%</span>
-          </div>
-          <div className="loader-meta">
-            <h1 className="loader-title">AKARI'S BIRTHDAY RESCUE</h1>
-            <p className="loader-subtitle">Loading Gothic Biomes & Sprite Sheets...</p>
+          <div className="ld-veil" aria-hidden="true" />
+          <div className="ld-core">
+            <span className="ld-kanji">誕生日</span>
+            <h1 className="ld-title">
+              <span className="ld-title-sm">AKARI&rsquo;S</span>
+              <span className="ld-title-lg">BIRTHDAY RESCUE</span>
+            </h1>
+            <div className="ld-bar">
+              <i style={{ width: `${loadingProgress}%` }} />
+            </div>
+            <div className="ld-foot">
+              <span className="ld-status">Sharpening the katana</span>
+              <span className="ld-pct">
+                {String(loadingProgress).padStart(2, '0')}<em>%</em>
+              </span>
+            </div>
           </div>
         </div>
       )}
@@ -742,115 +751,66 @@ function App() {
       {gameState === 'START' && (
         <div className="screen start-screen">
           <div className="ts-aura" aria-hidden="true" />
+          <span className="ts-vert" aria-hidden="true">アカリの誕生日レスキュー</span>
+
+          <button
+            className="ts-sound-btn"
+            onClick={() => setIsMuted(synth.toggleMute())}
+            aria-label={isMuted ? 'Unmute' : 'Mute'}
+          >
+            {isMuted ? '🔇' : '🔊'}
+          </button>
 
           <header className="ts-header">
-            <span className="ts-eyebrow">2D Anime Action RPG</span>
+            <span className="ts-eyebrow">◆ Chapter One ◆</span>
             <h1 className="ts-title">
               <span className="ts-title-top">AKARI&rsquo;S</span>
-              <span className="ts-title-main">BIRTHDAY RESCUE</span>
+              <span className="ts-title-main" data-text="BIRTHDAY RESCUE">BIRTHDAY RESCUE</span>
             </h1>
-            <div className="ts-rule" aria-hidden="true"><i /><span>◆</span><i /></div>
-            <span className="ts-kanji">アカリの誕生日レスキュー</span>
-            <p className="ts-tagline">
-              Cut through the gothic shadow realm, shatter four prison cells,
-              and bring every companion home before the night ends.
-            </p>
+            <p className="ts-tagline">Four allies. One night. Bring them all home.</p>
           </header>
 
-          <div className="ts-body">
-            <section className="ts-hero">
-              <div className="ts-hero-crest"><span>刀</span></div>
-              <div className="ts-hero-meta">
-                <span className="ts-label">Playable Heroine</span>
-                <h2 className="ts-hero-name">AKARI</h2>
-                <div className="ts-hero-stats">
-                  <div className="ts-stat">
-                    <span className="ts-stat-key">Weapon</span>
-                    <span className="ts-stat-val">Birthday Katana</span>
-                  </div>
-                  <div className="ts-stat">
-                    <span className="ts-stat-key">Vitality</span>
-                    <span className="ts-stat-val ts-pips">
-                      <i /><i /><i /><i /><i />
-                    </span>
-                  </div>
-                  <div className="ts-stat">
-                    <span className="ts-stat-key">Art</span>
-                    <span className="ts-stat-val">Crescent Slash</span>
-                  </div>
-                </div>
-              </div>
-              <button
-                className="ts-sound-btn"
-                onClick={() => setIsMuted(synth.toggleMute())}
-                aria-pressed={!isMuted}
-              >
-                {isMuted ? '🔇' : '🔊'}
-                <span>{isMuted ? 'Muted' : 'Sound'}</span>
-              </button>
-            </section>
-
-            <section className="ts-roster">
-              <div className="ts-roster-head">
-                <span className="ts-label">Allies to Free</span>
-                <span className="ts-roster-count">04</span>
-              </div>
-
-              <ul className="ts-roster-list">
-                <li className="ts-ally" style={{ '--ally': '#8ecae6' }}>
-                  <span className="ts-ally-no">01</span>
-                  <span className="ts-ally-body">
-                    <span className="ts-ally-name">Muichiro Tokito</span>
-                    <span className="ts-ally-power">Air Double Jump</span>
-                  </span>
-                </li>
-                <li className="ts-ally" style={{ '--ally': '#fb8500' }}>
-                  <span className="ts-ally-no">02</span>
-                  <span className="ts-ally-body">
-                    <span className="ts-ally-name">Chuuya Nakahara</span>
-                    <span className="ts-ally-power">Gravity Float</span>
-                  </span>
-                </li>
-                <li className="ts-ally" style={{ '--ally': '#e0b1cb' }}>
-                  <span className="ts-ally-no">03</span>
-                  <span className="ts-ally-body">
-                    <span className="ts-ally-name">Yuta Okkotsu</span>
-                    <span className="ts-ally-power">Cursed Slash</span>
-                  </span>
-                </li>
-                <li className="ts-ally" style={{ '--ally': '#219ebc' }}>
-                  <span className="ts-ally-no">04</span>
-                  <span className="ts-ally-body">
-                    <span className="ts-ally-name">Giyu Tomioka</span>
-                    <span className="ts-ally-power">Water Shield</span>
-                  </span>
-                </li>
-              </ul>
-            </section>
-          </div>
-
-          <section className="ts-controls">
-            <span className="ts-label">Controls</span>
-            <ul className="ts-control-list">
-              <li>
-                <span className="ts-keys"><kbd>A</kbd><kbd>D</kbd></span>
-                <span className="ts-control-text">Walk</span>
-              </li>
-              <li>
-                <span className="ts-keys"><kbd>Space</kbd><kbd>W</kbd></span>
-                <span className="ts-control-text">Jump</span>
-              </li>
-              <li>
-                <span className="ts-keys"><kbd>X</kbd><kbd>Enter</kbd></span>
-                <span className="ts-control-text">Attack &amp; Shatter Prison Cells</span>
-              </li>
-            </ul>
-          </section>
+          <ul className="ts-cards">
+            <li className="ts-card ts-card--hero" style={{ '--ally': '#ff3b6b' }}>
+              <span className="ts-card-glyph">刀</span>
+              <span className="ts-card-name">AKARI</span>
+              <span className="ts-card-power">Crescent Slash</span>
+              <span className="ts-card-tag">YOU</span>
+            </li>
+            <li className="ts-card" style={{ '--ally': '#8ecae6' }}>
+              <span className="ts-card-glyph">霞</span>
+              <span className="ts-card-name">MUICHIRO</span>
+              <span className="ts-card-power">Double Jump</span>
+            </li>
+            <li className="ts-card" style={{ '--ally': '#fb8500' }}>
+              <span className="ts-card-glyph">重</span>
+              <span className="ts-card-name">CHUUYA</span>
+              <span className="ts-card-power">Gravity Float</span>
+            </li>
+            <li className="ts-card" style={{ '--ally': '#e0b1cb' }}>
+              <span className="ts-card-glyph">呪</span>
+              <span className="ts-card-name">YUTA</span>
+              <span className="ts-card-power">Cursed Slash</span>
+            </li>
+            <li className="ts-card" style={{ '--ally': '#219ebc' }}>
+              <span className="ts-card-glyph">水</span>
+              <span className="ts-card-name">GIYU</span>
+              <span className="ts-card-power">Water Shield</span>
+            </li>
+          </ul>
 
           <button className="ts-play" onClick={resetGame}>
-            <span className="ts-play-label">Play Mission</span>
+            <span className="ts-play-label">Start</span>
             <span className="ts-play-icon">▶</span>
           </button>
+
+          <div className="ts-keys">
+            <span><kbd>A</kbd><kbd>D</kbd> Move</span>
+            <i aria-hidden="true" />
+            <span><kbd>Space</kbd> Jump</span>
+            <i aria-hidden="true" />
+            <span><kbd>X</kbd> Slash</span>
+          </div>
         </div>
       )}
 
@@ -905,48 +865,68 @@ function App() {
 
       {gameState === 'VICTORY' && (
         <div className="screen victory-screen">
-          <div className="victory-crown">👑✨</div>
-          <h1 className="victory-title">HAPPY BIRTHDAY, AKARI!</h1>
-          <span className="victory-kanji">「聖誕祭の勝利」 — SACRED BIRTHDAY VICTORY</span>
-          
-          <div className="victory-card">
-            <p className="victory-main-message">
-              You successfully fought through the gothic void shadow realm, shattered the 4 runic prison sanctuaries, and rescued Tokito, Chuuya, Yuta, and Giyu! 
-              Together, your companions stand by your side to wish you the absolute happiest birthday and eternal glory!
-            </p>
+          <div className="vc-glow" aria-hidden="true" />
+          <div className="vc-sparks" aria-hidden="true">
+            <span>✦</span><span>✧</span><span>❀</span><span>✦</span>
+            <span>✧</span><span>✿</span><span>✦</span><span>✧</span>
           </div>
 
-          <div className="victory-companions-container">
-            <h2 className="section-heading">🎉 COMPANION BIRTHDAY BLESSINGS</h2>
-            <div className="victory-grid">
-              <div className="victory-card-item" style={{ borderColor: '#38bdf8' }}>
-                <div className="avatar-bubble">🗡️</div>
-                <h3>Muichiro Tokito</h3>
-                <p className="blessing-quote">&ldquo;I remember now... today is Akari-san&rsquo;s birthday! Let the clouds clear for you.&rdquo;</p>
-              </div>
+          <span className="vc-eyebrow">✧ 誕生日おめでとう ✧</span>
 
-              <div className="victory-card-item" style={{ borderColor: '#fb8500' }}>
-                <div className="avatar-bubble">🍷</div>
-                <h3>Chuuya Nakahara</h3>
-                <p className="blessing-quote">&ldquo;Raise a glass! Nobody could ruin your birthday while I&rsquo;m manipulating gravity. Cheers, Akari!&rdquo;</p>
-              </div>
+          <h1 className="vc-title">
+            <span className="vc-title-line">HAPPY</span>
+            <span className="vc-title-line vc-title-big">BIRTHDAY</span>
+            <span className="vc-title-line vc-title-name">AKARI</span>
+          </h1>
 
-              <div className="victory-card-item" style={{ borderColor: '#e0b1cb' }}>
-                <div className="avatar-bubble">💍</div>
-                <h3>Yuta Okkotsu</h3>
-                <p className="blessing-quote">&ldquo;Rika and I are so happy you are safe, Akari-san. Happy Birthday! We will protect you forever!&rdquo;</p>
-              </div>
+          <p className="vc-note">
+            The shadows are gone, every cell is broken, and everyone you saved
+            is standing here just to say one thing &mdash;
+            <strong> today belongs to you.</strong> 🎂
+          </p>
 
-              <div className="victory-card-item" style={{ borderColor: '#0ea5e9' }}>
-                <div className="avatar-bubble">🌊</div>
-                <h3>Giyu Tomioka</h3>
-                <p className="blessing-quote">&ldquo;The water is calm today. No shadow beast could ruin your birthday. Congratulations, Akari.&rdquo;</p>
-              </div>
-            </div>
+          <ul className="vc-wishes">
+            <li className="vc-wish" style={{ '--ally': '#8ecae6' }}>
+              <span className="vc-wish-face">🗡️</span>
+              <span className="vc-wish-body">
+                <span className="vc-wish-name">Muichiro</span>
+                <span className="vc-wish-text">&ldquo;The mist cleared just for today. Happy birthday, Akari.&rdquo;</span>
+              </span>
+            </li>
+            <li className="vc-wish" style={{ '--ally': '#fb8500' }}>
+              <span className="vc-wish-face">🍷</span>
+              <span className="vc-wish-body">
+                <span className="vc-wish-name">Chuuya</span>
+                <span className="vc-wish-text">&ldquo;Gravity bends for you tonight. Cheers, birthday girl!&rdquo;</span>
+              </span>
+            </li>
+            <li className="vc-wish" style={{ '--ally': '#e0b1cb' }}>
+              <span className="vc-wish-face">💍</span>
+              <span className="vc-wish-body">
+                <span className="vc-wish-name">Yuta</span>
+                <span className="vc-wish-text">&ldquo;Rika and I will keep you safe. Always. Happy birthday.&rdquo;</span>
+              </span>
+            </li>
+            <li className="vc-wish" style={{ '--ally': '#219ebc' }}>
+              <span className="vc-wish-face">🌊</span>
+              <span className="vc-wish-body">
+                <span className="vc-wish-name">Giyu</span>
+                <span className="vc-wish-text">&ldquo;Still water, clear sky. You earned this day.&rdquo;</span>
+              </span>
+            </li>
+          </ul>
+
+          <div className="vc-stats">
+            <span><b>04</b> Allies Freed</span>
+            <i aria-hidden="true" />
+            <span><b>{currentScore}</b> Score</span>
+            <i aria-hidden="true" />
+            <span><b>100%</b> Cleared</span>
           </div>
 
-          <button className="start-btn victory-restart-btn" onClick={resetGame}>
-            PLAY AGAIN 🔄
+          <button className="vc-again" onClick={resetGame}>
+            <span>Play Again</span>
+            <span className="vc-again-icon">↺</span>
           </button>
         </div>
       )}
