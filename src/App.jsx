@@ -720,7 +720,7 @@ function App() {
   }, [gameState]);
 
   return (
-    <div className="app-container">
+    <div className={`app-container state-${gameState.toLowerCase()}`}>
       {!isLoaded && (
         <div className="screen loading-screen">
           <div className="ld-veil" aria-hidden="true" />

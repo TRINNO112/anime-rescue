@@ -110,6 +110,19 @@ body {
   pointer-events: none;
 }
 
+.ts-vert-ch {
+  display: inline-block;
+  opacity: 0;
+  animation: tsVertIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--vi, 0) * 0.08s + 0.8s);
+}
+
+@keyframes tsVertIn {
+  0%   { opacity: 0; transform: translateY(-8px) scale(0.85); filter: blur(2px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+
 .ts-sound-btn {
   position: absolute;
   top: 20px;
@@ -815,9 +828,19 @@ body {
 /* Mobile Landscape Edge-to-Edge Optimization */
 @media (max-width: 950px) and (orientation: landscape) {
   .app-container {
-    padding: 0;
+    padding: 18px;
     width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .app-container.state-playing {
+    padding: 0;
     height: 100vh;
+    overflow: hidden;
     justify-content: center;
   }
 
