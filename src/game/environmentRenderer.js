@@ -12,14 +12,22 @@ export class EnvironmentRenderer {
     this.w = viewWidth;
     this.h = viewHeight;
 
-    // Load authentic Gothicvania background layers from extracted Legacy Collection
+    // Load Stage 1: Night Town & Gothic Castle
     this.bgSky = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/night-town-background-files/layers/night-town-background-sky.png');
     this.bgMountains = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/night-town-background-files/layers/night-town-background-mountains.png');
     this.bgBuildings = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/night-town-background-files/layers/night-town-background-far-buildings.png');
     this.bgTown = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/night-town-background-files/layers/night-town-background-town.png');
-    this.bgCastle = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/Gothic-Castle-Files/PNG/layers/gothic-castle-background.png');
-    this.castleTileset = new Image();
-    this.castleTileset.src = '/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/Gothic-Castle-Files/PNG/layers/gothic-castle-tileset.png';
+    this.castleTileset = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/Gothic-Castle-Files/PNG/layers/gothic-castle-tileset.png');
+
+    // Load Stage 2: Haunted Forest & Mist Woodland
+    this.bgForestBack = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/HauntedForest/Layers/back.png');
+    this.bgForestMiddle = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/HauntedForest/Layers/middle.png');
+    this.forestTileset = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/HauntedForest/Layers/tileset.png');
+
+    // Load Stage 3: Lava Depths & Demon Overlord Arena
+    this.bgLavaBack = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/lava-background/PNG/background.png');
+    this.bgLavaRocks = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/lava-background/PNG/middle-rocks.png');
+    this.cavernsTileset = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/caverns-files-web/layers/tiles.png');
 
     // Pre-generate background stars
     this.stars = Array.from({ length: 80 }).map(() => ({
@@ -44,7 +52,7 @@ export class EnvironmentRenderer {
   drawBackground(ctx, cameraX, frames) {
     ctx.imageSmoothingEnabled = false;
 
-    // 1. Draw Authentic Gothic Sky Layer or fallback linear gradient
+    // 1. Sky Base Layer
     if (this.bgSky.complete && this.bgSky.naturalWidth !== 0) {
       for (let x = 0; x < this.w + 500; x += this.bgSky.naturalWidth) {
         ctx.drawImage(this.bgSky, x - (cameraX * 0.02) % this.bgSky.naturalWidth, 0, this.bgSky.naturalWidth, this.h);
@@ -67,7 +75,7 @@ export class EnvironmentRenderer {
       ctx.fillRect(realX, star.y, star.size, star.size);
     });
 
-    // 3. Parallax Layer 1: Gothic Distant Mountains (0.1 camera speed)
+    // 3. Stage 1: Gothic Distant Mountains
     if (this.bgMountains.complete && this.bgMountains.naturalWidth !== 0) {
       const w = this.bgMountains.naturalWidth * 2;
       const h = this.bgMountains.naturalHeight * 2;
@@ -78,26 +86,52 @@ export class EnvironmentRenderer {
       }
     }
 
-    // 4. Parallax Layer 2: Distant Buildings & Castle Silhouettes (0.25 camera speed)
+    // 4. Stage 1: Distant Buildings
     if (this.bgBuildings.complete && this.bgBuildings.naturalWidth !== 0) {
       const w = this.bgBuildings.naturalWidth * 2;
       const h = this.bgBuildings.naturalHeight * 2;
-      const y = this.h - h - 10;
+      const y = this.h - h + 10;
       for (let x = -200; x < this.w + 600; x += w) {
         const drawX = x - (cameraX * 0.25) % w;
         ctx.drawImage(this.bgBuildings, drawX, y, w, h);
       }
     }
 
-    // 5. Parallax Layer 3: Gothic Town Architecture (0.4 camera speed)
+    // 5. Stage 1: Town Architecture - Anchored Flat to Canvas Bottom (+70px) to prevent house floating!
     if (this.bgTown.complete && this.bgTown.naturalWidth !== 0) {
       const w = this.bgTown.naturalWidth * 2;
       const h = this.bgTown.naturalHeight * 2;
-      const y = this.h - h + 20;
+      const y = this.h - h + 70; // Solidly anchored to bottom horizon
       for (let x = -200; x < this.w + 600; x += w) {
         const drawX = x - (cameraX * 0.4) % w;
         ctx.drawImage(this.bgTown, drawX, y, w, h);
       }
+    }
+
+    // Stage 2: Haunted Forest Parallax Overlay (Fades in around X = 1200)
+    if (cameraX > 900 && this.bgForestBack.complete && this.bgForestBack.naturalWidth !== 0) {
+      const forestAlpha = Math.min(1, (cameraX - 900) / 400);
+      ctx.save();
+      ctx.globalAlpha = forestAlpha;
+      const fw = this.bgForestBack.naturalWidth * 2.2;
+      const fh = this.bgForestBack.naturalHeight * 2.2;
+      for (let x = -200; x < this.w + 600; x += fw) {
+        ctx.drawImage(this.bgForestBack, x - (cameraX * 0.3) % fw, this.h - fh, fw, fh);
+      }
+      ctx.restore();
+    }
+
+    // Stage 3: Lava Depths Red Glow Overlay (Fades in around X = 2500)
+    if (cameraX > 2200 && this.bgLavaBack.complete && this.bgLavaBack.naturalWidth !== 0) {
+      const lavaAlpha = Math.min(1, (cameraX - 2200) / 400);
+      ctx.save();
+      ctx.globalAlpha = lavaAlpha * 0.85;
+      const lw = this.bgLavaBack.naturalWidth * 2.5;
+      const lh = this.bgLavaBack.naturalHeight * 2.5;
+      for (let x = -200; x < this.w + 600; x += lw) {
+        ctx.drawImage(this.bgLavaBack, x - (cameraX * 0.2) % lw, 0, lw, this.h);
+      }
+      ctx.restore();
     }
 
     // 6. Floating Embers / Magic Sparks
@@ -107,7 +141,7 @@ export class EnvironmentRenderer {
       if (emb.y < -10) emb.y = this.h + 10;
       const ex = emb.x - cameraX * 0.5;
       if (ex > -10 && ex < this.w + 10) {
-        ctx.fillStyle = `rgba(192, 132, 252, ${emb.alpha})`;
+        ctx.fillStyle = cameraX > 2200 ? `rgba(239, 68, 68, ${emb.alpha})` : `rgba(192, 132, 252, ${emb.alpha})`;
         ctx.fillRect(ex, emb.y, emb.size, emb.size);
       }
     });
@@ -122,22 +156,22 @@ export class EnvironmentRenderer {
 
       ctx.save();
 
-      // Multi-piece 9-slice Gothicvania Castle Tilemap Renderer
+      // Multi-piece 9-slice Gothicvania Castle Tilemap Renderer (16x16 tile grid)
       if (this.castleTileset.complete && this.castleTileset.naturalWidth !== 0) {
-        const tileSize = 32;
+        const tileSize = 16;
 
         for (let x = px; x < px + plat.w; x += tileSize) {
           const isLeftEdge = (x === px);
           const isRightEdge = (x + tileSize >= px + plat.w);
           const chunkW = Math.min(tileSize, px + plat.w - x);
 
-          // 1. Top Cap Slice (Left corner X=32 Y=32, Middle top X=48 Y=32, Right corner X=80 Y=32)
-          let srcX = 48; // Middle top cap
+          // 1. Top Cap Slice (Left corner X=32, Middle top X=48, Right corner X=80)
+          let srcX = 48; // Middle top cap tile (16x32)
           if (isLeftEdge) srcX = 32;
           else if (isRightEdge) srcX = 80;
 
           const topH = Math.min(32, plat.h);
-          ctx.drawImage(this.castleTileset, srcX, 32, 32, topH, x, plat.y, chunkW, topH);
+          ctx.drawImage(this.castleTileset, srcX, 32, 16, topH, x, plat.y, chunkW, topH);
 
           // 2. Underneath Body Wall Fill (Left X=32 Y=48, Middle X=48 Y=48, Right X=80 Y=48)
           if (plat.h > topH) {
@@ -147,7 +181,7 @@ export class EnvironmentRenderer {
               if (isLeftEdge) bodySrcX = 32;
               else if (isRightEdge) bodySrcX = 80;
 
-              ctx.drawImage(this.castleTileset, bodySrcX, 48, 32, 32, x, y, chunkW, chunkH);
+              ctx.drawImage(this.castleTileset, bodySrcX, 48, 16, 16, x, y, chunkW, chunkH);
             }
           }
         }
@@ -198,31 +232,23 @@ export class EnvironmentRenderer {
           }
         }
 
-        // Metallic Cage Frame
-        ctx.fillStyle = '#4b5563';
-        ctx.fillRect(cx, cy, cage.w, 6); // Top
-        ctx.fillRect(cx, cy + cage.h - 6, cage.w, 6); // Bottom
-        ctx.fillRect(cx, cy, 5, cage.h); // Left
-        ctx.fillRect(cx + cage.w - 5, cy, 5, cage.h); // Right
+        // Metallic Gothic Dark Steel Frame
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(cx, cy, cage.w, 6); // Top beam
+        ctx.fillRect(cx, cy + cage.h - 6, cage.w, 6); // Bottom beam
+        ctx.fillRect(cx, cy, 6, cage.h); // Left post
+        ctx.fillRect(cx + cage.w - 6, cy, 6, cage.h); // Right post
 
-        // Steel Bars
-        ctx.fillStyle = '#9ca3af';
-        for (let bx = cx + 12; bx < cx + cage.w - 8; bx += 11) {
-          ctx.fillRect(bx, cy + 6, 3, cage.h - 12);
+        // Metallic Steel Vertical Bars
+        ctx.fillStyle = '#64748b';
+        for (let bx = cx + 11; bx < cx + cage.w - 8; bx += 10) {
+          ctx.fillRect(bx, cy + 5, 3, cage.h - 10);
         }
 
-        // Force Field Pulsing Energy Shield
-        const pulse = Math.sin(frames / 8) * 0.25 + 0.45;
-        ctx.fillStyle = `rgba(168, 85, 247, ${pulse})`;
-        ctx.fillRect(cx + 4, cy + 4, cage.w - 8, cage.h - 8);
-
-        // Glowing Core Rune Diamond
-        ctx.save();
-        ctx.translate(cx + cage.w / 2, cy + cage.h / 2);
-        ctx.rotate(Math.PI / 4);
-        ctx.fillStyle = animeChar ? animeChar.color : '#c084fc';
-        ctx.fillRect(-7, -7, 14, 14);
-        ctx.restore();
+        // Golden Padlock Icon in Center
+        ctx.font = '14px system-ui';
+        ctx.textAlign = 'center';
+        ctx.fillText('🔒', cx + cage.w / 2, cy + cage.h / 2 + 5);
 
         // Keypress Proximity Prompt Overlay when Akari is near!
         const dist = Math.abs((player.x + player.width / 2) - (cage.x + cage.w / 2));

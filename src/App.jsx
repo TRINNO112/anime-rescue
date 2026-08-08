@@ -42,6 +42,9 @@ function App() {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (gameState !== 'PLAYING') return;
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' ', 'x', 'X', 'Enter', 'w', 'W', 'a', 'A', 's', 'S', 'd', 'D'].includes(e.key)) {
+        e.preventDefault();
+      }
       if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keysRef.current.left = true;
       if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keysRef.current.right = true;
       if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
@@ -53,6 +56,9 @@ function App() {
     };
 
     const handleKeyUp = (e) => {
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' ', 'x', 'X', 'Enter', 'w', 'W', 'a', 'A', 's', 'S', 'd', 'D'].includes(e.key)) {
+        e.preventDefault();
+      }
       if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keysRef.current.left = false;
       if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keysRef.current.right = false;
       if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') keysRef.current.jump = false;
@@ -557,8 +563,8 @@ function App() {
         const enemyCenterX = ex + enemy.width / 2;
         // Snap enemy feet solidly onto stone platform caps (+2px offset)
         const enemyGroundY = enemy.y + enemy.height + 2;
-        // HellHound & Werewolf source sprites face LEFT by default -> flip when moving RIGHT!
-        const facingLeft = (enemy.vx ? enemy.vx > 0 : enemy.speed > 0);
+        // HellHound & Werewolf source sprites face LEFT by default -> facingLeft = true when moving left (speed < 0)
+        const facingLeft = (enemy.vx ? enemy.vx < 0 : enemy.speed < 0);
 
         const animList = enemySprites[enemy.type] || enemySprites.hellhound;
         const currentFrameIdx = Math.floor(frames / 5) % animList.length;
@@ -599,7 +605,7 @@ function App() {
       // 7. Companions Trail
       drawCompanions(ctx, activeRescues, player, cameraX, frames);
 
-      // 8. Player (Akari) - Cropped Normalized Rendering with Feet Ground Snapping
+      // 8. Player (Akari) - Cropped Normalized Rendering with Feet Ground Snapping & Slash FX
       if (player.invulnFrames % 4 < 2) {
         let state = 'idle';
         if (!player.isGrounded) state = 'jump';
@@ -618,6 +624,23 @@ function App() {
         if (!drawCroppedSprite(ctx, akariImg, akariCenterX, akariGroundY, AKARI_RENDER_HEIGHT, player.facingLeft)) {
           ctx.fillStyle = player.color;
           ctx.fillRect(player.x - cameraX, player.y, player.width, player.height);
+        }
+
+        // Render Sword Slash Energy Arc when Attack Key is Active!
+        if (state === 'attack') {
+          ctx.save();
+          ctx.strokeStyle = '#ff758f';
+          ctx.shadowColor = '#ff4d6d';
+          ctx.shadowBlur = 12;
+          ctx.lineWidth = 3.5;
+          ctx.beginPath();
+          const slashX = akariCenterX + (player.facingLeft ? -25 : 25);
+          const slashY = akariGroundY - 34;
+          const startA = player.facingLeft ? Math.PI * 0.75 : -Math.PI * 0.25;
+          const endA = player.facingLeft ? Math.PI * 1.25 : Math.PI * 0.25;
+          ctx.arc(slashX, slashY, 32, startA, endA);
+          ctx.stroke();
+          ctx.restore();
         }
       }
 

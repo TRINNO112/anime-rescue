@@ -31,10 +31,10 @@ export const platforms = [
 
 // Initial Prison Cages Config (Locked in cells!)
 export const initialCages = [
-  { x: 400, y: 300, w: 50, h: 60, charId: 'muichiro', rescued: false },
-  { x: 800, y: 210, w: 50, h: 60, charId: 'chuuya', rescued: false },
-  { x: 1850, y: 270, w: 50, h: 60, charId: 'yuta', rescued: false },
-  { x: 2450, y: 410, w: 50, h: 60, charId: 'giyu', rescued: false }
+  { x: 375, y: 300, w: 50, h: 50, charId: 'muichiro', rescued: false },
+  { x: 700, y: 210, w: 50, h: 50, charId: 'chuuya', rescued: false },
+  { x: 1835, y: 270, w: 50, h: 50, charId: 'yuta', rescued: false },
+  { x: 2650, y: 410, w: 50, h: 50, charId: 'giyu', rescued: false }
 ];
 
 // Level Enemies Config
