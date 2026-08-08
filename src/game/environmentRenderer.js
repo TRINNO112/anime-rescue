@@ -238,158 +238,200 @@ export class EnvironmentRenderer {
       const animeChar = CHARACTERS.find(ch => ch.id === cage.charId);
 
       if (!cage.rescued) {
-        // --- Gothic Iron Cell Geometry ---------------------------------
+        // --- Gothic Iron Cell ------------------------------------------
+        // Built taller than the cage hitbox so a full companion sprite fits
+        // inside; the hitbox stays the authoritative collision volume.
         const accent = (animeChar && animeChar.color) || '#c084fc';
         const midX = cx + cage.w / 2;
-        const left = cx - 3;
-        const right = cx + cage.w + 3;
+        const bottom = cy + cage.h;      // floor line, sits on the platform
+        const HALF = cage.w / 2 + 8;     // cell is wider than the hitbox
+        const left = midX - HALF;
+        const right = midX + HALF;
         const span = right - left;
-        const top = cy - 2;
-        const bottom = cy + cage.h;
-        const archPeak = top - 14; // control point of the arched crown
-        const pulse = 0.55 + Math.sin(frames / 32) * 0.45;
+        const top = bottom - 62;         // springline of the arch
+        const apex = top - 20;           // tip of the pointed gothic arch
+        const pulse = 0.5 + Math.sin(frames / 30) * 0.5;
 
-        // Arch curve: control-x sits at the midpoint, so x moves linearly
-        // with t and a bar's top edge is a plain quadratic lookup.
+        // Pointed (two-centre) gothic arch: each half is a quadratic whose
+        // control point pulls outward, meeting in a sharp point at the apex.
         const archY = (x) => {
-          const t = (x - left) / span;
+          const half = span / 2;
+          const t = x <= midX ? (x - left) / half : (right - x) / half;
+          const ctrlY = top - 3;
           const inv = 1 - t;
-          return inv * inv * top + 2 * inv * t * archPeak + t * t * top;
+          return inv * inv * top + 2 * inv * t * ctrlY + t * t * apex;
+        };
+
+        const traceArch = () => {
+          ctx.moveTo(left, bottom);
+          ctx.lineTo(left, top);
+          ctx.quadraticCurveTo(left + span * 0.14, top - 3, midX, apex);
+          ctx.quadraticCurveTo(right - span * 0.14, top - 3, right, top);
+          ctx.lineTo(right, bottom);
         };
 
         ctx.save();
 
-        // 1. Contact shadow so the cell reads as resting on the stone
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.42)';
+        // 1. Contact shadow — grounds the cell on the stone
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
         ctx.beginPath();
-        ctx.ellipse(midX, bottom + 3, cage.w * 0.56, 4.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(midX, bottom + 2, HALF + 5, 5, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // 2. Cell cavity (arched silhouette)
+        // 2. Stone alcove framing the cell mouth
         ctx.beginPath();
-        ctx.moveTo(left, bottom);
-        ctx.lineTo(left, top);
-        ctx.quadraticCurveTo(midX, archPeak, right, top);
-        ctx.lineTo(right, bottom);
+        ctx.moveTo(left - 7, bottom);
+        ctx.lineTo(left - 7, top - 2);
+        ctx.quadraticCurveTo(left + span * 0.12, apex - 9, midX, apex - 9);
+        ctx.quadraticCurveTo(right - span * 0.12, apex - 9, right + 7, top - 2);
+        ctx.lineTo(right + 7, bottom);
         ctx.closePath();
+        const stone = ctx.createLinearGradient(left - 7, apex, right + 7, bottom);
+        stone.addColorStop(0, '#3b3550');
+        stone.addColorStop(0.5, '#241f36');
+        stone.addColorStop(1, '#151222');
+        ctx.fillStyle = stone;
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.55)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
 
-        const cavity = ctx.createLinearGradient(0, archPeak, 0, bottom);
-        cavity.addColorStop(0, 'rgba(9, 7, 22, 0.94)');
-        cavity.addColorStop(1, 'rgba(4, 3, 12, 0.97)');
+        // 3. Cell cavity — near-black so bars and sprite read against it
+        ctx.beginPath();
+        traceArch();
+        ctx.closePath();
+        const cavity = ctx.createLinearGradient(0, apex, 0, bottom);
+        cavity.addColorStop(0, '#05040c');
+        cavity.addColorStop(0.55, '#0a0716');
+        cavity.addColorStop(1, '#03020a');
         ctx.fillStyle = cavity;
         ctx.fill();
 
-        // 3. The captive's aura, clipped to the cavity so it never bleeds out
+        // 4. Everything inside the cavity is clipped to it
         ctx.save();
         ctx.clip();
-        const aura = ctx.createRadialGradient(midX, bottom - 14, 2, midX, bottom - 14, cage.w * 0.85);
+
+        // Captive's aura pooling on the cell floor
+        const aura = ctx.createRadialGradient(midX, bottom - 10, 1, midX, bottom - 10, HALF * 1.9);
         aura.addColorStop(0, accent);
         aura.addColorStop(1, 'transparent');
-        ctx.globalAlpha = 0.16 + pulse * 0.14;
+        ctx.globalAlpha = 0.2 + pulse * 0.2;
         ctx.fillStyle = aura;
-        ctx.fillRect(left, archPeak, span, bottom - archPeak);
+        ctx.fillRect(left, apex, span, bottom - apex);
         ctx.globalAlpha = 1;
 
-        // 4. Companion preview sprite, framed inside the cell
+        // Companion sprite standing on the cell floor
         if (animeChar) {
           const compObj = companionSprites[animeChar.id];
           const list = (compObj && compObj.walking) ? compObj.walking : null;
           const img = (list && list.length > 0) ? list[0] : null;
 
           if (img) {
-            drawCroppedSprite(ctx, img, midX, bottom - 4, 38, false, compObj ? compObj.flipDefault : false);
+            drawCroppedSprite(ctx, img, midX, bottom - 3, 44, false, compObj ? compObj.flipDefault : false);
           } else {
             ctx.fillStyle = '#ffd166';
-            ctx.fillRect(midX - 10, bottom - 28, 20, 20);
+            ctx.fillRect(midX - 10, bottom - 30, 20, 22);
             ctx.fillStyle = animeChar.hairColor || '#333';
-            ctx.fillRect(midX - 12, bottom - 32, 24, 8);
+            ctx.fillRect(midX - 12, bottom - 34, 24, 8);
           }
         }
+
+        // Vignette so the sprite's feet melt into the dark
+        const vig = ctx.createLinearGradient(0, bottom - 16, 0, bottom);
+        vig.addColorStop(0, 'transparent');
+        vig.addColorStop(1, 'rgba(3, 2, 10, 0.9)');
+        ctx.fillStyle = vig;
+        ctx.fillRect(left, bottom - 16, span, 16);
+
         ctx.restore();
 
-        // 5. Vertical iron bars, tops following the arch
-        const barGrad = ctx.createLinearGradient(left, 0, right, 0);
-        barGrad.addColorStop(0, '#1c2436');
-        barGrad.addColorStop(0.45, '#5b6880');
-        barGrad.addColorStop(0.6, '#8996ac');
-        barGrad.addColorStop(1, '#1c2436');
-
-        const BAR_W = 2.4;
-        const GAP = 9;
-        const inset = 6;
-        for (let bx = left + inset; bx <= right - inset; bx += GAP) {
-          ctx.fillStyle = barGrad;
-          ctx.fillRect(bx - BAR_W / 2, archY(bx) + 2, BAR_W, bottom - archY(bx) - 2);
-          // thin specular edge
-          ctx.fillStyle = 'rgba(203, 213, 225, 0.35)';
-          ctx.fillRect(bx - BAR_W / 2, archY(bx) + 2, 0.8, bottom - archY(bx) - 2);
+        // 5. Vertical iron bars IN FRONT of the sprite — this is what sells
+        //    the depth: the captive is visibly behind the bars.
+        const BAR_W = 3;
+        const GAP = 11;
+        const firstBar = midX - Math.floor((HALF - 5) / GAP) * GAP;
+        for (let bx = firstBar; bx <= right - 5; bx += GAP) {
+          const bTop = archY(bx) + 2;
+          const h = bottom - bTop;
+          if (h <= 0) continue;
+          // cylindrical shading: dark edges, hot specular just left of centre
+          const g = ctx.createLinearGradient(bx - BAR_W / 2, 0, bx + BAR_W / 2, 0);
+          g.addColorStop(0, '#0f1420');
+          g.addColorStop(0.35, '#7b8aa3');
+          g.addColorStop(0.55, '#aab6c9');
+          g.addColorStop(1, '#131926');
+          ctx.fillStyle = g;
+          ctx.fillRect(bx - BAR_W / 2, bTop, BAR_W, h);
         }
 
-        // 6. Horizontal cross rails
-        [top + (bottom - top) * 0.34, top + (bottom - top) * 0.7].forEach(ry => {
-          ctx.fillStyle = '#232b3c';
-          ctx.fillRect(left + 1, ry, span - 2, 3);
-          ctx.fillStyle = 'rgba(148, 163, 184, 0.4)';
-          ctx.fillRect(left + 1, ry, span - 2, 1);
+        // 6. Riveted horizontal cross-braces (also in front of the bars)
+        [bottom - 42, bottom - 14].forEach(ry => {
+          if (ry <= archY(midX)) return;
+          const g = ctx.createLinearGradient(0, ry, 0, ry + 4);
+          g.addColorStop(0, '#8d9ab0');
+          g.addColorStop(0.5, '#3f4a5e');
+          g.addColorStop(1, '#161d2c');
+          ctx.fillStyle = g;
+          ctx.fillRect(left + 2, ry, span - 4, 4);
+          // rivet heads along the brace
+          ctx.fillStyle = '#c3cddb';
+          for (let rx = left + 7; rx < right - 5; rx += 13) {
+            ctx.beginPath();
+            ctx.arc(rx, ry + 2, 1.1, 0, Math.PI * 2);
+            ctx.fill();
+          }
         });
 
-        // 7. Outer frame: side posts, base plinth and the arched crown
-        ctx.fillStyle = '#161d2c';
-        ctx.fillRect(left - 2, top - 2, 4, bottom - top + 2); // left post
-        ctx.fillRect(right - 2, top - 2, 4, bottom - top + 2); // right post
-        ctx.fillRect(left - 4, bottom - 4, span + 8, 6); // base plinth
-        ctx.fillStyle = '#0a0f1a';
-        ctx.fillRect(left - 4, bottom + 1, span + 8, 2); // plinth shadow trim
-
+        // 7. Iron frame tracing the arch and posts
         ctx.beginPath();
-        ctx.moveTo(left - 1, top);
-        ctx.quadraticCurveTo(midX, archPeak, right + 1, top);
-        ctx.lineWidth = 4;
-        ctx.strokeStyle = '#161d2c';
+        traceArch();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#141a28';
         ctx.stroke();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+        ctx.lineWidth = 1.6;
+        ctx.strokeStyle = 'rgba(170, 182, 201, 0.65)';
         ctx.stroke();
 
-        // 8. Rivets on the posts
-        ctx.fillStyle = '#64748b';
-        [top + 4, bottom - 9].forEach(ry => {
-          ctx.beginPath();
-          ctx.arc(left, ry, 1.4, 0, Math.PI * 2);
-          ctx.arc(right, ry, 1.4, 0, Math.PI * 2);
-          ctx.fill();
-        });
+        // 8. Base plinth the whole cell rests on
+        ctx.fillStyle = '#1b2233';
+        ctx.fillRect(left - 6, bottom - 4, span + 12, 6);
+        ctx.fillStyle = 'rgba(170, 182, 201, 0.3)';
+        ctx.fillRect(left - 6, bottom - 4, span + 12, 1);
+        ctx.fillStyle = '#07050f';
+        ctx.fillRect(left - 6, bottom + 2, span + 12, 2);
 
-        // 9. Keystone gem crowning the arch
+        // 9. Keystone gem at the apex, pulsing in the captive's colour
+        ctx.save();
+        ctx.shadowColor = accent;
+        ctx.shadowBlur = 6 + pulse * 8;
         ctx.fillStyle = accent;
-        ctx.globalAlpha = 0.45 + pulse * 0.55;
+        ctx.globalAlpha = 0.5 + pulse * 0.5;
         ctx.beginPath();
-        ctx.moveTo(midX, archPeak + 3);
-        ctx.lineTo(midX + 3.5, archPeak + 7);
-        ctx.lineTo(midX, archPeak + 11);
-        ctx.lineTo(midX - 3.5, archPeak + 7);
+        ctx.moveTo(midX, apex - 5);
+        ctx.lineTo(midX + 4, apex + 1);
+        ctx.lineTo(midX, apex + 7);
+        ctx.lineTo(midX - 4, apex + 1);
         ctx.closePath();
         ctx.fill();
-        ctx.globalAlpha = 1;
+        ctx.restore();
 
-        // 10. Golden padlock emblem on the cell door
-        const lockY = top + (bottom - top) * 0.7 + 1.5;
-        ctx.fillStyle = 'rgba(255, 209, 59, 0.18)';
+        // 10. Golden padlock hanging at the centre of the cell door
+        const lockY = bottom - 26;
+        ctx.strokeStyle = '#6b7280';       // short chain link to the brace
+        ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.arc(midX, lockY, 9, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#12182a';
-        ctx.beginPath();
-        ctx.arc(midX, lockY, 7, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = '#ffd13b';
-        ctx.lineWidth = 1.2;
+        ctx.moveTo(midX, bottom - 42);
+        ctx.lineTo(midX, lockY - 7);
         ctx.stroke();
 
-        ctx.font = '11px system-ui';
+        ctx.save();
+        ctx.shadowColor = 'rgba(255, 209, 59, 0.85)';
+        ctx.shadowBlur = 8;
+        ctx.font = '15px system-ui, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('🔒', midX, lockY + 0.5);
+        ctx.fillText('🔒', midX, lockY);
+        ctx.restore();
 
         ctx.restore();
 
@@ -403,7 +445,7 @@ export class EnvironmentRenderer {
           ctx.lineWidth = 1.5;
           const promptW = 120;
           const promptX = cx + cage.w / 2 - promptW / 2;
-          const promptY = cy - 36 + bounceY;
+          const promptY = apex - 32 + bounceY; // clear the arch apex
 
           ctx.beginPath();
           ctx.roundRect(promptX, promptY, promptW, 24, 6);
