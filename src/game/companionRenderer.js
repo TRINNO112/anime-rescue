@@ -1,6 +1,6 @@
 import { companionSprites, drawCroppedSprite } from './spriteLoader';
 
-export function drawCompanions(ctx, activeRescues, player, cameraX, frames, isAttacking = false, nearEnemies = false) {
+export function drawCompanions(ctx, activeRescues, player, cameraX, frames, nearEnemies = false) {
   activeRescues.forEach((char, idx) => {
     // 16 frames history offset per companion in line, guarded against negative indices
     const targetIdx = Math.max(0, player.history.length - 1 - (idx + 1) * 16);
@@ -13,8 +13,8 @@ export function drawCompanions(ctx, activeRescues, player, cameraX, frames, isAt
     const compObj = companionSprites[char.id];
     if (compObj) {
       const isMoving = Math.abs(player.vx) > 0.1;
-      // Companions ONLY attack when Akari is attacking OR enemies are nearby!
-      const shouldUseAttack = Boolean(isAttacking || nearEnemies);
+      // Companions ONLY attack when an active enemy or boss is nearby!
+      const shouldUseAttack = Boolean(nearEnemies);
       
       const animList = (shouldUseAttack && compObj.attack && compObj.attack.length > 0)
         ? compObj.attack
