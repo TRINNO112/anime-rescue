@@ -697,16 +697,17 @@ function App() {
       {gameState === 'START' && (
         <div className="screen start-screen">
           <div className="title-banner">
-            <span className="retro-tag">✨ ANIME SIDE-SCROLLER RPG ✨</span>
+            <span className="retro-tag">✨ 2D ANIME ACTION RPG • 2026 EDITION ✨</span>
             <h1 className="title">AKARI'S BIRTHDAY RESCUE</h1>
-            <p className="title-sub">Fight through void shadows, shatter prison cages, and rescue your 4 anime allies!</p>
+            <span className="kanji-subtitle">「アカリの誕生日レスキュー」</span>
+            <p className="title-sub">Battle through gothic shadow realms, shatter prison sanctuaries, and rescue your 4 anime companions!</p>
           </div>
 
           <div className="hero-showcase-card">
             <div className="hero-avatar">👑</div>
             <div className="hero-details">
-              <h2>AKARI</h2>
-              <p>Weapon: Birthday Katana • HP: ❤️❤️❤️❤️❤️</p>
+              <h2>HEROINE AKARI</h2>
+              <p>Weapon: Birthday Katana • HP: ❤️❤️❤️❤️❤️ • Special: Sword Slash</p>
             </div>
             <button className="start-audio-btn" onClick={() => setIsMuted(synth.toggleMute())}>
               {isMuted ? '🔇 SOUND OFF' : '🔊 SOUND ON'}
@@ -714,13 +715,13 @@ function App() {
           </div>
 
           <div className="companion-grid-section">
-            <h2 className="section-heading">🛡️ ANIME COMPANION ROSTER</h2>
+            <h2 className="section-heading">🛡️ RECRUITABLE ANIME ALLIES</h2>
             <div className="roster-grid">
-              <div className="roster-card" style={{ borderColor: '#8ecae6' }}>
+              <div className="roster-card" style={{ borderColor: '#38bdf8' }}>
                 <div className="roster-icon">🗡️</div>
                 <div className="roster-info">
                   <h3>Muichiro Tokito</h3>
-                  <span className="power-tag" style={{ background: '#8ecae6', color: '#0f172a' }}>Air Double Jump</span>
+                  <span className="power-tag" style={{ background: '#38bdf8', color: '#0f172a' }}>Air Double Jump</span>
                 </div>
               </div>
 
@@ -740,18 +741,18 @@ function App() {
                 </div>
               </div>
 
-              <div className="roster-card" style={{ borderColor: '#219ebc' }}>
+              <div className="roster-card" style={{ borderColor: '#0ea5e9' }}>
                 <div className="roster-icon">🌊</div>
                 <div className="roster-info">
                   <h3>Giyu Tomioka</h3>
-                  <span className="power-tag" style={{ background: '#219ebc', color: '#0f172a' }}>Water Shield</span>
+                  <span className="power-tag" style={{ background: '#0ea5e9', color: '#ffffff' }}>Water Shield</span>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="controls-glass-card">
-            <h3>⚡ CONTROLS & HOW TO PLAY</h3>
+            <h3>⚡ CONTROLS & GAMEPLAY</h3>
             <div className="controls-list">
               <span><strong>[A] [D] / Left & Right Arrows</strong> : Walk Akari</span>
               <span><strong>[SPACE] / [W]</strong> : Jump (Unlocks Air Double-Jump with Muichiro!)</span>
@@ -760,7 +761,7 @@ function App() {
           </div>
 
           <button className="start-btn" onClick={resetGame}>
-            START MISSION ▶
+            PLAY MISSION ▶
           </button>
         </div>
       )}

@@ -84,8 +84,18 @@ body {
   font-size: 14px;
   font-weight: 600;
   color: #e2e8f0;
-  margin: 8px 0 0 0;
+  margin: 6px 0 0 0;
   line-height: 1.45;
+}
+
+.kanji-subtitle {
+  font-size: 13px;
+  font-weight: 800;
+  color: #f472b6;
+  letter-spacing: 2px;
+  display: block;
+  margin-top: 4px;
+  text-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
 }
 
 /* Roster Grid Section */
