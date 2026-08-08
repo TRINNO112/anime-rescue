@@ -1,30 +1,38 @@
 import { companionSprites, drawCroppedSprite } from './spriteLoader';
 
-export function drawCompanions(ctx, activeRescues, player, cameraX, frames) {
+export function drawCompanions(ctx, activeRescues, player, cameraX, frames, isAttacking = false, nearEnemies = false) {
   activeRescues.forEach((char, idx) => {
     // 16 frames history offset per companion in line, guarded against negative indices
     const targetIdx = Math.max(0, player.history.length - 1 - (idx + 1) * 16);
     const offsetHistory = player.history[targetIdx] || { x: player.x, y: player.y };
 
     const cx = offsetHistory.x - cameraX + player.width / 2;
-    const groundY = offsetHistory.y + player.height;
+    const groundY = offsetHistory.y + player.height + 2;
     let drawnSprite = false;
 
     const compObj = companionSprites[char.id];
-    if (compObj && compObj.walking && compObj.walking.length > 0) {
+    if (compObj) {
       const isMoving = Math.abs(player.vx) > 0.1;
-      const animSpeed = 5;
-      const frameIndex = isMoving ? (Math.floor(frames / animSpeed) % compObj.walking.length) : 0;
-      const img = compObj.walking[frameIndex];
+      const shouldUseAttack = isAttacking || nearEnemies || (frames + idx * 15) % 120 < 40;
+      
+      const animList = (shouldUseAttack && compObj.attack && compObj.attack.length > 0)
+        ? compObj.attack
+        : (compObj.walking && compObj.walking.length > 0 ? compObj.walking : null);
 
-      if (img) {
-        const COMPANION_HEIGHT = 58;
-        drawnSprite = drawCroppedSprite(ctx, img, cx, groundY, COMPANION_HEIGHT, player.facingLeft, compObj.flipDefault);
+      if (animList && animList.length > 0) {
+        const animSpeed = shouldUseAttack ? 4 : 5;
+        const frameIndex = (isMoving || shouldUseAttack) ? (Math.floor(frames / animSpeed) % animList.length) : 0;
+        const img = animList[frameIndex];
+
+        if (img) {
+          const COMPANION_HEIGHT = shouldUseAttack ? 68 : 60;
+          drawnSprite = drawCroppedSprite(ctx, img, cx, groundY, COMPANION_HEIGHT, player.facingLeft, compObj.flipDefault);
+        }
       }
     }
 
     if (!drawnSprite) {
-      // High-detail procedural chibi rendering for companions
+      // High-detail procedural fallback aura
       const floatY = offsetHistory.y + Math.sin((frames + idx * 20) / 8) * 4 - 8;
       const compX = offsetHistory.x - cameraX;
 
@@ -52,7 +60,6 @@ export function drawCompanions(ctx, activeRescues, player, cameraX, frames) {
 
       // Special Character Auras
       if (char.id === 'giyu') {
-        // Water aura ripples
         ctx.strokeStyle = 'rgba(14, 165, 233, 0.6)';
         ctx.lineWidth = 2;
         ctx.beginPath();

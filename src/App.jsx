@@ -602,8 +602,10 @@ function App() {
       // 6. Particles
       particleEngine.draw(ctx, cameraX);
 
-      // 7. Companions Trail
-      drawCompanions(ctx, activeRescues, player, cameraX, frames);
+      // 7. Companions Trail (With Fighting Attack Animations Triggered!)
+      const isAttacking = keysRef.current.attack;
+      const nearEnemies = enemies.some(e => e.health > 0 && Math.abs(e.x - player.x) < 160);
+      drawCompanions(ctx, activeRescues, player, cameraX, frames, isAttacking, nearEnemies);
 
       // 8. Player (Akari) - Authentic 8-Frame Katana Slash Animation (No procedural semi-circles!)
       if (player.invulnFrames % 4 < 2) {

@@ -240,12 +240,11 @@ export class EnvironmentRenderer {
       const animeChar = CHARACTERS.find(ch => ch.id === cage.charId);
 
       if (!cage.rescued) {
-        // Draw Gothic Stone Pillar Altar behind cage!
-        if (this.propPillars.complete && this.propPillars.naturalWidth !== 0) {
-          ctx.drawImage(this.propPillars, cx + cage.w / 2 - 32, cy - 20, 64, cage.h + 24);
-        }
+        // Translucent Dark Runic Sanctuary Shield Trapping Companion
+        ctx.fillStyle = 'rgba(30, 27, 75, 0.65)';
+        ctx.fillRect(cx, cy, cage.w, cage.h);
 
-        // Draw character mini preview sprite inside cage!
+        // Draw character mini preview sprite trapped inside pillar sanctuary!
         if (animeChar) {
           const compObj = companionSprites[animeChar.id];
           const list = (compObj && compObj.walking) ? compObj.walking : null;
@@ -261,21 +260,30 @@ export class EnvironmentRenderer {
           }
         }
 
-        // Metallic Gothic Dark Steel Frame
-        ctx.fillStyle = '#1e293b';
-        ctx.fillRect(cx, cy, cage.w, 6); // Top beam
-        ctx.fillRect(cx, cy + cage.h - 6, cage.w, 6); // Bottom beam
-        ctx.fillRect(cx, cy, 6, cage.h); // Left post
-        ctx.fillRect(cx + cage.w - 6, cy, 6, cage.h); // Right post
+        // Inverted Gothic Stone Pillars Gate Prison Structure!
+        if (this.propPillars.complete && this.propPillars.naturalWidth !== 0) {
+          // Left Upright Gothic Pillar
+          ctx.drawImage(this.propPillars, cx - 10, cy - 8, 22, cage.h + 14);
 
-        // Metallic Steel Vertical Bars
-        ctx.fillStyle = '#64748b';
-        for (let bx = cx + 11; bx < cx + cage.w - 8; bx += 10) {
-          ctx.fillRect(bx, cy + 5, 3, cage.h - 10);
+          // Right Upright Gothic Pillar
+          ctx.drawImage(this.propPillars, cx + cage.w - 12, cy - 8, 22, cage.h + 14);
+
+          // Inverted Gothic Pillar Top Roof Cap Arch
+          ctx.save();
+          ctx.translate(cx + cage.w / 2, cy);
+          ctx.scale(1, -1); // Vertically Inverted Pillar on top of cage roof!
+          ctx.drawImage(this.propPillars, -cage.w / 2 - 10, -18, cage.w + 20, 26);
+          ctx.restore();
+        } else {
+          // Fallback gothic frame
+          ctx.fillStyle = '#1e293b';
+          ctx.fillRect(cx - 6, cy - 6, cage.w + 12, 10);
+          ctx.fillRect(cx - 6, cy, 10, cage.h);
+          ctx.fillRect(cx + cage.w - 4, cy, 10, cage.h);
         }
 
         // Golden Padlock Icon in Center
-        ctx.font = '14px system-ui';
+        ctx.font = '16px system-ui';
         ctx.textAlign = 'center';
         ctx.fillText('🔒', cx + cage.w / 2, cy + cage.h / 2 + 5);
 
