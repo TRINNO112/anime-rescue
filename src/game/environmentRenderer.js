@@ -29,6 +29,12 @@ export class EnvironmentRenderer {
     this.bgLavaRocks = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/lava-background/PNG/middle-rocks.png');
     this.cavernsTileset = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/caverns-files-web/layers/tiles.png');
 
+    // Props: Gothic Pillars, Ancient Haunted Trees, Throwing Daggers
+    this.propPillars = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/HauntedForest/Layers/Props/pillars.png');
+    this.propTree1 = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/HauntedForest/Layers/Props/tree.png');
+    this.propTree2 = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Environments/HauntedForest/Layers/Props/tree-2.png');
+    this.propDagger = loadImg('/assets/legacy/Legacy Collection/Assets/Gothicvania/Misc/Dagger/dagger.png');
+
     // Pre-generate background stars
     this.stars = Array.from({ length: 80 }).map(() => ({
       x: Math.random() * viewWidth,
@@ -108,7 +114,7 @@ export class EnvironmentRenderer {
       }
     }
 
-    // Stage 2: Haunted Forest Parallax Overlay (Fades in around X = 1200)
+    // Stage 2: Haunted Forest Parallax & Ancient Trees Overlay (Fades in around X = 1200)
     if (cameraX > 900 && this.bgForestBack.complete && this.bgForestBack.naturalWidth !== 0) {
       const forestAlpha = Math.min(1, (cameraX - 900) / 400);
       ctx.save();
@@ -117,6 +123,24 @@ export class EnvironmentRenderer {
       const fh = this.bgForestBack.naturalHeight * 2.2;
       for (let x = -200; x < this.w + 600; x += fw) {
         ctx.drawImage(this.bgForestBack, x - (cameraX * 0.3) % fw, this.h - fh, fw, fh);
+      }
+
+      // Draw Ancient Haunted Trees in Foreground Silhouette
+      if (this.propTree1.complete && this.propTree1.naturalWidth !== 0) {
+        for (let tx = 1300; tx < 2600; tx += 450) {
+          const drawTx = tx - cameraX;
+          if (drawTx > -150 && drawTx < this.w + 150) {
+            ctx.drawImage(this.propTree1, drawTx, this.h - 260, 140, 220);
+          }
+        }
+      }
+      if (this.propTree2.complete && this.propTree2.naturalWidth !== 0) {
+        for (let tx = 1550; tx < 2600; tx += 450) {
+          const drawTx = tx - cameraX;
+          if (drawTx > -150 && drawTx < this.w + 150) {
+            ctx.drawImage(this.propTree2, drawTx, this.h - 250, 130, 210);
+          }
+        }
       }
       ctx.restore();
     }
@@ -216,6 +240,11 @@ export class EnvironmentRenderer {
       const animeChar = CHARACTERS.find(ch => ch.id === cage.charId);
 
       if (!cage.rescued) {
+        // Draw Gothic Stone Pillar Altar behind cage!
+        if (this.propPillars.complete && this.propPillars.naturalWidth !== 0) {
+          ctx.drawImage(this.propPillars, cx + cage.w / 2 - 32, cy - 20, 64, cage.h + 24);
+        }
+
         // Draw character mini preview sprite inside cage!
         if (animeChar) {
           const compObj = companionSprites[animeChar.id];
