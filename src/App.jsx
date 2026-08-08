@@ -907,19 +907,47 @@ function App() {
 
       {gameState === 'VICTORY' && (
         <div className="screen victory-screen">
-          <h1 className="victory-title">HAPPY BIRTHDAY {playerName.toUpperCase()}!</h1>
-          <p className="victory-subtitle">You rescued all your favorite anime companions and saved the kingdom!</p>
+          <div className="victory-crown">👑✨</div>
+          <h1 className="victory-title">HAPPY BIRTHDAY, AKARI!</h1>
+          <span className="victory-kanji">「聖誕祭の勝利」 — SACRED BIRTHDAY VICTORY</span>
           
-          <div className="victory-party">
-            {rescuedList.map(char => (
-              <div key={char.id} className="victory-char-card" style={{ borderColor: char.color }}>
-                <h3>{char.name}</h3>
-                <p>Abilities unlocked: {char.power}</p>
-              </div>
-            ))}
+          <div className="victory-card">
+            <p className="victory-main-message">
+              You successfully fought through the gothic void shadow realm, shattered the 4 runic prison sanctuaries, and rescued Tokito, Chuuya, Yuta, and Giyu! 
+              Together, your companions stand by your side to wish you the absolute happiest birthday and eternal glory!
+            </p>
           </div>
 
-          <button className="start-btn" onClick={resetGame}>
+          <div className="victory-companions-container">
+            <h2 className="section-heading">🎉 COMPANION BIRTHDAY BLESSINGS</h2>
+            <div className="victory-grid">
+              <div className="victory-card-item" style={{ borderColor: '#38bdf8' }}>
+                <div className="avatar-bubble">🗡️</div>
+                <h3>Muichiro Tokito</h3>
+                <p className="blessing-quote">&ldquo;I remember now... today is Akari-san&rsquo;s birthday! Let the clouds clear for you.&rdquo;</p>
+              </div>
+
+              <div className="victory-card-item" style={{ borderColor: '#fb8500' }}>
+                <div className="avatar-bubble">🍷</div>
+                <h3>Chuuya Nakahara</h3>
+                <p className="blessing-quote">&ldquo;Raise a glass! Nobody could ruin your birthday while I&rsquo;m manipulating gravity. Cheers, Akari!&rdquo;</p>
+              </div>
+
+              <div className="victory-card-item" style={{ borderColor: '#e0b1cb' }}>
+                <div className="avatar-bubble">💍</div>
+                <h3>Yuta Okkotsu</h3>
+                <p className="blessing-quote">&ldquo;Rika and I are so happy you are safe, Akari-san. Happy Birthday! We will protect you forever!&rdquo;</p>
+              </div>
+
+              <div className="victory-card-item" style={{ borderColor: '#0ea5e9' }}>
+                <div className="avatar-bubble">🌊</div>
+                <h3>Giyu Tomioka</h3>
+                <p className="blessing-quote">&ldquo;The water is calm today. No shadow beast could ruin your birthday. Congratulations, Akari.&rdquo;</p>
+              </div>
+            </div>
+          </div>
+
+          <button className="start-btn victory-restart-btn" onClick={resetGame}>
             PLAY AGAIN 🔄
           </button>
         </div>
