@@ -1,0 +1,1282 @@
+{
+  "nodes": [
+    {
+      "id": "vite_config_js",
+      "label": "vite.config.js",
+      "file_type": "code",
+      "source_file": "vite.config.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_jsx",
+      "label": "App.jsx",
+      "file_type": "code",
+      "source_file": "src\\App.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_app",
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "src\\App.jsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_main_jsx",
+      "label": "main.jsx",
+      "file_type": "code",
+      "source_file": "src\\main.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_hud_jsx",
+      "label": "HUD.jsx",
+      "file_type": "code",
+      "source_file": "src\\components\\HUD.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_hud_hud",
+      "label": "HUD()",
+      "file_type": "code",
+      "source_file": "src\\components\\HUD.jsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_components_mobilecontrols_jsx",
+      "label": "MobileControls.jsx",
+      "file_type": "code",
+      "source_file": "src\\components\\MobileControls.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_mobilecontrols_mobilecontrols",
+      "label": "MobileControls()",
+      "file_type": "code",
+      "source_file": "src\\components\\MobileControls.jsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_game_companionrenderer_js",
+      "label": "companionRenderer.js",
+      "file_type": "code",
+      "source_file": "src\\game\\companionRenderer.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "game_companionrenderer_drawcompanions",
+      "label": "drawCompanions()",
+      "file_type": "code",
+      "source_file": "src\\game\\companionRenderer.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_game_cutscenerenderer_js",
+      "label": "cutsceneRenderer.js",
+      "file_type": "code",
+      "source_file": "src\\game\\cutsceneRenderer.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "game_cutscenerenderer_drawrescuecutscene",
+      "label": "drawRescueCutscene()",
+      "file_type": "code",
+      "source_file": "src\\game\\cutsceneRenderer.js",
+      "source_location": "L26"
+    },
+    {
+      "id": "game_cutscenerenderer_isinsideokbtn",
+      "label": "isInsideOkBtn()",
+      "file_type": "code",
+      "source_file": "src\\game\\cutsceneRenderer.js",
+      "source_location": "L168"
+    },
+    {
+      "id": "src_game_environmentrenderer_js",
+      "label": "environmentRenderer.js",
+      "file_type": "code",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "game_environmentrenderer_loadimg",
+      "label": "loadImg()",
+      "file_type": "code",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "game_environmentrenderer_environmentrenderer",
+      "label": "EnvironmentRenderer",
+      "file_type": "code",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "game_environmentrenderer_environmentrenderer_constructor",
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "game_environmentrenderer_environmentrenderer_drawbackground",
+      "label": ".drawBackground()",
+      "file_type": "code",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L56"
+    },
+    {
+      "id": "game_environmentrenderer_environmentrenderer_drawplatforms",
+      "label": ".drawPlatforms()",
+      "file_type": "code",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L172"
+    },
+    {
+      "id": "game_environmentrenderer_environmentrenderer_drawcages",
+      "label": ".drawCages()",
+      "file_type": "code",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L232"
+    },
+    {
+      "id": "src_game_gameconfig_js",
+      "label": "gameConfig.js",
+      "file_type": "code",
+      "source_file": "src\\game\\gameConfig.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_game_particleengine_js",
+      "label": "particleEngine.js",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "game_particleengine_particleengine",
+      "label": "ParticleEngine",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "game_particleengine_particleengine_constructor",
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "game_particleengine_particleengine_triggershake",
+      "label": ".triggerShake()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "game_particleengine_particleengine_getshakeoffset",
+      "label": ".getShakeOffset()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L15"
+    },
+    {
+      "id": "game_particleengine_particleengine_addexplosion",
+      "label": ".addExplosion()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L24"
+    },
+    {
+      "id": "game_particleengine_particleengine_adddust",
+      "label": ".addDust()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L42"
+    },
+    {
+      "id": "game_particleengine_particleengine_addrescueenergyburst",
+      "label": ".addRescueEnergyBurst()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L58"
+    },
+    {
+      "id": "game_particleengine_particleengine_addconfettiburst",
+      "label": ".addConfettiBurst()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L76"
+    },
+    {
+      "id": "game_particleengine_particleengine_addvictoryfireworks",
+      "label": ".addVictoryFireworks()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L98"
+    },
+    {
+      "id": "game_particleengine_particleengine_update",
+      "label": ".update()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L113"
+    },
+    {
+      "id": "game_particleengine_particleengine_draw",
+      "label": ".draw()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L132"
+    },
+    {
+      "id": "src_game_soundsynth_js",
+      "label": "soundSynth.js",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "game_soundsynth_soundsynth",
+      "label": "SoundSynth",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L2"
+    },
+    {
+      "id": "game_soundsynth_soundsynth_constructor",
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "game_soundsynth_soundsynth_togglemute",
+      "label": ".toggleMute()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "game_soundsynth_soundsynth_init",
+      "label": ".init()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L13"
+    },
+    {
+      "id": "game_soundsynth_soundsynth_playsfx",
+      "label": ".playSfx()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L22"
+    },
+    {
+      "id": "game_soundsynth_soundsynth_playrescuefanfare",
+      "label": ".playRescueFanfare()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L78"
+    },
+    {
+      "id": "game_soundsynth_soundsynth_startbgm",
+      "label": ".startBgm()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L104"
+    },
+    {
+      "id": "game_soundsynth_soundsynth_stopbgm",
+      "label": ".stopBgm()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L138"
+    },
+    {
+      "id": "game_soundsynth_soundsynth_startsynthbgmloop",
+      "label": ".startSynthBgmLoop()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L154"
+    },
+    {
+      "id": "game_soundsynth_soundsynth_playbirthdaytheme",
+      "label": ".playBirthdayTheme()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L189"
+    },
+    {
+      "id": "src_game_spriteloader_js",
+      "label": "spriteLoader.js",
+      "file_type": "code",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "game_spriteloader_processimagecanvas",
+      "label": "processImageCanvas()",
+      "file_type": "code",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L2"
+    },
+    {
+      "id": "game_spriteloader_drawcroppedsprite",
+      "label": "drawCroppedSprite()",
+      "file_type": "code",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L59"
+    },
+    {
+      "id": "game_spriteloader_createimage",
+      "label": "createImage()",
+      "file_type": "code",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L93"
+    },
+    {
+      "id": "game_spriteloader_registerextraimage",
+      "label": "registerExtraImage()",
+      "file_type": "code",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L106"
+    },
+    {
+      "id": "game_spriteloader_preloadallimages",
+      "label": "preloadAllImages()",
+      "file_type": "code",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L110"
+    }
+  ],
+  "edges": [
+    {
+      "source": "vite_config_js",
+      "target": "vite",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "vite.config.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "vite_config_js",
+      "target": "plugin_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "vite.config.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "d_trinno_last_message_src_app_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "d_trinno_last_message_src_game_soundsynth",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_soundsynth_synth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "d_trinno_last_message_src_game_spriteloader",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_spriteloader_akarisprites",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_spriteloader_enemysprites",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_spriteloader_drawcroppedsprite",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_spriteloader_companionsprites",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_spriteloader_preloadallimages",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "d_trinno_last_message_src_game_gameconfig",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_gameconfig_characters",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_gameconfig_platforms",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_gameconfig_initialcages",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_gameconfig_initialenemies",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "d_trinno_last_message_src_game_companionrenderer",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_companionrenderer_drawcompanions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "d_trinno_last_message_src_game_environmentrenderer",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_environmentrenderer_environmentrenderer",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "d_trinno_last_message_src_game_particleengine",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_particleengine_particleengine",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "d_trinno_last_message_src_game_cutscenerenderer",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_cutscenerenderer_drawrescuecutscene",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "game_cutscenerenderer_isinsideokbtn",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "d_trinno_last_message_src_components_hud",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "components_hud_hud",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "d_trinno_last_message_src_components_mobilecontrols",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "components_mobilecontrols_mobilecontrols",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_jsx",
+      "target": "src_app_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.jsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_jsx",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\main.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_jsx",
+      "target": "client",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\main.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_jsx",
+      "target": "d_trinno_last_message_src_index_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\main.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_jsx",
+      "target": "d_trinno_last_message_src_app_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\main.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_hud_jsx",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\HUD.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_hud_jsx",
+      "target": "components_hud_hud",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\HUD.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mobilecontrols_jsx",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\MobileControls.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mobilecontrols_jsx",
+      "target": "components_mobilecontrols_mobilecontrols",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\MobileControls.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_companionrenderer_js",
+      "target": "d_trinno_last_message_src_game_spriteloader",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\companionRenderer.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_companionrenderer_js",
+      "target": "game_spriteloader_companionsprites",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\companionRenderer.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_companionrenderer_js",
+      "target": "game_spriteloader_drawcroppedsprite",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\companionRenderer.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_companionrenderer_js",
+      "target": "game_companionrenderer_drawcompanions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\companionRenderer.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_cutscenerenderer_js",
+      "target": "d_trinno_last_message_src_game_spriteloader",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\cutsceneRenderer.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_cutscenerenderer_js",
+      "target": "game_spriteloader_companionsprites",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\cutsceneRenderer.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_cutscenerenderer_js",
+      "target": "game_spriteloader_drawcroppedsprite",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\cutsceneRenderer.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_cutscenerenderer_js",
+      "target": "game_cutscenerenderer_drawrescuecutscene",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\cutsceneRenderer.js",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_cutscenerenderer_js",
+      "target": "game_cutscenerenderer_isinsideokbtn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\cutsceneRenderer.js",
+      "source_location": "L168",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_environmentrenderer_js",
+      "target": "d_trinno_last_message_src_game_spriteloader",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_environmentrenderer_js",
+      "target": "game_spriteloader_companionsprites",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_environmentrenderer_js",
+      "target": "game_spriteloader_drawcroppedsprite",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_environmentrenderer_js",
+      "target": "game_spriteloader_registerextraimage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_environmentrenderer_js",
+      "target": "d_trinno_last_message_src_game_gameconfig",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_environmentrenderer_js",
+      "target": "game_gameconfig_characters",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_environmentrenderer_js",
+      "target": "game_environmentrenderer_loadimg",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_environmentrenderer_js",
+      "target": "game_environmentrenderer_environmentrenderer",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "game_environmentrenderer_environmentrenderer",
+      "target": "game_environmentrenderer_environmentrenderer_constructor",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "game_environmentrenderer_environmentrenderer",
+      "target": "game_environmentrenderer_environmentrenderer_drawbackground",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "game_environmentrenderer_environmentrenderer",
+      "target": "game_environmentrenderer_environmentrenderer_drawplatforms",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "game_environmentrenderer_environmentrenderer",
+      "target": "game_environmentrenderer_environmentrenderer_drawcages",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L232",
+      "weight": 1.0
+    },
+    {
+      "source": "game_environmentrenderer_environmentrenderer_constructor",
+      "target": "game_environmentrenderer_loadimg",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_particleengine_js",
+      "target": "game_particleengine_particleengine",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_constructor",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_triggershake",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_getshakeoffset",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_addexplosion",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_adddust",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_addrescueenergyburst",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_addconfettiburst",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_addvictoryfireworks",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_update",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_draw",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_soundsynth_js",
+      "target": "game_soundsynth_soundsynth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_constructor",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_togglemute",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_playsfx",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_playrescuefanfare",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_startbgm",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_stopbgm",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L138",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_startsynthbgmloop",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L154",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_playbirthdaytheme",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L189",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth_playsfx",
+      "target": "game_soundsynth_soundsynth_init",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth_playsfx",
+      "target": "game_soundsynth_soundsynth_playrescuefanfare",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth_playrescuefanfare",
+      "target": "game_soundsynth_soundsynth_init",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L80",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth_startbgm",
+      "target": "game_soundsynth_soundsynth_init",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth_playbirthdaytheme",
+      "target": "game_soundsynth_soundsynth_init",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L191",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_spriteloader_js",
+      "target": "game_spriteloader_processimagecanvas",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_spriteloader_js",
+      "target": "game_spriteloader_drawcroppedsprite",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_spriteloader_js",
+      "target": "game_spriteloader_createimage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L93",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_spriteloader_js",
+      "target": "game_spriteloader_registerextraimage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "src_game_spriteloader_js",
+      "target": "game_spriteloader_preloadallimages",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "game_spriteloader_drawcroppedsprite",
+      "target": "game_spriteloader_processimagecanvas",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L62",
+      "weight": 1.0
+    },
+    {
+      "source": "game_spriteloader_registerextraimage",
+      "target": "game_spriteloader_createimage",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\spriteLoader.js",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "game_cutscenerenderer_drawrescuecutscene",
+      "target": "game_spriteloader_drawcroppedsprite",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\game\\cutsceneRenderer.js",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "game_environmentrenderer_loadimg",
+      "target": "game_spriteloader_registerextraimage",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\game\\environmentRenderer.js",
+      "source_location": "L5",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

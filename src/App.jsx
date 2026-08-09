@@ -19,13 +19,46 @@ function App() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    if (!isLoaded) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [isLoaded]);
+
+  useEffect(() => {
     preloadAllImages((pct) => {
-      setLoadingProgress(pct);
+      // Scale image preloading to 75% of progress bar
+      setLoadingProgress(Math.round(pct * 0.75));
     }).then(() => {
-      setTimeout(() => {
-        setIsLoaded(true);
-        window.scrollTo(0, 0);
-      }, 250);
+      if (document.fonts) {
+        setLoadingProgress(90);
+        document.fonts.ready.then(() => {
+          setLoadingProgress(100);
+          setTimeout(() => {
+            setIsLoaded(true);
+            window.scrollTo(0, 0);
+          }, 450);
+        }).catch(() => {
+          setLoadingProgress(100);
+          setTimeout(() => {
+            setIsLoaded(true);
+            window.scrollTo(0, 0);
+          }, 450);
+        });
+      } else {
+        setLoadingProgress(100);
+        setTimeout(() => {
+          setIsLoaded(true);
+          window.scrollTo(0, 0);
+        }, 450);
+      }
     });
   }, []);
 
