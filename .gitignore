@@ -50,3 +50,6 @@ rbi_project.*
 .claude/
 .used_assets.txt
 
+# Graphify Internal Caches
+.graphify_*
+
