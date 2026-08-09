@@ -86,7 +86,7 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   const textTopOffset = isSmallScreen ? 34 : 48;
   const cardH = Math.max(isSmallScreen ? 85 : 110, textTopOffset + lines.length * lineSpacing + (isSmallScreen ? 18 : 22));
   const cardX = viewW / 2 - cardW / 2;
-  const cardY = isSmallScreen ? 18 : viewH - cardH - 14;
+  const cardY = 10;
 
   // Glass Box Container
   ctx.fillStyle = 'rgba(10, 15, 30, 0.96)';
@@ -133,8 +133,8 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   }
 
   // OK Button (Bottom Right of dialogue box)
-  const btnW = isSmallScreen ? 70 : 90;
-  const btnH = isSmallScreen ? 28 : 32;
+  const btnW = isSmallScreen ? 120 : 140;
+  const btnH = isSmallScreen ? 26 : 30;
   const btnX = cardX + cardW - btnW - 12;
   const btnY = cardY + cardH - btnH - 8;
   const btnColor = char.color || '#ffd13b';
@@ -154,9 +154,9 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   ctx.fill();
 
   ctx.fillStyle = '#0b0510';
-  ctx.font = `800 ${isSmallScreen ? 12 : 14}px system-ui, sans-serif`;
+  ctx.font = `800 ${isSmallScreen ? 10 : 12}px system-ui, sans-serif`;
   ctx.textAlign = 'center';
-  ctx.fillText('OK ▶', btnX + btnW / 2, btnY + btnH / 2 + (isSmallScreen ? 4 : 5));
+  ctx.fillText('OK ▶ TAP TO CLOSE', btnX + btnW / 2, btnY + btnH / 2 + (isSmallScreen ? 3 : 4));
 
   ctx.restore();
 }

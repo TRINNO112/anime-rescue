@@ -128,11 +128,9 @@ function App() {
       }
 
       if (cutsceneRef.current.active) {
-        // Only dismiss if OK button is tapped, or X key was pressed
-        if (isInsideOkBtn(e.clientX, e.clientY, canvasRef.current)) {
-          cutsceneRef.current.active = false;
-          synth.playSfx('unlock');
-        }
+        cutsceneRef.current.active = false;
+        synth.playSfx('unlock');
+        return;
       }
     };
 
