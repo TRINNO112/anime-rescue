@@ -86,7 +86,7 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   const textTopOffset = isSmallScreen ? 34 : 48;
   const cardH = Math.max(isSmallScreen ? 85 : 110, textTopOffset + lines.length * lineSpacing + (isSmallScreen ? 18 : 22));
   const cardX = viewW / 2 - cardW / 2;
-  const cardY = 10;
+  const cardY = (viewH / 2) - (cardH / 2);
 
   // Glass Box Container
   ctx.fillStyle = 'rgba(10, 15, 30, 0.96)';
@@ -133,8 +133,8 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   }
 
   // OK Button (Bottom Right of dialogue box)
-  const btnW = isSmallScreen ? 120 : 140;
-  const btnH = isSmallScreen ? 26 : 30;
+  const btnW = isSmallScreen ? 130 : 150;
+  const btnH = isSmallScreen ? 28 : 32;
   const btnX = cardX + cardW - btnW - 12;
   const btnY = cardY + cardH - btnH - 8;
   const btnColor = char.color || '#ffd13b';
@@ -154,9 +154,9 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   ctx.fill();
 
   ctx.fillStyle = '#0b0510';
-  ctx.font = `800 ${isSmallScreen ? 10 : 12}px system-ui, sans-serif`;
+  ctx.font = `800 ${isSmallScreen ? 11 : 13}px system-ui, sans-serif`;
   ctx.textAlign = 'center';
-  ctx.fillText('OK ▶ TAP TO CLOSE', btnX + btnW / 2, btnY + btnH / 2 + (isSmallScreen ? 3 : 4));
+  ctx.fillText('OK ▶ TAP TO CLOSE', btnX + btnW / 2, btnY + btnH / 2 + (isSmallScreen ? 4 : 5));
 
   ctx.restore();
 }
@@ -167,11 +167,11 @@ export const lastOkBtnBounds = { x: 0, y: 0, w: 0, h: 0, viewW: 1000, viewH: 500
 export function isInsideOkBtn(clickX, clickY, canvasEl) {
   if (!canvasEl) return false;
   const rect = canvasEl.getBoundingClientRect();
-  // Convert page coords to canvas internal coords
   const scaleX = lastOkBtnBounds.viewW / rect.width;
   const scaleY = lastOkBtnBounds.viewH / rect.height;
   const cx = (clickX - rect.left) * scaleX;
   const cy = (clickY - rect.top) * scaleY;
   const b = lastOkBtnBounds;
-  return cx >= b.x && cx <= b.x + b.w && cy >= b.y && cy <= b.y + b.h;
+  const pad = 24; // Generous 24px touch buffer around OK button
+  return cx >= (b.x - pad) && cx <= (b.x + b.w + pad) && cy >= (b.y - pad) && cy <= (b.y + b.h + pad);
 }

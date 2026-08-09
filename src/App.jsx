@@ -128,8 +128,10 @@ function App() {
       }
 
       if (cutsceneRef.current.active) {
-        cutsceneRef.current.active = false;
-        synth.playSfx('unlock');
+        if (isInsideOkBtn(e.clientX, e.clientY, canvasRef.current)) {
+          cutsceneRef.current.active = false;
+          synth.playSfx('unlock');
+        }
         return;
       }
     };

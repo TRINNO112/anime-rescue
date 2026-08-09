@@ -106,33 +106,32 @@ export class SoundSynth {
     try {
       this.init();
       if (!this.bgmAudio) {
-        // Construct full URL using Vite base path (/anime-rescue/ on GitHub Pages)
-        const baseUrl = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) 
-          ? import.meta.env.BASE_URL 
-          : './';
-        const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-        const audioUrl = `${window.location.origin}${cleanBase}Twelve_Candles_Burning.mp3`;
+        // Resolve absolute URL for GitHub Pages /anime-rescue/ or local server
+        const loc = window.location;
+        const repoPath = loc.pathname.includes('/anime-rescue') ? '/anime-rescue/' : '/';
+        const audioUrl = `${loc.origin}${repoPath}Twelve_Candles_Burning.mp3`;
         
         this.bgmAudio = new Audio(audioUrl);
         this.bgmAudio.loop = true;
-        this.bgmAudio.volume = 0.9;
+        this.bgmAudio.volume = 1.0; // Full volume
       }
-      this.bgmAudio.play().then(() => {
-        this.bgmPlaying = true;
-      }).catch((e) => {
-        console.warn("Primary audio URL failed, attempting fallback:", e);
-        const fallback = new Audio('./Twelve_Candles_Burning.mp3');
-        fallback.loop = true;
-        fallback.volume = 0.9;
-        fallback.play().then(() => {
-          this.bgmAudio = fallback;
+      
+      const playPromise = this.bgmAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
           this.bgmPlaying = true;
-        }).catch(() => {
-          this.startSynthBgmLoop();
+        }).catch((err) => {
+          console.warn("Retrying MP3 play with direct relative path:", err);
+          this.bgmAudio = new Audio('./Twelve_Candles_Burning.mp3');
+          this.bgmAudio.loop = true;
+          this.bgmAudio.volume = 1.0;
+          this.bgmAudio.play().then(() => {
+            this.bgmPlaying = true;
+          }).catch((e) => console.error("MP3 audio play error:", e));
         });
-      });
+      }
     } catch (e) {
-      this.startSynthBgmLoop();
+      console.error("Audio init error:", e);
     }
   }
 
