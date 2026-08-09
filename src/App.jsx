@@ -35,11 +35,10 @@ function App() {
   const [showControlsModal, setShowControlsModal] = useState(true);
   const MAX_HP = 5;
 
-  // Handle victory audio theme
+  // Handle victory audio theme: STOP BGM completely and play Happy Birthday melody!
   useEffect(() => {
     if (gameState === 'VICTORY') {
       synth.stopBgm();
-      synth.startBgm();
       synth.playBirthdayTheme();
     }
   }, [gameState]);
