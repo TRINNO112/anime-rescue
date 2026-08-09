@@ -39,14 +39,9 @@ export function HUD({ currentScore, playerHp, maxHp, rescuedList, isMuted, onTog
         <div className="hud-value">{currentScore.toLocaleString()}</div>
       </div>
 
-      <div className="hud-actions" style={{ display: 'flex', gap: '8px' }}>
-        <button className="audio-toggle-btn" onClick={onToggleAudio} title="Toggle Audio Sound FX">
-          {isMuted ? '🔇 SOUND OFF' : '🔊 SOUND ON'}
-        </button>
-        <button className="audio-toggle-btn" style={{ borderColor: '#ffd13b', color: '#ffd13b' }} onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'v' }))} title="Cheat: Instant Victory">
-          ⚡ INSTANT WIN
-        </button>
-      </div>
+      <button className="audio-toggle-btn" onClick={onToggleAudio} title="Toggle Audio Sound FX">
+        {isMuted ? '🔇 SOUND OFF' : '🔊 SOUND ON'}
+      </button>
     </div>
   );
 }
