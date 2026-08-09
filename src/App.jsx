@@ -264,42 +264,15 @@ function App() {
     let cameraX = 0;
     let animId;
     let frames = 0;
-
-    let lastClickTime = 0;
-    let poseMode = null; // 'victory', 'hurt', or null
+    let poseMode = null;
     let poseTimer = 0;
-
-    const handleCanvasClick = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const clickX = ((e.clientX - rect.left) / rect.width) * VIEW_W;
-      const clickY = ((e.clientY - rect.top) / rect.height) * VIEW_H;
-
-      const akariCanvasX = player.x - cameraX;
-      if (clickX >= akariCanvasX - 25 && clickX <= akariCanvasX + player.width + 25 &&
-          clickY >= player.y - 25 && clickY <= player.y + player.height + 25) {
-        
-        const now = Date.now();
-        if (now - lastClickTime < 320) { // Double tap!
-          if (poseMode === null) {
-            poseMode = 'victory';
-            synth.playSfx('unlock');
-          } else if (poseMode === 'victory') {
-            poseMode = 'hurt';
-            synth.playSfx('hit');
-          } else {
-            poseMode = null;
-          }
-          poseTimer = 180;
-        }
-        lastClickTime = now;
-      }
-    };
-    canvas.addEventListener('pointerdown', handleCanvasClick);
 
     const takePlayerDamage = () => {
       if (player.invulnFrames > 0) return;
 
       player.invulnFrames = 60;
+      poseMode = 'hurt';
+      poseTimer = 40; // Play hurt flinch animation automatically on damage
       synth.playSfx('hit');
       particleEngine.triggerShake(16, 8);
       particleEngine.addExplosion(player.x + player.width / 2, player.y + player.height / 2, '#ef4444', 16);
