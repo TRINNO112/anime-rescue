@@ -905,25 +905,27 @@ html, body {
   width: 76px;
   height: 76px;
   border-radius: 50%;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1.5px solid rgba(192, 132, 252, 0.6);
+  background: rgba(15, 10, 32, 0.35);
+  border: 1.5px solid rgba(192, 132, 252, 0.4);
   color: #ffffff;
   font-size: 30px;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
   cursor: pointer;
-  transition: transform 0.1s ease;
+  opacity: 0.55;
+  transition: transform 0.1s ease, opacity 0.15s ease, background 0.15s ease;
 }
 
 .touch-btn:active {
-  background: rgba(168, 85, 247, 0.85);
+  opacity: 0.95;
+  background: rgba(168, 85, 247, 0.7);
   transform: scale(0.92);
 }
 
@@ -1048,18 +1050,25 @@ html, body {
   }
 
   .game-hud {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    margin-bottom: 8px;
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    right: 8px;
+    width: auto;
+    margin-bottom: 0;
     z-index: 100;
-    background: rgba(8, 5, 18, 0.78);
+    background: rgba(8, 5, 18, 0.65);
     border: 1px solid rgba(168, 85, 247, 0.4);
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: 12px;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
+    pointer-events: none;
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+
+  .game-hud button {
+    pointer-events: auto;
   }
 
   .canvas-wrapper {
