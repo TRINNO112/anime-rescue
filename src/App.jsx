@@ -35,6 +35,15 @@ function App() {
   const [showControlsModal, setShowControlsModal] = useState(true);
   const MAX_HP = 5;
 
+  // Handle victory audio theme
+  useEffect(() => {
+    if (gameState === 'VICTORY') {
+      synth.stopBgm();
+      synth.startBgm();
+      synth.playBirthdayTheme();
+    }
+  }, [gameState]);
+
   // Game control references
   const keysRef = useRef({
     left: false,
