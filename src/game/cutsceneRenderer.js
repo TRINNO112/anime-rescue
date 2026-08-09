@@ -34,6 +34,9 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   };
 
   ctx.save();
+  ctx.beginPath();
+  ctx.rect(0, 0, viewW, viewH);
+  ctx.clip();
 
   // 1. Cinematic Dim Backdrop
   ctx.fillStyle = 'rgba(7, 10, 20, 0.72)';
@@ -49,8 +52,8 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
     const animFrame = Math.floor(frames / 9) % attackList.length;
     const attackImg = attackList[animFrame];
     if (attackImg) {
-      const showcaseY = isSmallScreen ? viewH * 0.18 : viewH * 0.22;
-      drawCroppedSprite(ctx, attackImg, viewW / 2, showcaseY, isSmallScreen ? 96 : 128, false, compObj ? compObj.flipDefault : false);
+      const showcaseY = isSmallScreen ? viewH * 0.24 : viewH * 0.26;
+      drawCroppedSprite(ctx, attackImg, viewW / 2, showcaseY, isSmallScreen ? 90 : 120, false, compObj ? compObj.flipDefault : false);
     }
   }
 
