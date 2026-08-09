@@ -98,6 +98,73 @@ export class SoundSynth {
     }
   }
 
+  startBgm() {
+    if (this.bgmPlaying || this.muted) return;
+    try {
+      this.init();
+      // First check if user provided a custom bgm.mp3 in public folder
+      if (!this.bgmAudio) {
+        this.bgmAudio = new Audio('./bgm.mp3');
+        this.bgmAudio.loop = true;
+        this.bgmAudio.volume = 0.4;
+      }
+      this.bgmAudio.play().then(() => {
+        this.bgmPlaying = true;
+      }).catch(() => {
+        // Fallback to Web Audio synthesized J-RPG loop if no bgm.mp3 is found
+        this.startSynthBgmLoop();
+      });
+    } catch (e) {
+      this.startSynthBgmLoop();
+    }
+  }
+
+  stopBgm() {
+    if (this.bgmAudio) {
+      this.bgmAudio.pause();
+    }
+    if (this.synthBgmInterval) {
+      clearInterval(this.synthBgmInterval);
+      this.synthBgmInterval = null;
+    }
+    this.bgmPlaying = false;
+  }
+
+  startSynthBgmLoop() {
+    if (this.synthBgmInterval) return;
+    this.bgmPlaying = true;
+    
+    // Upbeat J-RPG Anime Chiptune Arpeggio Sequence (Key of C Major / A Minor)
+    const sequence = [
+      { note: 220.00, dur: 0.15 }, { note: 261.63, dur: 0.15 }, { note: 329.63, dur: 0.15 }, { note: 392.00, dur: 0.15 },
+      { note: 440.00, dur: 0.15 }, { note: 392.00, dur: 0.15 }, { note: 329.63, dur: 0.15 }, { note: 261.63, dur: 0.15 },
+      { note: 174.61, dur: 0.15 }, { note: 220.00, dur: 0.15 }, { note: 261.63, dur: 0.15 }, { note: 349.23, dur: 0.15 },
+      { note: 392.00, dur: 0.15 }, { note: 349.23, dur: 0.15 }, { note: 261.63, dur: 0.15 }, { note: 220.00, dur: 0.15 },
+    ];
+
+    let step = 0;
+    const playNextNote = () => {
+      if (this.muted || !this.bgmPlaying) return;
+      try {
+        const item = sequence[step % sequence.length];
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(item.note, now);
+        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.exponentialRampToValueAtTime(0.005, now + item.dur);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + item.dur);
+        step++;
+      } catch (e) {}
+    };
+
+    this.synthBgmInterval = setInterval(playNextNote, 160);
+  }
+
   playBirthdayTheme() {
     try {
       this.init();
@@ -139,3 +206,4 @@ export class SoundSynth {
 }
 
 export const synth = new SoundSynth();
+

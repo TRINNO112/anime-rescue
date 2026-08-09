@@ -794,10 +794,18 @@ function App() {
 
           <button
             className="ts-sound-btn"
-            onClick={() => setIsMuted(synth.toggleMute())}
+            onClick={() => {
+              const muted = synth.toggleMute();
+              setIsMuted(muted);
+              if (!muted) {
+                synth.startBgm();
+              } else {
+                synth.stopBgm();
+              }
+            }}
             aria-label={isMuted ? 'Unmute' : 'Mute'}
           >
-            {isMuted ? '🔇' : '🔊'}
+            {isMuted ? '🔇' : '🎵'}
           </button>
 
           <header className="ts-header">
