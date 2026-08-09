@@ -1019,76 +1019,67 @@ html, body {
   }
 
   .app-container.state-playing {
-    padding: 0 !important;
+    padding: 8px !important;
     margin: 0 !important;
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    height: calc(var(--vh, 1vh) * 100) !important;
-    overflow: hidden !important;
+    position: relative !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
     background: #000000 !important;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
   .screen.game-screen {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    height: calc(var(--vh, 1vh) * 100) !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 1000px !important;
+    height: auto !important;
     padding: 0 !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden !important;
     background: #000000 !important;
   }
 
   .game-hud {
-    position: absolute;
-    top: 6px;
-    left: 10px;
-    right: 10px;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-bottom: 8px;
     z-index: 100;
     background: rgba(8, 5, 18, 0.78);
     border: 1px solid rgba(168, 85, 247, 0.4);
-    padding: 4px 12px;
+    padding: 6px 12px;
     border-radius: 12px;
     backdrop-filter: blur(8px);
-    transform: scale(0.85);
-    transform-origin: top center;
   }
 
   .canvas-wrapper {
-    position: absolute;
-    bottom: 6px;
-    top: 6px;
-    left: 6px;
-    right: 6px;
-    width: calc(100% - 12px);
-    height: calc(100% - 12px);
-    max-width: calc(100% - 12px);
-    max-height: calc(100% - 12px);
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    aspect-ratio: 2 / 1;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    border-radius: 0;
-    border: none;
-    margin: 0;
+    border-radius: 12px;
+    border: 1.5px solid rgba(168, 85, 247, 0.4);
+    margin: 0 auto;
     overflow: hidden;
   }
 
   .canvas-wrapper canvas {
     width: 100%;
     height: 100%;
-    max-width: 100%;
-    max-height: 100%;
     object-fit: contain;
-    object-position: bottom center;
   }
 
 
