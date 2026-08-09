@@ -101,45 +101,39 @@ export class SoundSynth {
     }
   }
 
+  playSynthNote(freq, dur, type = 'sine', vol = 0.05, filterFreq = 1200) {
+    if (this.muted || !this.ctx) return;
+    const now = this.ctx.currentTime;
+    
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(filterFreq, now);
+    
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, now);
+    
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(vol, now + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+    
+    osc.connect(gain);
+    gain.connect(filter);
+    filter.connect(this.ctx.destination);
+    
+    osc.start(now);
+    osc.stop(now + dur);
+  }
+
   startBgm() {
     if (this.bgmPlaying || this.muted) return;
-    try {
-      this.init();
-      if (!this.bgmAudio) {
-        // Resolve absolute URL for GitHub Pages /anime-rescue/ or local server
-        const loc = window.location;
-        const repoPath = loc.pathname.includes('/anime-rescue') ? '/anime-rescue/' : '/';
-        const audioUrl = `${loc.origin}${repoPath}Twelve_Candles_Burning.mp3`;
-        
-        this.bgmAudio = new Audio(audioUrl);
-        this.bgmAudio.loop = true;
-        this.bgmAudio.volume = 0.5; // 50% main BGM volume as requested
-      }
-      
-      const playPromise = this.bgmAudio.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          this.bgmPlaying = true;
-        }).catch((err) => {
-          console.warn("Retrying MP3 play with direct relative path:", err);
-          this.bgmAudio = new Audio('./Twelve_Candles_Burning.mp3');
-          this.bgmAudio.loop = true;
-          this.bgmAudio.volume = 1.0;
-          this.bgmAudio.play().then(() => {
-            this.bgmPlaying = true;
-          }).catch((e) => console.error("MP3 audio play error:", e));
-        });
-      }
-    } catch (e) {
-      console.error("Audio init error:", e);
-    }
+    this.init();
+    this.startSynthBgmLoop();
   }
 
   stopBgm() {
-    if (this.bgmAudio) {
-      this.bgmAudio.pause();
-      this.bgmAudio.currentTime = 0;
-    }
     if (this.synthBgmInterval) {
       clearInterval(this.synthBgmInterval);
       this.synthBgmInterval = null;
@@ -154,36 +148,48 @@ export class SoundSynth {
   startSynthBgmLoop() {
     if (this.synthBgmInterval) return;
     this.bgmPlaying = true;
-    
-    // Gentle, Soft Anime Lullaby Melody (Sine Wave, Slow 400ms pace)
-    const sequence = [
-      { note: 329.63, dur: 0.35 }, { note: 392.00, dur: 0.35 }, { note: 440.00, dur: 0.70 },
-      { note: 392.00, dur: 0.35 }, { note: 329.63, dur: 0.35 }, { note: 261.63, dur: 0.70 },
-      { note: 293.66, dur: 0.35 }, { note: 329.63, dur: 0.35 }, { note: 392.00, dur: 0.35 }, { note: 349.23, dur: 0.35 },
-      { note: 329.63, dur: 0.70 }, { note: 261.63, dur: 0.70 }
+    this.init();
+
+    // Peaceful Pentatonic Chime Progression
+    const melody = [
+      329.63, 392.00, 440.00, 523.25,  // E5, G5, A5, C6
+      440.00, 392.00, 329.63, 293.66,  // A5, G5, E5, D5
+      329.63, 392.00, 440.00, 523.25,  // E5, G5, A5, C6
+      587.33, 523.25, 440.00, 392.00   // D6, C6, A5, G5
+    ];
+
+    const chords = [
+      [130.81, 196.00, 261.63, 329.63], // C major (C3, G3, C4, E4)
+      [110.00, 164.81, 220.00, 261.63], // A minor (A2, E3, A3, C4)
+      [87.31, 130.81, 174.61, 261.63],  // F major (F2, C3, F3, C4)
+      [98.00, 146.83, 196.00, 293.66]   // G major (G2, D3, G3, D4)
     ];
 
     let step = 0;
-    const playNextNote = () => {
+    const tick = () => {
       if (this.muted || !this.bgmPlaying) return;
       try {
-        const item = sequence[step % sequence.length];
-        const now = this.ctx.currentTime;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(item.note, now);
-        gain.gain.setValueAtTime(0.08, now);
-        gain.gain.exponentialRampToValueAtTime(0.005, now + item.dur);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start(now);
-        osc.stop(now + item.dur);
+        const mNote = melody[step % melody.length];
+        
+        // Play peaceful high chime melody
+        this.playSynthNote(mNote, 0.8, 'sine', 0.04, 1500);
+        
+        // Play warm harmony/pad chord every 4 steps (on the beat)
+        if (step % 4 === 0) {
+          const chordIdx = Math.floor(step / 4) % chords.length;
+          const chordNotes = chords[chordIdx];
+          chordNotes.forEach(note => {
+            // Very soft triangle wave for warm analog chord feel
+            this.playSynthNote(note, 2.2, 'triangle', 0.02, 600);
+          });
+        }
+        
         step++;
       } catch (e) {}
     };
 
-    this.synthBgmInterval = setInterval(playNextNote, 420);
+    tick();
+    this.synthBgmInterval = setInterval(tick, 600);
   }
 
   playBirthdayTheme() {

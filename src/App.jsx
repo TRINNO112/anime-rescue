@@ -552,6 +552,16 @@ function App() {
               cage.y + cage.h / 2, 
               animeChar ? animeChar.color : '#a855f7'
             );
+            particleEngine.addStarBurst(
+              cage.x + cage.w / 2,
+              cage.y + cage.h / 2,
+              animeChar ? animeChar.color : '#ffd13b',
+              30
+            );
+            
+            // Give 1 heart back to Akari if she lost any
+            setPlayerHp(prevHp => Math.min(MAX_HP, prevHp + 1));
+            
             setCurrentScore(s => s + 500);
 
             // Companion Combat Strike! Obliterate nearest patrol enemy with special attack burst!
@@ -649,8 +659,9 @@ function App() {
         }
       }
 
-      // Camera Scrolling & Screen Shake
-      cameraX = Math.max(0, Math.min(player.x - 300, 3200));
+      // Camera Scrolling (Smooth Lerp) & Screen Shake
+      const targetCameraX = Math.max(0, Math.min(player.x - 300, 3200));
+      cameraX += (targetCameraX - cameraX) * 0.08;
       particleEngine.update();
 
       const shake = particleEngine.getShakeOffset();

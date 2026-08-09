@@ -73,6 +73,27 @@ export class ParticleEngine {
     }
   }
 
+  addStarBurst(x, y, color, count = 25) {
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 5 + 2;
+      this.particles.push({
+        x,
+        y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 1.5,
+        color,
+        size: Math.random() * 7 + 4,
+        life: 50 + Math.random() * 20,
+        maxLife: 70,
+        shape: 'star',
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 10,
+        gravity: 0.05
+      });
+    }
+  }
+
   addConfettiBurst(x, y, count = 80) {
     const colors = ['#ffd13b', '#ff3b6b', '#8c52ff', '#00e5ff', '#ff6f9c', '#ffb347', '#4ade80', '#f472b6'];
     for (let i = 0; i < count; i++) {
@@ -154,6 +175,31 @@ export class ParticleEngine {
         ctx.fill();
         ctx.shadowColor = p.color;
         ctx.shadowBlur = 10;
+      } else if (p.shape === 'star') {
+        ctx.translate(px, py);
+        ctx.rotate((p.rotation || 0) * Math.PI / 180);
+        ctx.beginPath();
+        const spikes = 5;
+        const outerRadius = p.size;
+        const innerRadius = p.size * 0.4;
+        let rot = (Math.PI / 2) * 3;
+        const step = Math.PI / spikes;
+        ctx.moveTo(0, -outerRadius);
+        for (let i = 0; i < spikes; i++) {
+          let x = Math.cos(rot) * outerRadius;
+          let y = Math.sin(rot) * outerRadius;
+          ctx.lineTo(x, y);
+          rot += step;
+          x = Math.cos(rot) * innerRadius;
+          y = Math.sin(rot) * innerRadius;
+          ctx.lineTo(x, y);
+          rot += step;
+        }
+        ctx.lineTo(0, -outerRadius);
+        ctx.closePath();
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 8;
+        ctx.fill();
       } else {
         ctx.fillRect(px - p.size / 2, py - p.size / 2, p.size, p.size);
       }
