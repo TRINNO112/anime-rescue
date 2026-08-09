@@ -22,7 +22,10 @@ function App() {
     preloadAllImages((pct) => {
       setLoadingProgress(pct);
     }).then(() => {
-      setTimeout(() => setIsLoaded(true), 250);
+      setTimeout(() => {
+        setIsLoaded(true);
+        window.scrollTo(0, 0);
+      }, 250);
     });
   }, []);
 
@@ -739,12 +742,13 @@ function App() {
     return () => cancelAnimationFrame(animId);
   }, [gameState]);
 
-  // Immediately stop background music audio when Victory screen is active
+  // Immediately stop background music audio when Victory screen is active and reset scroll
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (gameState === 'VICTORY') {
       synth.stopBgm();
     }
-  }, [gameState]);
+  }, [gameState, isLoaded]);
 
   return (
     <div className={`app-container state-${gameState.toLowerCase()}`}>
