@@ -75,6 +75,12 @@ function App() {
         e.preventDefault();
       }
 
+      if (e.key === 'v' || e.key === 'V') {
+        synth.playBirthdayTheme();
+        setGameState('VICTORY');
+        return;
+      }
+
       if (e.key === 'f' || e.key === 'F') {
         toggleFullscreen();
         return;
