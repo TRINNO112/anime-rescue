@@ -6,7 +6,7 @@ export function HUD({ currentScore, playerHp, maxHp, rescuedList, isMuted, onTog
   for (let i = 0; i < maxHp; i++) {
     hearts.push(
       <span key={i} className={`hp-heart ${i < playerHp ? 'active' : 'empty'}`}>
-        {i < playerHp ? '❤️' : '🖤'}
+        ❤️
       </span>
     );
   }

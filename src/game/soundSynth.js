@@ -19,6 +19,17 @@ export class SoundSynth {
     }
   }
 
+  createNoiseBuffer() {
+    if (!this.ctx) return null;
+    const bufferSize = this.ctx.sampleRate * 0.18;
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    return buffer;
+  }
+
   playSfx(type) {
     if (this.muted) return;
     try {
@@ -26,7 +37,6 @@ export class SoundSynth {
       const now = this.ctx.currentTime;
 
       if (type === 'jump') {
-        // Classic Arcade Boing Jump (Rising Sine Sweep)
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'sine';
@@ -40,7 +50,6 @@ export class SoundSynth {
         osc.stop(now + 0.16);
       } 
       else if (type === 'shoot' || type === 'attack') {
-        // Katana Sword Energy Slash (High Frequency White Noise Whip + Square Slash)
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'sawtooth';
@@ -53,20 +62,80 @@ export class SoundSynth {
         osc.start(now);
         osc.stop(now + 0.1);
       } 
+      else if (type === 'sword') {
+        // High-quality sword swoosh with high-pass filtered noise + metal ping
+        const nBuffer = this.createNoiseBuffer();
+        if (nBuffer) {
+          const noise = this.ctx.createBufferSource();
+          noise.buffer = nBuffer;
+          const filter = this.ctx.createBiquadFilter();
+          filter.type = 'highpass';
+          filter.frequency.setValueAtTime(1500, now);
+          filter.frequency.exponentialRampToValueAtTime(8000, now + 0.14);
+          const noiseGain = this.ctx.createGain();
+          noiseGain.gain.setValueAtTime(0.25, now);
+          noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+          noise.connect(filter);
+          filter.connect(noiseGain);
+          noiseGain.connect(this.ctx.destination);
+          noise.start(now);
+        }
+
+        const osc = this.ctx.createOscillator();
+        const oscGain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(700, now);
+        osc.frequency.exponentialRampToValueAtTime(150, now + 0.14);
+        oscGain.gain.setValueAtTime(0.12, now);
+        oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        osc.connect(oscGain);
+        oscGain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.14);
+      }
       else if (type === 'hit') {
-        // Deep Impact Enemy Hit Crunch (Heavy Bass Noise Drop)
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'square';
         osc.frequency.setValueAtTime(160, now);
         osc.frequency.exponentialRampToValueAtTime(30, now + 0.22);
-        gain.gain.setValueAtTime(0.5, now);
+        gain.gain.setValueAtTime(0.4, now);
         gain.gain.exponentialRampToValueAtTime(0.01, now + 0.22);
         osc.connect(gain);
         gain.connect(this.ctx.destination);
         osc.start(now);
         osc.stop(now + 0.22);
       } 
+      else if (type === 'bossHit') {
+        // Exploding heavy hit rumble for boss / cage breaking
+        const nBuffer = this.createNoiseBuffer();
+        if (nBuffer) {
+          const noise = this.ctx.createBufferSource();
+          noise.buffer = nBuffer;
+          const filter = this.ctx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(400, now);
+          const noiseGain = this.ctx.createGain();
+          noiseGain.gain.setValueAtTime(0.5, now);
+          noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          noise.connect(filter);
+          filter.connect(noiseGain);
+          noiseGain.connect(this.ctx.destination);
+          noise.start(now);
+        }
+
+        const osc = this.ctx.createOscillator();
+        const oscGain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(140, now);
+        osc.frequency.linearRampToValueAtTime(35, now + 0.25);
+        oscGain.gain.setValueAtTime(0.35, now);
+        oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.connect(oscGain);
+        oscGain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      }
       else if (type === 'unlock') {
         this.playRescueFanfare();
       }
