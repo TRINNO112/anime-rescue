@@ -116,6 +116,12 @@ function App() {
     };
 
     const handlePointerDown = (e) => {
+      // Auto-unlock Web Audio on first user interaction to bypass browser autoplay restrictions
+      synth.init();
+      if (!isMuted && !synth.bgmPlaying) {
+        synth.startBgm();
+      }
+
       if (cutsceneRef.current.active) {
         // Only dismiss if OK button is tapped, or X key was pressed
         if (isInsideOkBtn(e.clientX, e.clientY, canvasRef.current)) {
