@@ -144,6 +144,10 @@ export class SoundSynth {
       clearInterval(this.synthBgmInterval);
       this.synthBgmInterval = null;
     }
+    if (this.birthdayInterval) {
+      clearInterval(this.birthdayInterval);
+      this.birthdayInterval = null;
+    }
     this.bgmPlaying = false;
   }
 
@@ -185,37 +189,37 @@ export class SoundSynth {
   playBirthdayTheme() {
     try {
       this.init();
-      const now = this.ctx.currentTime;
-      const melody = [
-        { note: 261.63, dur: 0.3 },
-        { note: 261.63, dur: 0.15 },
-        { note: 293.66, dur: 0.45 },
-        { note: 261.63, dur: 0.45 },
-        { note: 349.23, dur: 0.45 },
-        { note: 329.63, dur: 0.9 },
-        { note: 261.63, dur: 0.3 },
-        { note: 261.63, dur: 0.15 },
-        { note: 293.66, dur: 0.45 },
-        { note: 261.63, dur: 0.45 },
-        { note: 392.00, dur: 0.45 },
-        { note: 349.23, dur: 0.9 },
-      ];
+      if (this.birthdayInterval) clearInterval(this.birthdayInterval);
 
-      let elapsed = 0;
-      melody.forEach((item) => {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(item.note, now + elapsed);
-        gain.gain.setValueAtTime(0, now + elapsed);
-        gain.gain.linearRampToValueAtTime(0.1, now + elapsed + 0.03);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + elapsed + item.dur);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start(now + elapsed);
-        osc.stop(now + elapsed + item.dur);
-        elapsed += item.dur + 0.05;
-      });
+      const playMelody = () => {
+        if (this.muted) return;
+        const now = this.ctx.currentTime;
+        const melody = [
+          { note: 261.63, dur: 0.35 }, { note: 261.63, dur: 0.20 }, { note: 293.66, dur: 0.50 }, { note: 261.63, dur: 0.50 }, { note: 349.23, dur: 0.50 }, { note: 329.63, dur: 0.90 },
+          { note: 261.63, dur: 0.35 }, { note: 261.63, dur: 0.20 }, { note: 293.66, dur: 0.50 }, { note: 261.63, dur: 0.50 }, { note: 392.00, dur: 0.50 }, { note: 349.23, dur: 0.90 },
+          { note: 261.63, dur: 0.35 }, { note: 261.63, dur: 0.20 }, { note: 523.25, dur: 0.50 }, { note: 440.00, dur: 0.50 }, { note: 349.23, dur: 0.50 }, { note: 329.63, dur: 0.50 }, { note: 293.66, dur: 0.90 },
+          { note: 466.16, dur: 0.35 }, { note: 466.16, dur: 0.20 }, { note: 440.00, dur: 0.50 }, { note: 349.23, dur: 0.50 }, { note: 392.00, dur: 0.50 }, { note: 349.23, dur: 1.10 }
+        ];
+
+        let elapsed = 0;
+        melody.forEach((item) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(item.note, now + elapsed);
+          gain.gain.setValueAtTime(0, now + elapsed);
+          gain.gain.linearRampToValueAtTime(0.14, now + elapsed + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.005, now + elapsed + item.dur);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now + elapsed);
+          osc.stop(now + elapsed + item.dur);
+          elapsed += item.dur + 0.06;
+        });
+      };
+
+      playMelody();
+      this.birthdayInterval = setInterval(playMelody, 8800);
     } catch (e) {
       console.warn("Failed to play victory birthday melody", e);
     }
