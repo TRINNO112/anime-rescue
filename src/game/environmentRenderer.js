@@ -101,11 +101,11 @@ export class EnvironmentRenderer {
       }
     }
 
-    // 5. Stage 1: Town Architecture - Anchored Flat to Canvas Bottom (+70px) to prevent house floating!
+    // 5. Stage 1: Town Architecture - Elevated above ground floor tiles so homes and roofs stand tall!
     if (this.bgTown.complete && this.bgTown.naturalWidth !== 0) {
       const w = this.bgTown.naturalWidth * 2;
       const h = this.bgTown.naturalHeight * 2;
-      const y = this.h - h + 70; // Solidly anchored to bottom horizon
+      const y = 425 - h; // Elevated to sit directly on top of the ground floor horizon (y = 410)
       for (let x = -200; x < this.w + 600; x += w) {
         const drawX = x - (cameraX * 0.4) % w;
         ctx.drawImage(this.bgTown, drawX, y, w, h);
@@ -177,6 +177,10 @@ export class EnvironmentRenderer {
       if (px + plat.w < -50 || px > this.w + 50) return;
 
       ctx.save();
+
+      // Solid dark backing for solid ground floor
+      ctx.fillStyle = '#100c24';
+      ctx.fillRect(px, plat.y, plat.w, plat.h);
 
       // Multi-piece 9-slice Gothicvania Castle Tilemap Renderer (16x16 tile grid)
       if (this.castleTileset.complete && this.castleTileset.naturalWidth !== 0) {
