@@ -1,0 +1,499 @@
+{
+  "nodes": [
+    {
+      "id": "hero_hero_sprite_asset",
+      "label": "hero.png Pixel-Art Character Asset",
+      "file_type": "image",
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hero_palette_indexed_png",
+      "label": "Palette-Indexed PNG (343x361, mode P)",
+      "file_type": "rationale",
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hero_limited_palette_art_direction",
+      "label": "Limited Dark Blue-Gray Palette Art Direction",
+      "file_type": "rationale",
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hero_akari_protagonist",
+      "label": "Akari (Player Protagonist)",
+      "file_type": "rationale",
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hero_unreferenced_asset",
+      "label": "Asset Not Referenced By Filename In Source",
+      "file_type": "rationale",
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "s1_gameplay_screenshot_a",
+      "label": "s1.png Gameplay Screenshot A (1280x1000)",
+      "file_type": "image",
+      "source_file": "s1.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "s2_gameplay_screenshot_b",
+      "label": "s2.png Gameplay Screenshot B (1280x1000)",
+      "file_type": "image",
+      "source_file": "s2.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "s1_canvas_capture_1280x1000",
+      "label": "1280x1000 Canvas Frame Capture",
+      "file_type": "rationale",
+      "source_file": "s1.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "s1_pixel_art_scene_composition",
+      "label": "Dark Pixel-Art Scene Composition",
+      "file_type": "rationale",
+      "source_file": "s1.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "s2_paired_reference_screenshots",
+      "label": "Paired Before/After Reference Screenshots",
+      "file_type": "rationale",
+      "source_file": "s2.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "s2_sprite_preview_workflow",
+      "label": "Sprite Preview / Visual QA Workflow",
+      "file_type": "rationale",
+      "source_file": "s2.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "761909750_personal_photograph",
+      "label": "Personal Photograph (720x338 JPEG)",
+      "file_type": "image",
+      "source_file": "761909750_1621372159641915_6465272321453475866_n.jpg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "761909750_meta_cdn_filename_convention",
+      "label": "Meta/Facebook CDN Filename Convention",
+      "file_type": "rationale",
+      "source_file": "761909750_1621372159641915_6465272321453475866_n.jpg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "761909750_birthday_dedication_theme",
+      "label": "Birthday Dedication / Personal Gift Theme",
+      "file_type": "rationale",
+      "source_file": "761909750_1621372159641915_6465272321453475866_n.jpg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hero_sprite_loader_pipeline",
+      "label": "spriteLoader Alpha-Key + Tight Crop Pipeline",
+      "file_type": "rationale",
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "s1_companion_cage_scene",
+      "label": "Caged Companion Environment Scene",
+      "file_type": "rationale",
+      "source_file": "s1.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "s1_repo_root_showcase_artifact",
+      "label": "Repo-Root Showcase / README Artifact",
+      "file_type": "rationale",
+      "source_file": "s1.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "hero_hero_sprite_asset",
+      "target": "hero_palette_indexed_png",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hero_palette_indexed_png",
+      "target": "hero_limited_palette_art_direction",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hero_hero_sprite_asset",
+      "target": "hero_akari_protagonist",
+      "relation": "references",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.3,
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hero_hero_sprite_asset",
+      "target": "hero_unreferenced_asset",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hero_hero_sprite_asset",
+      "target": "hero_sprite_loader_pipeline",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.55,
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s1_gameplay_screenshot_a",
+      "target": "s1_canvas_capture_1280x1000",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "s1.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s2_gameplay_screenshot_b",
+      "target": "s1_canvas_capture_1280x1000",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "s2.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s1_gameplay_screenshot_a",
+      "target": "s2_gameplay_screenshot_b",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "s1.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s1_gameplay_screenshot_a",
+      "target": "s1_pixel_art_scene_composition",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "s1.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s2_gameplay_screenshot_b",
+      "target": "s1_pixel_art_scene_composition",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "s2.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s2_gameplay_screenshot_b",
+      "target": "s2_paired_reference_screenshots",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "s2.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s1_gameplay_screenshot_a",
+      "target": "s2_paired_reference_screenshots",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "s1.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s2_paired_reference_screenshots",
+      "target": "s2_sprite_preview_workflow",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "s2.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s1_gameplay_screenshot_a",
+      "target": "s1_companion_cage_scene",
+      "relation": "references",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.25,
+      "source_file": "s1.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s1_gameplay_screenshot_a",
+      "target": "s1_repo_root_showcase_artifact",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "s1.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s2_gameplay_screenshot_b",
+      "target": "s1_repo_root_showcase_artifact",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "s2.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "761909750_personal_photograph",
+      "target": "761909750_meta_cdn_filename_convention",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "761909750_1621372159641915_6465272321453475866_n.jpg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "761909750_personal_photograph",
+      "target": "761909750_birthday_dedication_theme",
+      "relation": "references",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.3,
+      "source_file": "761909750_1621372159641915_6465272321453475866_n.jpg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "761909750_personal_photograph",
+      "target": "s1_repo_root_showcase_artifact",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "761909750_1621372159641915_6465272321453475866_n.jpg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "761909750_personal_photograph",
+      "target": "hero_unreferenced_asset",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "761909750_1621372159641915_6465272321453475866_n.jpg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hero_limited_palette_art_direction",
+      "target": "s1_pixel_art_scene_composition",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hero_akari_protagonist",
+      "target": "s1_companion_cage_scene",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "s1.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hero_sprite_loader_pipeline",
+      "target": "s2_sprite_preview_workflow",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "s1_repo_root_showcase_artifact",
+      "target": "hero_unreferenced_asset",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "s1.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "761909750_birthday_dedication_theme",
+      "target": "s2_sprite_preview_workflow",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.15,
+      "source_file": "761909750_1621372159641915_6465272321453475866_n.jpg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hero_hero_sprite_asset",
+      "target": "s1_gameplay_screenshot_a",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "src/assets/hero.png",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "unreferenced_media_artifacts",
+      "label": "Unreferenced Media Artifacts At Repo Root / Assets",
+      "nodes": [
+        "hero_hero_sprite_asset",
+        "s1_gameplay_screenshot_a",
+        "s2_gameplay_screenshot_b",
+        "761909750_personal_photograph"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "s1.png"
+    },
+    {
+      "id": "pixel_art_visual_language",
+      "label": "Shared Dark Pixel-Art Visual Language",
+      "nodes": [
+        "hero_limited_palette_art_direction",
+        "s1_pixel_art_scene_composition",
+        "s1_gameplay_screenshot_a",
+        "s2_gameplay_screenshot_b"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "s1.png"
+    },
+    {
+      "id": "asset_authoring_feedback_loop",
+      "label": "Sprite Asset Authoring And Visual QA Feedback Loop",
+      "nodes": [
+        "hero_hero_sprite_asset",
+        "hero_sprite_loader_pipeline",
+        "s2_sprite_preview_workflow",
+        "s2_paired_reference_screenshots"
+      ],
+      "relation": "implement",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "src/assets/hero.png"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
