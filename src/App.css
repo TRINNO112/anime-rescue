@@ -1543,13 +1543,13 @@ body {
    START SCREEN TITLE SLAM — anime impact effect
    ========================================================================== */
 .ts-title-slam {
-  animation: tsTitleSlam 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 0.25s;
+  animation: tsTitleSlam 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.55s;
 }
 
 @keyframes tsTitleSlam {
-  0%   { opacity: 0; transform: scale(1.8) translateY(-10px); }
-  50%  { opacity: 1; transform: scale(0.96) translateY(2px); }
+  0%   { opacity: 0; transform: scale(1.6) translateY(-14px); }
+  60%  { opacity: 1; transform: scale(0.97) translateY(2px); }
   100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
@@ -1558,15 +1558,15 @@ body {
   position: absolute;
   inset: -50%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 59, 107, 0.45) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(255, 59, 107, 0.55) 0%, transparent 65%);
   opacity: 0;
-  animation: tsFlashPop 0.8s ease-out 0.25s both;
+  animation: tsFlashPop 0.75s ease-out 0.55s both;
   pointer-events: none;
   z-index: -1;
 }
 
 @keyframes tsFlashPop {
-  0%   { opacity: 0; transform: scale(0.3); }
-  20%  { opacity: 1; transform: scale(1.2); }
-  100% { opacity: 0; transform: scale(1.8); }
+  0%   { opacity: 0; transform: scale(0.2); }
+  25%  { opacity: 1; transform: scale(1.3); }
+  100% { opacity: 0; transform: scale(2.0); }
 }

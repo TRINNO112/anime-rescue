@@ -834,7 +834,7 @@ function App() {
             <h1 className="ts-title" style={{ position: 'relative' }}>
               <div className="ts-title-flash" aria-hidden="true" />
               <span className="ts-title-top ts-fade-in" style={{ '--i': 1 }}>AKARI&rsquo;S</span>
-              <span className="ts-title-main ts-title-slam ts-fade-in" data-text="BIRTHDAY RESCUE" style={{ '--i': 2 }}>BIRTHDAY RESCUE</span>
+              <span className="ts-title-main ts-title-slam" data-text="BIRTHDAY RESCUE">BIRTHDAY RESCUE</span>
             </h1>
             <p className="ts-tagline ts-typewriter">Four allies. One night. Bring them all home.</p>
           </header>
