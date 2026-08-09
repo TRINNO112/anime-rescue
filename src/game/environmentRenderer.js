@@ -101,11 +101,11 @@ export class EnvironmentRenderer {
       }
     }
 
-    // 5. Stage 1: Town Architecture - Elevated above ground floor tiles so homes and roofs stand tall!
+    // 5. Stage 1: Town Architecture - Lowered to sit comfortably at the horizon
     if (this.bgTown.complete && this.bgTown.naturalWidth !== 0) {
       const w = this.bgTown.naturalWidth * 2;
       const h = this.bgTown.naturalHeight * 2;
-      const y = 425 - h; // Elevated to sit directly on top of the ground floor horizon (y = 410)
+      const y = 465 - h; // Lowered houses by ~40px so roofs and windows sit at the perfect horizon height
       for (let x = -200; x < this.w + 600; x += w) {
         const drawX = x - (cameraX * 0.4) % w;
         ctx.drawImage(this.bgTown, drawX, y, w, h);
