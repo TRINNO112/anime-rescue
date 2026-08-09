@@ -267,6 +267,32 @@ function App() {
     let poseMode = null;
     let poseTimer = 0;
 
+    let lastClickTime = 0;
+    const handleCanvasClick = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = ((e.clientX - rect.left) / rect.width) * VIEW_W;
+      const clickY = ((e.clientY - rect.top) / rect.height) * VIEW_H;
+
+      const akariCanvasX = player.x - cameraX;
+      if (clickX >= akariCanvasX - 25 && clickX <= akariCanvasX + player.width + 25 &&
+          clickY >= player.y - 25 && clickY <= player.y + player.height + 25) {
+        
+        const now = Date.now();
+        if (now - lastClickTime < 320) { // Double tap easter egg!
+          if (poseMode !== 'victory') {
+            poseMode = 'victory';
+            synth.playSfx('unlock');
+            particleEngine.addExplosion(player.x + player.width / 2, player.y + player.height / 2, '#ffd13b', 12);
+          } else {
+            poseMode = null;
+          }
+          poseTimer = 180;
+        }
+        lastClickTime = now;
+      }
+    };
+    canvas.addEventListener('pointerdown', handleCanvasClick);
+
     const takePlayerDamage = () => {
       if (player.invulnFrames > 0) return;
 
