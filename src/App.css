@@ -1159,18 +1159,19 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 72px;
-  height: 72px;
+  width: 110px;
+  height: 110px;
 }
 
 .ld-kanji {
   font-family: 'Yuji Syuku', serif;
-  font-size: 26px;
-  letter-spacing: 0.62em;
-  text-indent: 0.62em;
-  color: rgba(255, 255, 255, 0.45);
+  font-size: 22px;
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;
+  color: rgba(255, 255, 255, 0.85);
   position: relative;
   z-index: 1;
+  text-shadow: 0 0 16px rgba(255, 59, 107, 0.7);
 }
 
 .ld-title {
@@ -1301,12 +1302,12 @@ html, body {
 /* Spinning orbit ring around the kanji */
 .ld-ring {
   position: absolute;
-  width: 72px;
-  height: 72px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
-  border: 1.5px solid transparent;
-  border-top-color: rgba(255, 59, 107, 0.7);
-  border-right-color: rgba(140, 82, 255, 0.4);
+  border: 2px solid transparent;
+  border-top-color: rgba(255, 59, 107, 0.85);
+  border-right-color: rgba(140, 82, 255, 0.6);
   animation: ldRingSpin 2.2s linear infinite;
   pointer-events: none;
 }
@@ -1476,17 +1477,26 @@ html, body {
 }
 
 .vc-note {
-  max-width: 46ch;
-  margin: 0;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.75;
-  color: #d6cfe4;
+  max-width: 52ch;
+  margin: 12px 0;
+  padding: 16px 24px;
+  background: rgba(255, 209, 59, 0.06);
+  border: 1.5px solid rgba(255, 209, 59, 0.4);
+  border-radius: 16px;
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: clamp(18px, 3.2vw, 24px);
+  font-weight: 700;
+  line-height: 1.55;
+  color: #fff4d0;
+  text-shadow: 0 0 12px rgba(255, 209, 59, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 209, 59, 0.1);
 }
 
 .vc-note strong {
-  font-weight: 600;
-  color: var(--gold);
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 900;
+  color: #ff3b6b;
+  font-size: 0.9em;
 }
 
 /* --- Ally wishes -------------------------------------------------------- */
