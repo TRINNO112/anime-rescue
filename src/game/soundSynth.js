@@ -106,20 +106,24 @@ export class SoundSynth {
     try {
       this.init();
       if (!this.bgmAudio) {
-        // Try direct relative asset URL
-        const basePath = window.location.pathname.replace(/index\.html$/, '');
-        const fullUrl = new URL('Twelve_Candles_Burning.mp3', window.location.origin + basePath).href;
-        this.bgmAudio = new Audio(fullUrl);
+        // Construct full URL using Vite base path (/anime-rescue/ on GitHub Pages)
+        const baseUrl = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) 
+          ? import.meta.env.BASE_URL 
+          : './';
+        const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+        const audioUrl = `${window.location.origin}${cleanBase}Twelve_Candles_Burning.mp3`;
+        
+        this.bgmAudio = new Audio(audioUrl);
         this.bgmAudio.loop = true;
-        this.bgmAudio.volume = 0.85;
+        this.bgmAudio.volume = 0.9;
       }
       this.bgmAudio.play().then(() => {
         this.bgmPlaying = true;
       }).catch((e) => {
-        console.warn("Primary audio path failed, trying fallback:", e);
+        console.warn("Primary audio URL failed, attempting fallback:", e);
         const fallback = new Audio('./Twelve_Candles_Burning.mp3');
         fallback.loop = true;
-        fallback.volume = 0.85;
+        fallback.volume = 0.9;
         fallback.play().then(() => {
           this.bgmAudio = fallback;
           this.bgmPlaying = true;
