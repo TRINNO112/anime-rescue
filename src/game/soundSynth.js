@@ -113,7 +113,7 @@ export class SoundSynth {
         
         this.bgmAudio = new Audio(audioUrl);
         this.bgmAudio.loop = true;
-        this.bgmAudio.volume = 1.0; // Full volume
+        this.bgmAudio.volume = 0.5; // 50% main BGM volume as requested
       }
       
       const playPromise = this.bgmAudio.play();
@@ -208,12 +208,26 @@ export class SoundSynth {
           osc.type = 'triangle';
           osc.frequency.setValueAtTime(item.note, now + elapsed);
           gain.gain.setValueAtTime(0, now + elapsed);
-          gain.gain.linearRampToValueAtTime(0.14, now + elapsed + 0.03);
-          gain.gain.exponentialRampToValueAtTime(0.005, now + elapsed + item.dur);
+          gain.gain.linearRampToValueAtTime(0.35, now + elapsed + 0.03); // Double volume gain boost!
+          gain.gain.exponentialRampToValueAtTime(0.01, now + elapsed + item.dur);
           osc.connect(gain);
           gain.connect(this.ctx.destination);
           osc.start(now + elapsed);
           osc.stop(now + elapsed + item.dur);
+
+          // Secondary Harmony Oscillator for double rich volume sound
+          const oscHarm = this.ctx.createOscillator();
+          const gainHarm = this.ctx.createGain();
+          oscHarm.type = 'sine';
+          oscHarm.frequency.setValueAtTime(item.note * 0.5, now + elapsed);
+          gainHarm.gain.setValueAtTime(0, now + elapsed);
+          gainHarm.gain.linearRampToValueAtTime(0.25, now + elapsed + 0.03);
+          gainHarm.gain.exponentialRampToValueAtTime(0.01, now + elapsed + item.dur);
+          oscHarm.connect(gainHarm);
+          gainHarm.connect(this.ctx.destination);
+          oscHarm.start(now + elapsed);
+          oscHarm.stop(now + elapsed + item.dur);
+
           elapsed += item.dur + 0.06;
         });
       };
