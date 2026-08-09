@@ -105,17 +105,25 @@ export class SoundSynth {
     if (this.bgmPlaying || this.muted) return;
     try {
       this.init();
-      // First check if user provided a custom bgm.mp3 in public folder
       if (!this.bgmAudio) {
-        this.bgmAudio = new Audio('./bgm.mp3');
+        // Try Twelve_Candles_Burning.mp3 first, fallback to bgm.mp3
+        this.bgmAudio = new Audio('./Twelve_Candles_Burning.mp3');
         this.bgmAudio.loop = true;
-        this.bgmAudio.volume = 0.4;
+        this.bgmAudio.volume = 0.5;
       }
       this.bgmAudio.play().then(() => {
         this.bgmPlaying = true;
       }).catch(() => {
-        // Fallback to Web Audio synthesized J-RPG loop if no bgm.mp3 is found
-        this.startSynthBgmLoop();
+        // Fallback to bgm.mp3 or Web Audio synthesized loop
+        const fallbackAudio = new Audio('./bgm.mp3');
+        fallbackAudio.loop = true;
+        fallbackAudio.volume = 0.5;
+        fallbackAudio.play().then(() => {
+          this.bgmAudio = fallbackAudio;
+          this.bgmPlaying = true;
+        }).catch(() => {
+          this.startSynthBgmLoop();
+        });
       });
     } catch (e) {
       this.startSynthBgmLoop();
