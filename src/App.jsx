@@ -19,6 +19,20 @@ function App() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    const handleResize = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!isLoaded || gameState === 'PLAYING') {
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
