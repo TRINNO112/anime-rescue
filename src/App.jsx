@@ -35,11 +35,16 @@ function App() {
   const [showControlsModal, setShowControlsModal] = useState(true);
   const MAX_HP = 5;
 
-  // Handle victory audio theme: STOP BGM completely and play Happy Birthday melody!
+  // Handle victory audio theme: Loop Twelve Candles Burning MP3 continuously!
   useEffect(() => {
     if (gameState === 'VICTORY') {
-      synth.stopBgm();
-      synth.playBirthdayTheme();
+      if (synth.bgmAudio) {
+        synth.bgmAudio.currentTime = 0;
+        synth.bgmAudio.loop = true;
+        synth.bgmAudio.play().catch(() => {});
+      } else {
+        synth.startBgm();
+      }
     }
   }, [gameState]);
 
