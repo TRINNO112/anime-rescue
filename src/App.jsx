@@ -573,6 +573,9 @@ function App() {
               
               if (boss.health <= 0) {
                 particleEngine.addExplosion(boss.x + boss.width / 2, boss.y + boss.height / 2, '#ffd13b', 50);
+                particleEngine.addConfettiBurst(boss.x + boss.width / 2, boss.y + boss.height / 2, 120);
+                particleEngine.addVictoryFireworks(VIEW_W, VIEW_H);
+                particleEngine.triggerShake(30, 10);
                 setCurrentScore(s => s + 5000);
                 synth.playBirthdayTheme();
                 setTimeout(() => setGameState('VICTORY'), 2000);
@@ -739,11 +742,14 @@ function App() {
             ))}
           </div>
           <div className="ld-core">
-            <span className="ld-kanji">
-              {'誕生日'.split('').map((ch, i) => (
-                <span key={i} className="ld-kanji-ch" style={{ '--ki': i }}>{ch}</span>
-              ))}
-            </span>
+            <div className="ld-kanji-wrap">
+              <div className="ld-ring" aria-hidden="true" />
+              <span className="ld-kanji">
+                {'誕生日'.split('').map((ch, i) => (
+                  <span key={i} className="ld-kanji-ch" style={{ '--ki': i }}>{ch}</span>
+                ))}
+              </span>
+            </div>
             <h1 className="ld-title">
               <span className="ld-title-sm">AKARI&rsquo;S</span>
               <span className="ld-title-lg">BIRTHDAY RESCUE</span>
@@ -796,9 +802,10 @@ function App() {
 
           <header className="ts-header">
             <span className="ts-eyebrow ts-fade-in" style={{ '--i': 0 }}>◆ Chapter One ◆</span>
-            <h1 className="ts-title">
+            <h1 className="ts-title" style={{ position: 'relative' }}>
+              <div className="ts-title-flash" aria-hidden="true" />
               <span className="ts-title-top ts-fade-in" style={{ '--i': 1 }}>AKARI&rsquo;S</span>
-              <span className="ts-title-main ts-fade-in" data-text="BIRTHDAY RESCUE" style={{ '--i': 2 }}>BIRTHDAY RESCUE</span>
+              <span className="ts-title-main ts-title-slam ts-fade-in" data-text="BIRTHDAY RESCUE" style={{ '--i': 2 }}>BIRTHDAY RESCUE</span>
             </h1>
             <p className="ts-tagline ts-typewriter">Four allies. One night. Bring them all home.</p>
           </header>
@@ -903,22 +910,39 @@ function App() {
             <span>✦</span><span>✧</span><span>❀</span><span>✦</span>
             <span>✧</span><span>✿</span><span>✦</span><span>✧</span>
           </div>
+          <div className="vc-confetti" aria-hidden="true">
+            {Array.from({ length: 30 }).map((_, i) => {
+              const colors = ['#ffd13b', '#ff3b6b', '#8c52ff', '#00e5ff', '#ff6f9c', '#ffb347', '#4ade80', '#f472b6'];
+              return (
+                <div key={i} className="vc-confetti-piece" style={{
+                  '--cc': colors[i % colors.length],
+                  '--cw': `${5 + Math.random() * 6}px`,
+                  '--ch': `${8 + Math.random() * 10}px`,
+                  '--cf': `${3 + Math.random() * 4}s`,
+                  '--cs': `${1.5 + Math.random() * 2}s`,
+                  '--cd': `${Math.random() * 4}s`,
+                  '--cx': `${(Math.random() - 0.5) * 60}px`,
+                  left: `${Math.random() * 100}%`
+                }} />
+              );
+            })}
+          </div>
 
-          <span className="vc-eyebrow">✧ 誕生日おめでとう ✧</span>
+          <span className="vc-eyebrow vc-reveal" style={{ '--ri': 0 }}>✧ 誕生日おめでとう ✧</span>
 
-          <h1 className="vc-title">
+          <h1 className="vc-title vc-reveal" style={{ '--ri': 1 }}>
             <span className="vc-title-line">HAPPY</span>
             <span className="vc-title-line vc-title-big">BIRTHDAY</span>
             <span className="vc-title-line vc-title-name">AKARI</span>
           </h1>
 
-          <p className="vc-note">
+          <p className="vc-note vc-reveal" style={{ '--ri': 2 }}>
             The shadows are gone, every cell is broken, and everyone you saved
             is standing here just to say one thing &mdash;
             <strong> today belongs to you.</strong> 🎂
           </p>
 
-          <div className="vc-personal-msg">
+          <div className="vc-personal-msg vc-reveal" style={{ '--ri': 3 }}>
             <span className="vc-msg-from">A message from TRINNO ✉️</span>
             <p className="vc-msg-text">
               Hey Akari — you really crushed it out there. Every shadow, 
@@ -943,7 +967,7 @@ function App() {
             <span className="vc-msg-sign">— TRINNO</span>
           </div>
 
-          <ul className="vc-wishes">
+          <ul className="vc-wishes vc-reveal" style={{ '--ri': 4 }}>
             <li className="vc-wish" style={{ '--ally': '#8ecae6' }}>
               <span className="vc-wish-face">🗡️</span>
               <span className="vc-wish-body">
@@ -974,7 +998,7 @@ function App() {
             </li>
           </ul>
 
-          <div className="vc-stats">
+          <div className="vc-stats vc-reveal" style={{ '--ri': 5 }}>
             <span><b>04</b> Allies Freed</span>
             <i aria-hidden="true" />
             <span><b>{currentScore}</b> Score</span>
@@ -982,7 +1006,7 @@ function App() {
             <span><b>100%</b> Cleared</span>
           </div>
 
-          <button className="vc-again" onClick={resetGame}>
+          <button className="vc-again vc-reveal" style={{ '--ri': 6 }} onClick={resetGame}>
             <span>Play Again</span>
             <span className="vc-again-icon">↺</span>
           </button>

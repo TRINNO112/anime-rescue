@@ -73,11 +73,55 @@ export class ParticleEngine {
     }
   }
 
+  addConfettiBurst(x, y, count = 80) {
+    const colors = ['#ffd13b', '#ff3b6b', '#8c52ff', '#00e5ff', '#ff6f9c', '#ffb347', '#4ade80', '#f472b6'];
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 8 + 3;
+      this.particles.push({
+        x,
+        y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 6,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        size: Math.random() * 5 + 3,
+        life: 80 + Math.random() * 40,
+        maxLife: 120,
+        shape: Math.random() > 0.4 ? 'confetti' : 'circle',
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 12,
+        gravity: 0.12
+      });
+    }
+  }
+
+  addVictoryFireworks(viewW, viewH) {
+    const burstPoints = [
+      { x: viewW * 0.2, y: viewH * 0.3 },
+      { x: viewW * 0.5, y: viewH * 0.2 },
+      { x: viewW * 0.8, y: viewH * 0.3 },
+      { x: viewW * 0.35, y: viewH * 0.15 },
+      { x: viewW * 0.65, y: viewH * 0.15 }
+    ];
+    burstPoints.forEach((pt, i) => {
+      setTimeout(() => {
+        this.addConfettiBurst(pt.x, pt.y, 40);
+      }, i * 200);
+    });
+  }
+
   update() {
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
       p.x += p.vx;
       p.y += p.vy;
+      if (p.gravity) {
+        p.vy += p.gravity;
+        p.vx *= 0.99;
+      }
+      if (p.rotation !== undefined) {
+        p.rotation += p.rotSpeed || 0;
+      }
       p.life--;
       if (p.life <= 0) {
         this.particles.splice(i, 1);
@@ -95,7 +139,11 @@ export class ParticleEngine {
       const px = p.x - cameraX;
       const py = p.y;
 
-      if (p.shape === 'circle') {
+      if (p.shape === 'confetti') {
+        ctx.translate(px, py);
+        ctx.rotate((p.rotation || 0) * Math.PI / 180);
+        ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+      } else if (p.shape === 'circle') {
         ctx.beginPath();
         ctx.arc(px, py, p.size, 0, Math.PI * 2);
         ctx.fill();
