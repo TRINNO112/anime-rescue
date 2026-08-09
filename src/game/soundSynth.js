@@ -137,12 +137,12 @@ export class SoundSynth {
     if (this.synthBgmInterval) return;
     this.bgmPlaying = true;
     
-    // Upbeat J-RPG Anime Chiptune Arpeggio Sequence (Key of C Major / A Minor)
+    // Gentle, Soft Anime Lullaby Melody (Sine Wave, Slow 400ms pace)
     const sequence = [
-      { note: 220.00, dur: 0.15 }, { note: 261.63, dur: 0.15 }, { note: 329.63, dur: 0.15 }, { note: 392.00, dur: 0.15 },
-      { note: 440.00, dur: 0.15 }, { note: 392.00, dur: 0.15 }, { note: 329.63, dur: 0.15 }, { note: 261.63, dur: 0.15 },
-      { note: 174.61, dur: 0.15 }, { note: 220.00, dur: 0.15 }, { note: 261.63, dur: 0.15 }, { note: 349.23, dur: 0.15 },
-      { note: 392.00, dur: 0.15 }, { note: 349.23, dur: 0.15 }, { note: 261.63, dur: 0.15 }, { note: 220.00, dur: 0.15 },
+      { note: 329.63, dur: 0.35 }, { note: 392.00, dur: 0.35 }, { note: 440.00, dur: 0.70 },
+      { note: 392.00, dur: 0.35 }, { note: 329.63, dur: 0.35 }, { note: 261.63, dur: 0.70 },
+      { note: 293.66, dur: 0.35 }, { note: 329.63, dur: 0.35 }, { note: 392.00, dur: 0.35 }, { note: 349.23, dur: 0.35 },
+      { note: 329.63, dur: 0.70 }, { note: 261.63, dur: 0.70 }
     ];
 
     let step = 0;
@@ -153,9 +153,9 @@ export class SoundSynth {
         const now = this.ctx.currentTime;
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
-        osc.type = 'triangle';
+        osc.type = 'sine';
         osc.frequency.setValueAtTime(item.note, now);
-        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.setValueAtTime(0.08, now);
         gain.gain.exponentialRampToValueAtTime(0.005, now + item.dur);
         osc.connect(gain);
         gain.connect(this.ctx.destination);
@@ -165,7 +165,7 @@ export class SoundSynth {
       } catch (e) {}
     };
 
-    this.synthBgmInterval = setInterval(playNextNote, 160);
+    this.synthBgmInterval = setInterval(playNextNote, 420);
   }
 
   playBirthdayTheme() {
