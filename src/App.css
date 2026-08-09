@@ -730,6 +730,64 @@ html, body {
   backdrop-filter: blur(4px);
 }
 
+/* Centered Floating Instruction Modal Overlay */
+.instruction-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 2, 10, 0.88);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.instruction-modal-card {
+  background: #0e091f;
+  border: 2px solid var(--primary-purple);
+  border-radius: 18px;
+  padding: 20px 24px;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.95), 0 0 25px rgba(168, 85, 247, 0.45);
+  animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-title {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: var(--gold-accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.modal-body p {
+  margin: 8px 0;
+  font-size: 11px;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+.modal-ok-btn {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  border: none;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(236, 72, 153, 0.55);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.modal-ok-btn:active {
+  transform: scale(0.94);
+}
+
 /* Game Over Screen */
 .game-over-screen {
   background: var(--bg-glass);
@@ -890,26 +948,33 @@ html, body {
   }
 
   .app-container.state-playing {
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    height: 100dvh;
-    overflow: hidden;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    overflow: hidden !important;
+    background: #000000 !important;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .screen.game-screen {
-    width: 100vw;
-    height: 100vh;
-    height: 100dvh;
-    padding: 0;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    padding: 0 !important;
+    margin: 0 !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
+    overflow: hidden !important;
+    background: #000000 !important;
   }
 
   .game-hud {

@@ -29,10 +29,10 @@ function App() {
     });
   }, []);
 
-  // Active status variables
   const [currentScore, setCurrentScore] = useState(0);
   const [playerHp, setPlayerHp] = useState(5);
   const [isMuted, setIsMuted] = useState(false);
+  const [showControlsModal, setShowControlsModal] = useState(true);
   const MAX_HP = 5;
 
   // Game control references
@@ -48,6 +48,7 @@ function App() {
     setCurrentScore(0);
     setPlayerHp(5);
     setRescuedList([]);
+    setShowControlsModal(true);
     setGameState('PLAYING');
   };
 
@@ -915,13 +916,21 @@ function App() {
                 if (key === 'attack') keysRef.current.attack = false;
               }}
             />
-          </div>
-
-          <div className="controls-hint">
-            <span>[A] [D] / Arrows / Touch D-Pad : Walk</span>
-            <span>[SPACE] / [W] / [🦘] : Jump (Double Jump with Muichiro!)</span>
-            <span>[X] / [ENTER] / [⚔️] : Attack & Break Prison Cages</span>
-            <span>[F] / [🖥️] : Toggle Fullscreen Mode</span>
+            {showControlsModal && (
+              <div className="instruction-modal-overlay">
+                <div className="instruction-modal-card">
+                  <h3 className="modal-title">⚔️ MISSION CONTROLS ⚔️</h3>
+                  <div className="modal-body">
+                    <p><strong>Move:</strong> Touch ◀ ▶ buttons or [A][D] keys</p>
+                    <p><strong>Jump:</strong> Touch 🦘 button or [SPACE] key</p>
+                    <p><strong>Attack & Rescue:</strong> Touch ⚔️ button or [X] key</p>
+                  </div>
+                  <button className="modal-ok-btn" onClick={() => setShowControlsModal(false)}>
+                    OK ▶ START BATTLE
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
