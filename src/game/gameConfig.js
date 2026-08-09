@@ -8,11 +8,11 @@ export const CHARACTERS = [
 
 // Level Platforms Config
 export const platforms = [
-  // Ground level platforms (Raised from 460 -> 410 for high visibility)
-  { x: 0, y: 410, w: 950, h: 60 },
-  { x: 1000, y: 410, w: 1250, h: 60 },
-  { x: 2300, y: 410, w: 1050, h: 60 },
-  { x: 3400, y: 410, w: 1500, h: 60 },
+  // Ground level platforms (Raised from 460 -> 410, height extended to 90 to reach canvas bottom)
+  { x: 0, y: 410, w: 950, h: 90 },
+  { x: 1000, y: 410, w: 1250, h: 90 },
+  { x: 2300, y: 410, w: 1050, h: 90 },
+  { x: 3400, y: 410, w: 1500, h: 90 },
   
   // Floating level 1
   { x: 300, y: 310, w: 200, h: 36 },
@@ -26,7 +26,7 @@ export const platforms = [
   { x: 1250, y: 150, w: 180, h: 36 },
   
   // Boss arena ground
-  { x: 3500, y: 410, w: 1000, h: 60 }
+  { x: 3500, y: 410, w: 1000, h: 90 }
 ];
 
 // Initial Prison Cages Config (Locked in cells!)
