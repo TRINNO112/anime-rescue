@@ -765,16 +765,15 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Mobile Touch Gamepad Overlay (Hidden on PC/Desktop with Mouse) */
+/* Mobile Touch Gamepad Overlay (Frameless Floating over Canvas Corners) */
 .mobile-touch-gamepad {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 16px;
-  z-index: 100;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  z-index: 99;
 }
 
 @media (hover: hover) and (pointer: fine) and (min-width: 901px) {
@@ -783,7 +782,19 @@ body {
   }
 }
 
-.dpad-container, .action-container {
+.dpad-container {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.action-container {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
   display: flex;
   gap: 12px;
   pointer-events: auto;
