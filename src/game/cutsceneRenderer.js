@@ -131,12 +131,46 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
     lineY += lineSpacing;
   }
 
-  // Press Prompt Badge (Bottom Right)
-  const bounceX = Math.sin(frames / 6) * 3;
-  ctx.fillStyle = char.color || '#ffd13b';
-  ctx.font = `700 ${isSmallScreen ? 9 : 11}px system-ui, sans-serif`;
-  ctx.textAlign = 'right';
-  ctx.fillText(`PRESS [X] OR TAP TO CONTINUE ▶`, cardX + cardW - 14 + bounceX, cardY + cardH - (isSmallScreen ? 8 : 12));
+  // OK Button (Bottom Right of dialogue box)
+  const btnW = isSmallScreen ? 70 : 90;
+  const btnH = isSmallScreen ? 28 : 32;
+  const btnX = cardX + cardW - btnW - 12;
+  const btnY = cardY + cardH - btnH - 8;
+  const btnColor = char.color || '#ffd13b';
+
+  // Store bounds for hit-testing
+  lastOkBtnBounds.x = btnX;
+  lastOkBtnBounds.y = btnY;
+  lastOkBtnBounds.w = btnW;
+  lastOkBtnBounds.h = btnH;
+  lastOkBtnBounds.viewW = viewW;
+  lastOkBtnBounds.viewH = viewH;
+
+  // Draw button
+  ctx.fillStyle = btnColor;
+  ctx.beginPath();
+  ctx.roundRect(btnX, btnY, btnW, btnH, 8);
+  ctx.fill();
+
+  ctx.fillStyle = '#0b0510';
+  ctx.font = `800 ${isSmallScreen ? 12 : 14}px system-ui, sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.fillText('OK ▶', btnX + btnW / 2, btnY + btnH / 2 + (isSmallScreen ? 4 : 5));
 
   ctx.restore();
+}
+
+// Exported hit-test bounds for the OK button
+export const lastOkBtnBounds = { x: 0, y: 0, w: 0, h: 0, viewW: 1000, viewH: 500 };
+
+export function isInsideOkBtn(clickX, clickY, canvasEl) {
+  if (!canvasEl) return false;
+  const rect = canvasEl.getBoundingClientRect();
+  // Convert page coords to canvas internal coords
+  const scaleX = lastOkBtnBounds.viewW / rect.width;
+  const scaleY = lastOkBtnBounds.viewH / rect.height;
+  const cx = (clickX - rect.left) * scaleX;
+  const cy = (clickY - rect.top) * scaleY;
+  const b = lastOkBtnBounds;
+  return cx >= b.x && cx <= b.x + b.w && cy >= b.y && cy <= b.y + b.h;
 }

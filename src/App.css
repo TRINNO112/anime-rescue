@@ -752,13 +752,13 @@ body {
 }
 
 .touch-btn {
-  width: 68px;
-  height: 68px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   background: rgba(15, 23, 42, 0.7);
   border: 1.5px solid rgba(192, 132, 252, 0.6);
   color: #ffffff;
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 800;
   display: flex;
   align-items: center;

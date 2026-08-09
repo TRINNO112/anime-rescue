@@ -6,7 +6,7 @@ import { CHARACTERS, platforms, initialCages, initialEnemies } from './game/game
 import { drawCompanions } from './game/companionRenderer';
 import { EnvironmentRenderer } from './game/environmentRenderer';
 import { ParticleEngine } from './game/particleEngine';
-import { drawRescueCutscene } from './game/cutsceneRenderer';
+import { drawRescueCutscene, isInsideOkBtn } from './game/cutsceneRenderer';
 import { HUD } from './components/HUD';
 import { MobileControls } from './components/MobileControls';
 
@@ -109,10 +109,13 @@ function App() {
       if (e.key === 'x' || e.key === 'X' || e.key === 'Enter') keysRef.current.attack = false;
     };
 
-    const handlePointerDown = () => {
+    const handlePointerDown = (e) => {
       if (cutsceneRef.current.active) {
-        cutsceneRef.current.active = false;
-        synth.playSfx('unlock');
+        // Only dismiss if OK button is tapped, or X key was pressed
+        if (isInsideOkBtn(e.clientX, e.clientY, canvasRef.current)) {
+          cutsceneRef.current.active = false;
+          synth.playSfx('unlock');
+        }
       }
     };
 
