@@ -133,6 +133,7 @@ export class SoundSynth {
   stopBgm() {
     if (this.bgmAudio) {
       this.bgmAudio.pause();
+      this.bgmAudio.currentTime = 0;
     }
     if (this.synthBgmInterval) {
       clearInterval(this.synthBgmInterval);

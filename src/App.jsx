@@ -65,6 +65,7 @@ function App() {
     const handleKeyDown = (e) => {
       // Hidden Developer Cheat: Press 'V' to instantly trigger the custom Victory Birthday screen!
       if (e.key === 'v' || e.key === 'V') {
+        synth.stopBgm();
         setGameState('VICTORY');
         synth.playBirthdayTheme();
         return;
@@ -736,6 +737,13 @@ function App() {
 
     animId = requestAnimationFrame(gameTick);
     return () => cancelAnimationFrame(animId);
+  }, [gameState]);
+
+  // Immediately stop background music audio when Victory screen is active
+  useEffect(() => {
+    if (gameState === 'VICTORY') {
+      synth.stopBgm();
+    }
   }, [gameState]);
 
   return (
