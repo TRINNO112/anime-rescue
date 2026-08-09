@@ -197,53 +197,7 @@ body {
 }
 
 /* Katana Slash Beam Animation */
-.ts-katana-slash {
-  position: absolute;
-  top: 55%;
-  left: -25%;
-  width: 150%;
-  height: 8px;
-  background: linear-gradient(90deg, transparent 0%, #ffffff 30%, #ff3b6b 65%, #ffd13b 85%, transparent 100%);
-  box-shadow: 0 0 25px #ffffff, 0 0 50px #ff3b6b, 0 0 80px #ffd13b;
-  transform: rotate(-14deg) translateY(-50%) scaleX(0);
-  transform-origin: left center;
-  pointer-events: none;
-  z-index: 20;
-  animation: katanaSlashCut 3.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-}
 
-@keyframes katanaSlashCut {
-  0%   { transform: rotate(-14deg) translateY(-50%) scaleX(0); opacity: 0; }
-  10%  { opacity: 1; transform: rotate(-14deg) translateY(-50%) scaleX(1); filter: drop-shadow(0 0 25px #ffffff); }
-  35%  { transform: rotate(-14deg) translateY(-50%) scaleX(1.05); opacity: 0.8; }
-  50%, 100% { transform: rotate(-14deg) translateY(-50%) scaleX(1.1); opacity: 0; }
-}
-
-/* Flame embers along the slash track */
-.ts-flames {
-  position: absolute;
-  inset: -20px;
-  pointer-events: none;
-  z-index: 19;
-}
-
-.ts-flame-particle {
-  position: absolute;
-  width: var(--fs);
-  height: var(--fs);
-  border-radius: 50%;
-  background: radial-gradient(circle, #ffffff 0%, #ffd13b 35%, #ff3b6b 75%, transparent 100%);
-  box-shadow: 0 0 16px #ff3b6b, 0 0 28px #ffd13b;
-  opacity: 0;
-  animation: flameBurst 3.5s ease-out var(--fd) infinite;
-}
-
-@keyframes flameBurst {
-  0%   { transform: translate(0, 0) scale(0.3); opacity: 0; }
-  15%  { opacity: 1; transform: translate(var(--fx), var(--fy)) scale(1.8); }
-  40%  { opacity: 0; transform: translate(calc(var(--fx) * 1.5), calc(var(--fy) * 1.5)) scale(2.4); filter: blur(4px); }
-  100% { opacity: 0; }
-}
 
 .ts-tagline {
   margin: 18px 0 0;
