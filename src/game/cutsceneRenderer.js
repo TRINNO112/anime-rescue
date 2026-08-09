@@ -39,6 +39,8 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   ctx.fillStyle = 'rgba(7, 10, 20, 0.72)';
   ctx.fillRect(0, 0, viewW, viewH);
 
+  const isSmallScreen = viewW < 600 || viewH < 400;
+
   // 2. Companion Special Attack Rescue Showcase Animation (Cinematic Slowed Frame Rate: 9 ticks per frame!)
   const compObj = companionSprites[char.id];
   const attackList = (compObj && compObj.attack) ? compObj.attack : (compObj ? compObj.walking : null);
@@ -52,7 +54,6 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   }
 
   // 3. Dynamic RPG Dialogue Box (Moves up and sizes to fit content on small screens)
-  const isSmallScreen = viewW < 600 || viewH < 400;
   const cardW = Math.min(840, viewW - 24);
   
   const fontSize = isSmallScreen ? 11 : 13;
