@@ -106,24 +106,19 @@ export class SoundSynth {
     try {
       this.init();
       if (!this.bgmAudio) {
-        // Try Twelve_Candles_Burning.mp3 first, fallback to bgm.mp3
-        this.bgmAudio = new Audio('./Twelve_Candles_Burning.mp3');
+        // Try Twelve_Candles_Burning.mp3 with flexible base path resolution
+        const audioPath = window.location.pathname.endsWith('/') 
+          ? window.location.pathname + 'Twelve_Candles_Burning.mp3'
+          : './Twelve_Candles_Burning.mp3';
+        this.bgmAudio = new Audio(audioPath);
         this.bgmAudio.loop = true;
-        this.bgmAudio.volume = 0.5;
+        this.bgmAudio.volume = 0.65;
       }
       this.bgmAudio.play().then(() => {
         this.bgmPlaying = true;
-      }).catch(() => {
-        // Fallback to bgm.mp3 or Web Audio synthesized loop
-        const fallbackAudio = new Audio('./bgm.mp3');
-        fallbackAudio.loop = true;
-        fallbackAudio.volume = 0.5;
-        fallbackAudio.play().then(() => {
-          this.bgmAudio = fallbackAudio;
-          this.bgmPlaying = true;
-        }).catch(() => {
-          this.startSynthBgmLoop();
-        });
+      }).catch((e) => {
+        console.warn("Audio play failed, falling back:", e);
+        this.startSynthBgmLoop();
       });
     } catch (e) {
       this.startSynthBgmLoop();

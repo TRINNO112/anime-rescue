@@ -682,6 +682,49 @@ body {
   padding: 8px 18px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: fadeOutHint 0.8s ease-out 5s forwards;
+}
+
+@keyframes fadeOutHint {
+  to { opacity: 0; pointer-events: none; visibility: hidden; }
+}
+
+/* Frameless Minecraft-style Overlay HUD */
+.game-hud.minecraft-hud {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  padding: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.minecraft-hud .hud-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.minecraft-hud .hud-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.party-pill {
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(10, 8, 20, 0.75);
+  border: 1px solid;
+  padding: 2px 8px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
 }
 
 /* Game Over Screen */
