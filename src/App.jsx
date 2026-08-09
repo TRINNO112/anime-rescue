@@ -263,6 +263,37 @@ function App() {
     let animId;
     let frames = 0;
 
+    let lastClickTime = 0;
+    let poseMode = null; // 'victory', 'hurt', or null
+    let poseTimer = 0;
+
+    const handleCanvasClick = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = ((e.clientX - rect.left) / rect.width) * VIEW_W;
+      const clickY = ((e.clientY - rect.top) / rect.height) * VIEW_H;
+
+      const akariCanvasX = player.x - cameraX;
+      if (clickX >= akariCanvasX - 25 && clickX <= akariCanvasX + player.width + 25 &&
+          clickY >= player.y - 25 && clickY <= player.y + player.height + 25) {
+        
+        const now = Date.now();
+        if (now - lastClickTime < 320) { // Double tap!
+          if (poseMode === null) {
+            poseMode = 'victory';
+            synth.playSfx('unlock');
+          } else if (poseMode === 'victory') {
+            poseMode = 'hurt';
+            synth.playSfx('hit');
+          } else {
+            poseMode = null;
+          }
+          poseTimer = 180;
+        }
+        lastClickTime = now;
+      }
+    };
+    canvas.addEventListener('pointerdown', handleCanvasClick);
+
     const takePlayerDamage = () => {
       if (player.invulnFrames > 0) return;
 
@@ -737,9 +768,22 @@ function App() {
       // 8. Player (Akari) - Authentic 8-Frame Katana Slash Animation (No procedural semi-circles!)
       if (player.invulnFrames % 4 < 2) {
         let state = 'idle';
-        if (!player.isGrounded) state = 'jump';
-        else if (Math.abs(player.vx) > 0.5) state = 'running';
-        if (keysRef.current.attack) state = 'attack';
+
+        if (Math.abs(player.vx) > 0.5 || !player.isGrounded || keysRef.current.attack) {
+          poseMode = null;
+        }
+
+        if (poseMode && poseTimer > 0) {
+          state = poseMode;
+          poseTimer--;
+          if (poseTimer <= 0) {
+            poseMode = null;
+          }
+        } else {
+          if (!player.isGrounded) state = 'jump';
+          else if (Math.abs(player.vx) > 0.5) state = 'running';
+          if (keysRef.current.attack) state = 'attack';
+        }
 
         const animList = akariSprites[state] || akariSprites.idle;
         const currentAkariFrame = Math.floor(frames / 5) % animList.length;
@@ -797,7 +841,10 @@ function App() {
     };
 
     animId = requestAnimationFrame(gameTick);
-    return () => cancelAnimationFrame(animId);
+    return () => {
+      cancelAnimationFrame(animId);
+      canvas.removeEventListener('pointerdown', handleCanvasClick);
+    };
   }, [gameState]);
 
   // Immediately stop background music audio when Victory screen is active and reset scroll
