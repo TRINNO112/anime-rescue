@@ -178,10 +178,6 @@ export class EnvironmentRenderer {
 
       ctx.save();
 
-      // Solid dark backing to prevent parallax background houses showing through transparent tiles
-      ctx.fillStyle = '#100c24';
-      ctx.fillRect(px, plat.y, plat.w, plat.h);
-
       // Multi-piece 9-slice Gothicvania Castle Tilemap Renderer (16x16 tile grid)
       if (this.castleTileset.complete && this.castleTileset.naturalWidth !== 0) {
         const tileSize = 16;
