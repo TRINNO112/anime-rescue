@@ -44,3 +44,9 @@ __MACOSX/
 *.tmp
 *.bak
 rbi_project.*
+
+# Agent Configurations & Local Artifacts
+.agents/
+.claude/
+.used_assets.txt
+
