@@ -9,12 +9,14 @@
   --bg-glass: rgba(18, 14, 38, 0.75);
 }
 
-body {
+html, body {
   margin: 0;
-  background-color: var(--dark-bg);
-  background: radial-gradient(circle at 50% 50%, #1e1145 0%, #070311 100%);
+  padding: 0;
+  background: #000000 !important;
+  background-color: #000000 !important;
   color: #f8fafc;
   font-family: 'Outfit', sans-serif;
+  overscroll-behavior: none;
 }
 
 .app-container {
@@ -25,6 +27,7 @@ body {
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
+  background: #000000 !important;
 }
 
 /* Screen Wrappers */
@@ -658,11 +661,11 @@ body {
 
 /* Canvas Wrapper */
 .canvas-wrapper {
-  background: #090514;
-  border: 2px solid rgba(168, 85, 247, 0.5);
-  border-radius: 16px;
+  background: #000000 !important;
+  border: none !important;
+  border-radius: 0 !important;
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(168, 85, 247, 0.25);
+  box-shadow: none !important;
   width: 100%;
 }
 
