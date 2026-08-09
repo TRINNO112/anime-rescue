@@ -44,7 +44,18 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
 
   const isSmallScreen = viewW < 600 || viewH < 400;
 
-  // 2. Companion Special Attack Rescue Showcase Animation (Cinematic Slowed Frame Rate: 9 ticks per frame!)
+  const cardW = Math.min(840, viewW - 24);
+  const fontSize = isSmallScreen ? 11 : 13;
+  const lineSpacing = isSmallScreen ? 15 : 18;
+  const avatarSize = isSmallScreen ? 24 : 30;
+  const portRadius = isSmallScreen ? 22 : 30;
+  const portPadding = isSmallScreen ? 10 : 16;
+  const textTopOffset = isSmallScreen ? 34 : 48;
+  const cardH = Math.max(isSmallScreen ? 85 : 110, textTopOffset + 3 * lineSpacing + (isSmallScreen ? 18 : 22));
+  const cardX = viewW / 2 - cardW / 2;
+  const cardY = (viewH / 2) - (cardH / 2);
+
+  // 2. Companion Special Attack Rescue Showcase Animation (Positioned right above the dialogue box!)
   const compObj = companionSprites[char.id];
   const attackList = (compObj && compObj.attack) ? compObj.attack : (compObj ? compObj.walking : null);
 
@@ -52,20 +63,12 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
     const animFrame = Math.floor(frames / 9) % attackList.length;
     const attackImg = attackList[animFrame];
     if (attackImg) {
-      const showcaseY = isSmallScreen ? viewH * 0.24 : viewH * 0.26;
-      drawCroppedSprite(ctx, attackImg, viewW / 2, showcaseY, isSmallScreen ? 90 : 120, false, compObj ? compObj.flipDefault : false);
+      const showcaseY = cardY - (isSmallScreen ? 44 : 58);
+      drawCroppedSprite(ctx, attackImg, viewW / 2, showcaseY, isSmallScreen ? 88 : 118, false, compObj ? compObj.flipDefault : false);
     }
   }
 
-  // 3. Dynamic RPG Dialogue Box (Moves up and sizes to fit content on small screens)
-  const cardW = Math.min(840, viewW - 24);
-  
-  const fontSize = isSmallScreen ? 11 : 13;
-  const lineSpacing = isSmallScreen ? 15 : 18;
-  const avatarSize = isSmallScreen ? 24 : 30;
-  const portRadius = isSmallScreen ? 22 : 30;
-  const portPadding = isSmallScreen ? 10 : 16;
-  
+  // 3. Dynamic RPG Dialogue Box
   ctx.save();
   ctx.font = `600 ${fontSize}px system-ui, sans-serif`;
   
@@ -86,12 +89,6 @@ export function drawRescueCutscene(ctx, cutsceneData, viewW, viewH, frames) {
   }
   lines.push(currentLine);
   
-  // Calculate dynamic card height to fit text lines
-  const textTopOffset = isSmallScreen ? 34 : 48;
-  const cardH = Math.max(isSmallScreen ? 85 : 110, textTopOffset + lines.length * lineSpacing + (isSmallScreen ? 18 : 22));
-  const cardX = viewW / 2 - cardW / 2;
-  const cardY = (viewH / 2) - (cardH / 2);
-
   // Glass Box Container
   ctx.fillStyle = 'rgba(10, 15, 30, 0.96)';
   ctx.strokeStyle = char.color || '#a855f7';

@@ -938,13 +938,44 @@ html, body {
 /* Mobile Landscape Edge-to-Edge Optimization */
 @media (max-width: 950px) and (orientation: landscape) {
   .app-container {
-    padding: 18px;
+    padding: 12px;
     width: 100vw;
     min-height: 100vh;
     height: auto;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .start-screen {
+    padding: 20px 24px;
+    gap: 16px;
+    max-width: 92vw;
+    margin: 0 auto;
+  }
+
+  .ts-title {
+    font-size: clamp(22px, 5vw, 36px);
+  }
+
+  .ts-kanji-sub {
+    font-size: 11px;
+    letter-spacing: 4px;
+  }
+
+  .ts-cards-row {
+    gap: 8px;
+  }
+
+  .ts-card {
+    padding: 8px 10px;
+    min-width: 100px;
+  }
+
+  .ts-play {
+    padding: 10px 32px;
+    font-size: 16px;
   }
 
   .app-container.state-playing {
