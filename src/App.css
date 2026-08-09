@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;450;600;800&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Outfit:wght@400;600;800;900&family=Press+Start+2P&display=swap');
 
 /* Main CSS styling for Akari's Anime Rescue */
 :root {
@@ -176,27 +176,31 @@ html, body {
   line-height: 1;
 }
 
-.ts-title-top {
-  font-family: 'Bebas Neue', 'Outfit', sans-serif;
-  font-size: clamp(18px, 2.8vw, 26px);
-  letter-spacing: 0.5em;
-  text-indent: 0.5em;
-  color: #efe9ff;
-  opacity: 0.7;
-}
-
 .ts-title-main {
   position: relative;
-  font-family: 'Bebas Neue', 'Outfit', sans-serif;
-  font-size: clamp(46px, 9.5vw, 104px);
-  letter-spacing: 0.02em;
+  font-family: 'Cinzel Decorative', 'Outfit', serif, sans-serif;
+  font-weight: 900;
+  font-size: clamp(48px, 10vw, 98px);
+  letter-spacing: 0.04em;
   color: #ffffff;
-  background: linear-gradient(180deg, #ffffff 15%, #ffd9e3 50%, var(--crimson) 100%);
+  background: linear-gradient(180deg, #ffffff 10%, #ffd13b 50%, #ff3b6b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 30px rgba(255, 59, 107, 0.6);
-  filter: drop-shadow(0 8px 34px rgba(255, 59, 107, 0.5));
+  text-shadow: 0 0 35px rgba(255, 59, 107, 0.75);
+  filter: drop-shadow(0 8px 30px rgba(255, 59, 107, 0.6));
+}
+
+.ts-title-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(11px, 2vw, 17px);
+  font-weight: 800;
+  letter-spacing: 0.35em;
+  text-indent: 0.35em;
+  color: #ffd13b;
+  text-transform: uppercase;
+  opacity: 0.95;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
 /* Katana Slash Beam Animation */
