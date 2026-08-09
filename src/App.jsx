@@ -812,6 +812,19 @@ function App() {
             <span className="ts-eyebrow ts-fade-in" style={{ '--i': 0 }}>◆ Chapter One ◆</span>
             <h1 className="ts-title" style={{ position: 'relative' }}>
               <div className="ts-title-flash" aria-hidden="true" />
+              <div className="ts-katana-slash" aria-hidden="true" />
+              <div className="ts-flames" aria-hidden="true">
+                {Array.from({ length: 14 }).map((_, i) => (
+                  <span key={i} className="ts-flame-particle" style={{
+                    left: `${10 + i * 6}%`,
+                    top: `${40 + (i % 2 === 0 ? -12 : 12)}%`,
+                    '--fs': `${8 + (i % 3) * 4}px`,
+                    '--fd': `${0.32 + i * 0.025}s`,
+                    '--fx': `${(Math.random() - 0.5) * 40}px`,
+                    '--fy': `${-20 - Math.random() * 30}px`
+                  }} />
+                ))}
+              </div>
               <span className="ts-title-top ts-fade-in" style={{ '--i': 1 }}>AKARI&rsquo;S</span>
               <span className="ts-title-main ts-title-slam ts-fade-in" data-text="BIRTHDAY RESCUE" style={{ '--i': 2 }}>BIRTHDAY RESCUE</span>
             </h1>
