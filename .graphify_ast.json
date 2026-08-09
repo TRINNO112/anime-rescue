@@ -138,7 +138,7 @@
       "label": ".drawCages()",
       "file_type": "code",
       "source_file": "src\\game\\environmentRenderer.js",
-      "source_location": "L232"
+      "source_location": "L236"
     },
     {
       "id": "src_game_gameconfig_js",
@@ -204,32 +204,39 @@
       "source_location": "L58"
     },
     {
+      "id": "game_particleengine_particleengine_addstarburst",
+      "label": ".addStarBurst()",
+      "file_type": "code",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L76"
+    },
+    {
       "id": "game_particleengine_particleengine_addconfettiburst",
       "label": ".addConfettiBurst()",
       "file_type": "code",
       "source_file": "src\\game\\particleEngine.js",
-      "source_location": "L76"
+      "source_location": "L97"
     },
     {
       "id": "game_particleengine_particleengine_addvictoryfireworks",
       "label": ".addVictoryFireworks()",
       "file_type": "code",
       "source_file": "src\\game\\particleEngine.js",
-      "source_location": "L98"
+      "source_location": "L119"
     },
     {
       "id": "game_particleengine_particleengine_update",
       "label": ".update()",
       "file_type": "code",
       "source_file": "src\\game\\particleEngine.js",
-      "source_location": "L113"
+      "source_location": "L134"
     },
     {
       "id": "game_particleengine_particleengine_draw",
       "label": ".draw()",
       "file_type": "code",
       "source_file": "src\\game\\particleEngine.js",
-      "source_location": "L132"
+      "source_location": "L153"
     },
     {
       "id": "src_game_soundsynth_js",
@@ -267,46 +274,60 @@
       "source_location": "L13"
     },
     {
+      "id": "game_soundsynth_soundsynth_createnoisebuffer",
+      "label": ".createNoiseBuffer()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L22"
+    },
+    {
       "id": "game_soundsynth_soundsynth_playsfx",
       "label": ".playSfx()",
       "file_type": "code",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L22"
+      "source_location": "L33"
     },
     {
       "id": "game_soundsynth_soundsynth_playrescuefanfare",
       "label": ".playRescueFanfare()",
       "file_type": "code",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L78"
+      "source_location": "L147"
+    },
+    {
+      "id": "game_soundsynth_soundsynth_playsynthnote",
+      "label": ".playSynthNote()",
+      "file_type": "code",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L173"
     },
     {
       "id": "game_soundsynth_soundsynth_startbgm",
       "label": ".startBgm()",
       "file_type": "code",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L104"
+      "source_location": "L199"
     },
     {
       "id": "game_soundsynth_soundsynth_stopbgm",
       "label": ".stopBgm()",
       "file_type": "code",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L138"
+      "source_location": "L205"
     },
     {
       "id": "game_soundsynth_soundsynth_startsynthbgmloop",
       "label": ".startSynthBgmLoop()",
       "file_type": "code",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L154"
+      "source_location": "L217"
     },
     {
       "id": "game_soundsynth_soundsynth_playbirthdaytheme",
       "label": ".playBirthdayTheme()",
       "file_type": "code",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L189"
+      "source_location": "L264"
     },
     {
       "id": "src_game_spriteloader_js",
@@ -937,7 +958,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\environmentRenderer.js",
-      "source_location": "L232",
+      "source_location": "L236",
       "weight": 1.0
     },
     {
@@ -1015,7 +1036,7 @@
     },
     {
       "source": "game_particleengine_particleengine",
-      "target": "game_particleengine_particleengine_addconfettiburst",
+      "target": "game_particleengine_particleengine_addstarburst",
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\particleEngine.js",
@@ -1024,11 +1045,20 @@
     },
     {
       "source": "game_particleengine_particleengine",
+      "target": "game_particleengine_particleengine_addconfettiburst",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\particleEngine.js",
+      "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "game_particleengine_particleengine",
       "target": "game_particleengine_particleengine_addvictoryfireworks",
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\particleEngine.js",
-      "source_location": "L98",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -1037,7 +1067,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\particleEngine.js",
-      "source_location": "L113",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
@@ -1046,7 +1076,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\particleEngine.js",
-      "source_location": "L132",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -1087,7 +1117,7 @@
     },
     {
       "source": "game_soundsynth_soundsynth",
-      "target": "game_soundsynth_soundsynth_playsfx",
+      "target": "game_soundsynth_soundsynth_createnoisebuffer",
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
@@ -1096,11 +1126,29 @@
     },
     {
       "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_playsfx",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
       "target": "game_soundsynth_soundsynth_playrescuefanfare",
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L78",
+      "source_location": "L147",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth",
+      "target": "game_soundsynth_soundsynth_playsynthnote",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L173",
       "weight": 1.0
     },
     {
@@ -1109,7 +1157,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L104",
+      "source_location": "L199",
       "weight": 1.0
     },
     {
@@ -1118,7 +1166,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L138",
+      "source_location": "L205",
       "weight": 1.0
     },
     {
@@ -1127,7 +1175,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L154",
+      "source_location": "L217",
       "weight": 1.0
     },
     {
@@ -1136,7 +1184,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L189",
+      "source_location": "L264",
       "weight": 1.0
     },
     {
@@ -1146,7 +1194,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L25",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth_playsfx",
+      "target": "game_soundsynth_soundsynth_createnoisebuffer",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -1156,7 +1214,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L71",
+      "source_location": "L140",
       "weight": 1.0
     },
     {
@@ -1166,7 +1224,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L80",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
@@ -1176,7 +1234,27 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L107",
+      "source_location": "L201",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth_startbgm",
+      "target": "game_soundsynth_soundsynth_startsynthbgmloop",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L202",
+      "weight": 1.0
+    },
+    {
+      "source": "game_soundsynth_soundsynth_startsynthbgmloop",
+      "target": "game_soundsynth_soundsynth_init",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\game\\soundSynth.js",
+      "source_location": "L220",
       "weight": 1.0
     },
     {
@@ -1186,7 +1264,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src\\game\\soundSynth.js",
-      "source_location": "L191",
+      "source_location": "L266",
       "weight": 1.0
     },
     {

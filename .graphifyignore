@@ -1,0 +1,24 @@
+# GitHub Pages build output - a minified copy of src/. Indexing it duplicated
+# the whole game as mangled names (i(), pc(), wc()...) and made up 87% of the graph.
+docs/
+
+# Third-party sprite/asset packs and binaries. Not our code; indexing these
+# dispatches semantic-extraction subagents (token cost) for zero architectural insight.
+Legacy Collection/
+public/
+*.png
+*.gif
+*.jpg
+*.jpeg
+*.pdf
+*.mp3
+*.svg
+
+# Generated preview page (huge inline sprite dump, not source)
+sprite_preview.html
+
+# Prose files. Excluded to keep this a code-only corpus, which lets graphify use
+# the pure-AST fast path (no LLM subagents, zero token cost). Remove these two
+# lines if you ever want README/index.html concepts woven into the graph.
+README.md
+index.html
